@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Credentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
