@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
-    @RequestMapping("/")
-    public String root() {
-        return "redirect:/index";
-    }
+//    @RequestMapping("/")
+//    public String root() {
+//        return "redirect:/index";
+//    }
 
     @RequestMapping("/index")
     public String index() {
