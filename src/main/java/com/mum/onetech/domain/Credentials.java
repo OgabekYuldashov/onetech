@@ -17,8 +17,10 @@ public class Credentials {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
     private String firstName;
+
     @NotBlank
     private String lastName;
 
@@ -28,7 +30,7 @@ public class Credentials {
     @NotBlank
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Role role;
 
     private Integer verified = 0;

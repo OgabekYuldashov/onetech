@@ -15,11 +15,15 @@ INSERT INTO Role VALUES (4, 'USER');
 -- INSERT INTO Role (`ROLE`) VALUES ('SELLER');
 -- INSERT INTO Role (`ROLE`) VALUES ('BUYER');
 
+/*INSERT INTO Credentials (`ID`, `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `PASSWORD`, `VERIFIED`, `ROLE_ID`) VALUES (1, 'seller@seller.com', 'Tina', 'Xing', '132', 1, 2);
 
-/*INSERT INTO Category VALUES (4,'Computers & Laptops');
-INSERT INTO Category VALUES (5,'Cameras & Photos');
-INSERT INTO Category VALUES (6,'Hardware');
-INSERT INTO Category VALUES (7,'Smartphones & Tablets');*/
+INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (1, 'Fairfield', 'IA', '1000 N 4th', '52557');
+
+INSERT INTO Seller (`ID`, `ADDRESS_ID`, `CREDENTIALS_ID`) VALUES (1, 1, 1);
+
+INSERT INTO Product (`DESCRIPTION`, `NAME`, `PRICE`, `CATEGORY_ID`, `SELLER_ID`) VALUES ('Lorem Ipsum Dolor sit amet. Lorem Ipsum Dolor sit amet', 'MacBook Air 13', 2000, 1, 1);
+INSERT INTO Product (`DESCRIPTION`, `NAME`, `PRICE`, `CATEGORY_ID`, `SELLER_ID`) VALUES ('Lorem Ipsum Dolor sit amet. Lorem Ipsum Dolor sit amet', 'HP Envy 17', 1700, 1, 1);*/
+
 
 -- prepopulating the CATEGORIES
 -- INSERT INTO Category (`NAME`) VALUES ('Computers & Laptops');
