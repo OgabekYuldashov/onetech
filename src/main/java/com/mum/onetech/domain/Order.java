@@ -37,7 +37,7 @@ public class Order {
     @OneToOne
     private Address shippingAddr;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<OrderItem> orderItems;
 
 

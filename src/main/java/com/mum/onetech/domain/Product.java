@@ -20,14 +20,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private Category category;
     @NotBlank
     private String name;
 
     @NotBlank
     private String description;
-
-    @ManyToOne
-    private Category category;
 
     @NotNull
     private Double price;
