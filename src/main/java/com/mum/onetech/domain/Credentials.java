@@ -28,7 +28,7 @@ public class Credentials {
     @NotBlank
     private String password;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Role role;
 
     private Integer verified = 0;
