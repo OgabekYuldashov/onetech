@@ -12,7 +12,7 @@ public class LoginController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("/")
+//    @RequestMapping("/")
     public String root() {
         return "redirect:/index";
     }
