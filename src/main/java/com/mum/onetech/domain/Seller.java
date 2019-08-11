@@ -28,7 +28,8 @@ public class Seller {
     @ManyToMany(mappedBy = "sellers")
     private List<Buyer> followers;
 
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private Role role;
     @OneToMany(mappedBy = "sender")
     private List<Notification> notificationsSent;
 }
