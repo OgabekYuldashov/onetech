@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     @GetMapping("/")
-    public String getProductForm(@ModelAttribute("product") Product product){
+    public String getProductForm(){
 
         return "product";
     }
