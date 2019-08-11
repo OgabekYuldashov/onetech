@@ -17,8 +17,12 @@ import java.util.List;
 @Controller
 public class RegistrationController {
     @GetMapping("/")
-    public String getSellerRegistrationForm() {
+    public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
         return "register";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
 
