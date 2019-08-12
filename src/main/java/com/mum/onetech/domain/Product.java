@@ -38,10 +38,11 @@ public class Product {
 
     private Double discountRate = 0.0;
 
-    @ManyToOne
-    private Seller seller;
 
     private Boolean isNewArrival = false;
+
+    @ManyToOne
+    private Seller seller;
 
     @OneToMany
     private List<ProductImage> productImages;

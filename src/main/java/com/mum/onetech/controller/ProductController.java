@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/product")
+
 @Controller
 public class ProductController {
 
-    @GetMapping("/")
-    public String getProductForm(){
+    @GetMapping("/product")
+    public String getProductForm(@ModelAttribute("product") Product product){
 
         return "product";
     }

@@ -26,12 +26,12 @@ INSERT INTO Product (`DESCRIPTION`, `NAME`, `PRICE`, `CATEGORY_ID`, `SELLER_ID`)
 
 
 -- prepopulating the CATEGORIES
--- INSERT INTO Category (`NAME`) VALUES ('Computers & Laptops');
--- INSERT INTO Category (`NAME`) VALUES ('Cameras & Photos');
--- INSERT INTO Category (`NAME`) VALUES ('Hardware');
--- INSERT INTO Category (`NAME`) VALUES ('Smartphones & Tablets');
--- INSERT INTO Category (`NAME`) VALUES ('TV & Audio');
--- INSERT INTO Category (`NAME`) VALUES ('Gadgets');
--- INSERT INTO Category (`NAME`) VALUES ('Car Electronics');
--- INSERT INTO Category (`NAME`) VALUES ('Video Games $ Consoles');
--- INSERT INTO Category (`NAME`) VALUES ('Accessories');
+INSERT INTO Category (`NAME`) VALUES ('Computers & Laptops');
+INSERT INTO Category (`NAME`) VALUES ('Cameras & Photos');
+INSERT INTO Category (`NAME`) VALUES ('Hardware');
+INSERT INTO Category (`NAME`) VALUES ('Smartphones & Tablets');
+INSERT INTO Category (`NAME`) VALUES ('TV & Audio');
+INSERT INTO Category (`NAME`) VALUES ('Gadgets');
+INSERT INTO Category (`NAME`) VALUES ('Car Electronics');
+INSERT INTO Category (`NAME`) VALUES ('Video Games $ Consoles');
+INSERT INTO Category (`NAME`) VALUES ('Accessories');
