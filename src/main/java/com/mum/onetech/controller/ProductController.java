@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Date;
 
 
 @Controller
@@ -25,12 +27,12 @@ public class ProductController {
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
 
-    @GetMapping("/product")
+    @GetMapping("/addProduct")
     public String getProductForm(@ModelAttribute("product") Product product , Model model){
         model.addAttribute("categories",categoryService.findAll());
         return "product";
     }
-    @PostMapping("/product")
+    @PostMapping("/addProduct")
     public String addProduct(Product product){
 
         String result = null;
@@ -40,10 +42,12 @@ public class ProductController {
             e.printStackTrace();
         }
 
-        System.out.println("ppp "+product);
-        product.setDiscountRate(product.getDiscountRate());
+        System.out.println("ppp "+product.getDiscountRate());
+
+       product.calculateDiscount( product.getDiscountRate());
         MultipartFile[] images=product.getProductImages();
         product.setPictureUrls(result);
+        product.setDateProductAdded(new Date());
         productService.save(product);
        return "welcome";
     }
@@ -72,7 +76,6 @@ public class ProductController {
         }
         return sb.toString();
     }
-
 
 
 }

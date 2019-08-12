@@ -50,7 +50,7 @@
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">
-                <div class="container-fluid">
+
                     <div class="row">
 
                         <div class="col-lg-6">
@@ -59,7 +59,7 @@
                                     <strong>Basic Form</strong> Elements
                                 </div>
                                 <div class="card-body card-block">
-                                    <form th:action="@{/product}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <form th:action="@{/addProduct}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="row form-group">
                                             <div class="col col-md-3">
                                                 <label class=" form-control-label">Static</label>
@@ -115,7 +115,7 @@
                                                 <label for="text-input" class=" form-control-label">Discount Rate</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="text" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="price"
+                                                <input type="text" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="Discount Rate"
                                                        class="form-control">
                                                 <small class="form-text text-muted">This is a help text</small>
                                             </div>
@@ -133,8 +133,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
 
                                         <div class="row form-group">
                                             <div class="col col-md-3">

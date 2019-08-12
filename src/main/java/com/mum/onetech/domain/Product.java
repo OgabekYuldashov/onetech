@@ -10,7 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -32,17 +35,21 @@ public class Product {
     private String description;
 
     @NotNull
+    @Positive
     private Double price;
 
     //Don't set it in the from
     private Double oldPrice;
+    @Temporal(TemporalType.DATE)
+    private Date dateProductAdded;
 
-
-   private Double discountRate ;
-
+   private Double discountRate=0.0 ;
+   @Enumerated(EnumType.STRING)
+   private StatusType status =StatusType.NONE;
 
     private Boolean isNewArrival = false;
-
+    @Enumerated(EnumType.STRING)
+    private PromoteType promote=PromoteType.NONE;
 //    @ManyToOne
 //    private Seller seller;
 //
@@ -50,15 +57,15 @@ public class Product {
     private String pictureUrls;
      @Transient
     private MultipartFile[] productImages =new MultipartFile[3] ;
-//
+
 //    @OneToMany(mappedBy = "product")
 //    private List<Review> reviews;
 
-//    public void setDiscountRate(Double discRate){
-//        this.discountRate = discRate;
-//        this.oldPrice = this.price;
-//        this.price -= this.price *discRate / 100;
-//        this.price = Double.valueOf(Util.df2.format(this.price));
-//    }
+    public void calculateDiscount(Double discRate){
+        this.discountRate = discRate;
+        this.oldPrice = this.price;
+        this.price -= this.price *discRate / 100;
+        this.price = Double.valueOf(Util.df2.format(this.price));
+    }
 
 }
