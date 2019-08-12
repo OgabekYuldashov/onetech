@@ -5,10 +5,12 @@ import com.mum.onetech.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,7 +23,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
     @NotBlank
     private String name;
@@ -36,25 +38,25 @@ public class Product {
     private Double oldPrice;
 
 
-    private Double discountRate = 0.0;
+   private Double discountRate ;
 
 
     private Boolean isNewArrival = false;
 
-    @ManyToOne
-    private Seller seller;
+//    @ManyToOne
+//    private Seller seller;
+//
+     @OneToMany
+    private List<ProductImage> productImages =new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "product")
+//    private List<Review> reviews;
 
-    @OneToMany
-    private List<ProductImage> productImages;
-
-    @OneToMany(mappedBy = "product")
-    private List<Review> reviews;
-
-    public void setDiscountRate(Double discRate){
-        this.discountRate = discRate;
-        this.oldPrice = this.price;
-        this.price -= this.price *discRate / 100;
-        this.price = Double.valueOf(Util.df2.format(this.price));
-    }
+//    public void setDiscountRate(Double discRate){
+//        this.discountRate = discRate;
+//        this.oldPrice = this.price;
+//        this.price -= this.price *discRate / 100;
+//        this.price = Double.valueOf(Util.df2.format(this.price));
+//    }
 
 }
