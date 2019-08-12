@@ -10,4 +10,5 @@ public interface ProductService {
     List<Product> findAllByCategoryId(Long catId);
     Long getCountByCategoryId(Long catId);
     Long getCountAll();
+    Product getOneProductById(Long id);
 }

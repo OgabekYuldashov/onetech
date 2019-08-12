@@ -101,9 +101,9 @@
                                     <thead>
                                     <tr>
                                         <th>date</th>
-                                        <th>Category</th>
+                                        <th>category</th>
                                         <th>description</th>
-                                        <th>status</th>
+                                        <th>discount Rate</th>
                                         <th>price</th>
                                         <th></th>
                                     </tr>
@@ -113,16 +113,16 @@
                                         <td th:text="${pro.dateProductAdded}" ></td>
                                         <td th:text="${pro.category.name}"></td>
                                         <td th:text="${pro.description}"></td>
-                                        <td th:text="${pro.status}"></td>
+                                        <td th:text="${pro.discountRate}"></td>
                                         <td th:text="${pro.price}"></td>
                                         <td>
                                             <div class="table-data-feature">
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button>
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <a  th:href="@{/productUpdate(id=${pro.id})}"  class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
-                                                </button>
+                                                </a>
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>

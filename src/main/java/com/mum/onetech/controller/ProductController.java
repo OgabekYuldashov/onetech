@@ -58,10 +58,6 @@ public class ProductController {
 
     private String saveUploadedFiles(MultipartFile[] files) throws IOException {
 
-        // Make sure directory exists!
-//        File uploadDir = new File(UPLOAD_DIR);
-//        uploadDir.mkdirs();
-
         StringBuilder sb = new StringBuilder();
 
         for (MultipartFile file : files) {
@@ -69,7 +65,6 @@ public class ProductController {
             if (file.isEmpty()) {
                 continue;
             }
-//            String uploadFilePath = UPLOAD_DIR + "/" + file.getOriginalFilename();
             String uploadFilePath = uploadDirectory + "/" + file.getOriginalFilename();
 
             byte[] bytes = file.getBytes();
@@ -79,6 +74,19 @@ public class ProductController {
             sb.append(uploadFilePath).append("\n");
         }
         return sb.toString();
+    }
+
+    @GetMapping("/productUpdate")
+    public String getProductForUpdate(@RequestParam ("id") Long id,Model model){
+        model.addAttribute("product",productService.getOneProductById(id));
+        System.out.println("hereeeee");
+        return "productUpdateForm";
+    }
+    @PostMapping("/productUpdate")
+    public String updateProduct(Product product){
+        System.out.println("idddd" +product.getId());
+        productService.save(product);
+        return "";
     }
 
 

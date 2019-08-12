@@ -35,7 +35,6 @@ public class Product {
     private String description;
 
     @NotNull
-    @Positive
     private Double price;
 
     //Don't set it in the from
@@ -44,8 +43,7 @@ public class Product {
     private Date dateProductAdded;
 
    private Double discountRate=0.0 ;
-   @Enumerated(EnumType.STRING)
-   private StatusType status =StatusType.NONE;
+
 
     private Boolean isNewArrival = false;
     @Enumerated(EnumType.STRING)
