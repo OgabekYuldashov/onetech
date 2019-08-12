@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/seller")
 @Controller
 public class SellerController {
     @Autowired
     private SellerService sellerService;
 
-    @GetMapping("/")
+    @GetMapping("/seller")
     public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
         return "SellerRegForm";
     }
-    @PostMapping("/")
+
+    @PostMapping("/seller")
     public String processRegistrationForm(Seller seller , Model model){
         Role role =new Role();
         role.setRole(RoleType.SELLER);
@@ -31,7 +31,7 @@ public class SellerController {
         sellerService.registerSeller(seller);
         System.out.println("seller" + seller);
         model.addAttribute("product", new Product());
-        return "addProduct";
+        return "product";
     }
 
 
