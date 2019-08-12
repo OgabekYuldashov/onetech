@@ -5,15 +5,10 @@ create table if not exists persistent_logins (
   last_used timestamp not null
   );
 
-INSERT INTO Role VALUES (1, 'ADMIN');
-INSERT INTO Role VALUES (2, 'DBA');
-INSERT INTO Role VALUES (3, 'DEVELOPER');
-INSERT INTO Role VALUES (4, 'USER');
 
-
-INSERT INTO Role (`ROLE`) VALUES ('ADMIN');
+/*INSERT INTO Role (`ROLE`) VALUES ('ADMIN');
 INSERT INTO Role (`ROLE`) VALUES ('SELLER');
-INSERT INTO Role (`ROLE`) VALUES ('BUYER');
+INSERT INTO Role (`ROLE`) VALUES ('BUYER');*/
 
 /*INSERT INTO Credentials (`ID`, `EMAIL`, `FIRST_NAME`, `LAST_NAME`, `PASSWORD`, `VERIFIED`, `ROLE_ID`) VALUES (1, 'seller@seller.com', 'Tina', 'Xing', '132', 1, 2);
 

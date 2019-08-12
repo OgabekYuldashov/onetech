@@ -18,15 +18,9 @@ public class SellerController {
     @Autowired
     private SellerService sellerService;
 
-    @GetMapping("/seller")
-    public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
-        return "SellerRegForm";
-    }
-
     @PostMapping("/seller")
     public String processRegistrationForm(Seller seller , Model model){
-        Role role =new Role();
-        role.setRole(RoleType.SELLER);
+        Role role =new Role(RoleType.SELLER);
         seller.getCredentials().setRole(role);
         sellerService.registerSeller(seller);
         System.out.println("seller" + seller);

@@ -1,6 +1,10 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Buyer;
+import com.mum.onetech.domain.Role;
+import com.mum.onetech.domain.RoleType;
 import com.mum.onetech.domain.Seller;
+import com.mum.onetech.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +17,44 @@ import java.util.List;
 
 @Controller
 public class RegistrationController {
-    @GetMapping("/")
-    public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
+    @Autowired
+    BuyerService buyerService;
+
+    @GetMapping("/register")
+    public String getSellerRegistrationForm(Model model) {
+        model.addAttribute("seller", new Seller());
+        model.addAttribute("buyer", new Buyer());
+
         return "register";
     }
+
+    @PostMapping("/register/buyer")
+    public String registerBuyer(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult){
+
+        System.out.println("**************BUYER*************");
+        System.out.println(buyer);
+
+        if(bindingResult.hasErrors()){
+            return "register";
+        }
+
+        buyer.getCredentials().setRole(new Role(RoleType.BUYER));
+        buyer.getCredentials().setVerified(1);
+        buyerService.addNew(buyer);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/register/seller")
+    public String registerSeller(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "register";
+        }
+
+        return "";
+    }
+
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -25,6 +63,7 @@ public class RegistrationController {
     public String welcome(){
         return "welcome";
     }
+
 
 
 
