@@ -3,6 +3,7 @@ package com.mum.onetech.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,20 +17,19 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Credentials credentials;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Product> products;
 
-    @ManyToMany(mappedBy = "sellers")
+    @ManyToMany(mappedBy = "sellers",cascade=CascadeType.ALL)
     private List<Buyer> followers;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Role role;
-    @OneToMany(mappedBy = "sender")
+
+    @OneToMany(mappedBy = "sender",cascade=CascadeType.ALL)
     private List<Notification> notificationsSent;
 }
