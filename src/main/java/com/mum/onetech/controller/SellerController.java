@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class SellerController {
 
     @GetMapping("/seller")
     public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
-        return "seller";
+        return "productSideBar";
     }
     @PostMapping("/seller")
     public String processRegistrationForm(Seller seller , Model model){
@@ -38,8 +37,7 @@ public class SellerController {
         role.setRole(RoleType.SELLER);
         seller.getCredentials().setRole(role);
         sellerService.registerSeller(seller);
-        System.out.println("seller" + seller);
-        model.addAttribute("product", new Product());
+
         return "welcome";
     }
 

@@ -1,9 +1,9 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -27,10 +27,14 @@ public class ProductController {
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
 
+    @ModelAttribute("categories")
+    public List<Category> addCategories(){
+       return categoryService.findAll();
+    }
+
     @GetMapping("/addProduct")
     public String getProductForm(@ModelAttribute("product") Product product , Model model){
-        model.addAttribute("categories",categoryService.findAll());
-        return "product";
+        return "productAddForm";
     }
     @PostMapping("/addProduct")
     public String addProduct(Product product){
@@ -49,7 +53,7 @@ public class ProductController {
         product.setPictureUrls(result);
         product.setDateProductAdded(new Date());
         productService.save(product);
-       return "welcome";
+       return "productAddForm";
     }
 
     private String saveUploadedFiles(MultipartFile[] files) throws IOException {
