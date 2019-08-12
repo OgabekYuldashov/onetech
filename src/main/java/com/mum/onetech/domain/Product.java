@@ -46,8 +46,10 @@ public class Product {
 //    @ManyToOne
 //    private Seller seller;
 //
-     @OneToMany
-    private List<ProductImage> productImages =new ArrayList<>();
+
+    private String pictureUrls;
+     @Transient
+    private MultipartFile[] productImages =new MultipartFile[3] ;
 //
 //    @OneToMany(mappedBy = "product")
 //    private List<Review> reviews;

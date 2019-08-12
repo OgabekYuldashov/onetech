@@ -31,51 +31,48 @@ public class ProductController {
         return "product";
     }
     @PostMapping("/product")
-    public String addProduct(Product product, @RequestParam("productImagesFile") MultipartFile[] files){
-        StringBuilder filenames=new StringBuilder();
-        for(MultipartFile file:files){
-            Path filenameandpath= Paths.get(uploadDirectory,file.getOriginalFilename());
-            filenames.append(file.getOriginalFilename());
-            try {
-                Files.write(filenameandpath, file.getBytes());
-            }catch (IOException e){
-             e.printStackTrace();
-            }
+    public String addProduct(Product product){
+
+        String result = null;
+        try {
+            result = this.saveUploadedFiles(product.getProductImages());
+        }catch (IOException e){
+            e.printStackTrace();
         }
 
         System.out.println("ppp "+product);
 //        product.setDiscountRate(product.getDiscountRate());
-
-
+        MultipartFile[] images=product.getProductImages();
+        product.setPictureUrls(result);
         productService.save(product);
        return "welcome";
     }
 
+    private String saveUploadedFiles(MultipartFile[] files) throws IOException {
+
+        // Make sure directory exists!
+//        File uploadDir = new File(UPLOAD_DIR);
+//        uploadDir.mkdirs();
+
+        StringBuilder sb = new StringBuilder();
+
+        for (MultipartFile file : files) {
+
+            if (file.isEmpty()) {
+                continue;
+            }
+//            String uploadFilePath = UPLOAD_DIR + "/" + file.getOriginalFilename();
+            String uploadFilePath = uploadDirectory + "/" + file.getOriginalFilename();
+
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(uploadFilePath);
+            Files.write(path, bytes);
+
+            sb.append(uploadFilePath).append("\n");
+        }
+        return sb.toString();
+    }
 
 
-//    @Autowired
-//    CategoryService categoryService;
-//    @Autowired
-//    ProductService productService;
-//
-//    @ModelAttribute("categories")
-//    List<Category> getAllCategories(){
-//        return categoryService.findAll();
-//    }
-//
-//    @GetMapping("/products")
-//    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId, Model model){
-//        if(Util.isPositiveInteger(catId)){
-//            model.addAttribute("products", productService.findAllByCategoryId(Long.valueOf(catId)));
-//            model.addAttribute("count", productService.getCountByCategoryId(Long.valueOf(catId)));
-//        }else {
-//            model.addAttribute("products", productService.findAll());
-//            model.addAttribute("count", productService.getCountAll());
-//        }
-//
-//        Product p = new Product();
-//
-//        return "shop";
-//    }
 
 }

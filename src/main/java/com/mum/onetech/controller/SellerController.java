@@ -31,7 +31,7 @@ public class SellerController {
         sellerService.registerSeller(seller);
         System.out.println("seller" + seller);
         model.addAttribute("product", new Product());
-        return "addProduct";
+        return "welcome";
     }
 
 
