@@ -18,14 +18,15 @@
 </head>
 
 <body>
-
+<h1>Shop</h1>
+<!--
 <div class="super_container">
-	
-	<!-- Header -->
+
+	&lt;!&ndash; Header &ndash;&gt;
 
 	<header th:replace="fragments/frg_header :: header"></header>
-	
-	<!-- Home -->
+
+	&lt;!&ndash; Home &ndash;&gt;
 
 	<div class="home">
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-th:src="@{images/shop_background.jpg}"></div>
@@ -35,14 +36,14 @@
 		</div>
 	</div>
 
-	<!-- Shop -->
+	&lt;!&ndash; Shop &ndash;&gt;
 
 	<div class="shop">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3">
 
-					<!-- Shop Sidebar -->
+					&lt;!&ndash; Shop Sidebar &ndash;&gt;
 					<div class="shop_sidebar">
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
@@ -96,8 +97,8 @@
 				</div>
 
 				<div class="col-lg-9">
-					
-					<!-- Shop Content -->
+
+					&lt;!&ndash; Shop Content &ndash;&gt;
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
@@ -120,7 +121,7 @@
 						<div class="product_grid">
 							<div class="product_grid_border"></div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new" th:each="p : ${products}">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/{img}(img=${p.getProductImages().get(0)})}" alt=""></div>
@@ -135,7 +136,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item discount">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_1.png}" alt=""></div>
@@ -150,7 +151,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_2.png}" alt=""></div>
@@ -165,7 +166,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_3.png}" alt=""></div>
@@ -180,7 +181,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_4.png}" alt=""></div>
@@ -195,7 +196,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/shop_1.jpg}" alt=""></div>
@@ -210,7 +211,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_5.png}" alt=""></div>
@@ -225,7 +226,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_6.png}" alt=""></div>
@@ -240,7 +241,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_7.png}" alt=""></div>
@@ -255,7 +256,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_8.png}" alt=""></div>
@@ -270,7 +271,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_1.jpg}" alt=""></div>
@@ -285,7 +286,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_2.jpg}" alt=""></div>
@@ -300,7 +301,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_3.jpg}" alt=""></div>
@@ -315,7 +316,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_4.jpg}" alt=""></div>
@@ -330,7 +331,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item discount">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_1.png}" alt=""></div>
@@ -345,7 +346,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_6.jpg}" alt=""></div>
@@ -360,7 +361,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_7.jpg}" alt=""></div>
@@ -375,7 +376,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/new_8.jpg}" alt=""></div>
@@ -390,7 +391,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/shop_2.jpg}" alt=""></div>
@@ -405,7 +406,7 @@
 								</ul>
 							</div>
 
-							<!-- Product Item -->
+							&lt;!&ndash; Product Item &ndash;&gt;
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/featured_5.png}" alt=""></div>
@@ -422,7 +423,7 @@
 
 						</div>
 
-						<!-- Shop Page Navigation -->
+						&lt;!&ndash; Shop Page Navigation &ndash;&gt;
 
 						<div class="shop_page_nav d-flex flex-row">
 							<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
@@ -443,26 +444,26 @@
 		</div>
 	</div>
 
-	<!-- Recently Viewed -->
+	&lt;!&ndash; Recently Viewed &ndash;&gt;
 
 	<div th:replace="fragments/frg_viewed :: viewed"></div>
 
-	<!-- Brands -->
+	&lt;!&ndash; Brands &ndash;&gt;
 
 	<div th:replace="fragments/frg_brands :: brands"></div>
 
-	<!-- Newsletter -->
+	&lt;!&ndash; Newsletter &ndash;&gt;
 
 	<div th:replace="fragments/frg_newsletter :: newsletter"></div>
 
-	<!-- Footer -->
+	&lt;!&ndash; Footer &ndash;&gt;
 
 	<footer th:replace="fragments/frg_footer :: footer"> </footer>
 
-	<!-- Copyright -->
+	&lt;!&ndash; Copyright &ndash;&gt;
 
 	<div th:replace="fragments/frg_copyright :: copyright"></div>
-</div>
+</div>-->
 
 <script th:src="@{js/jquery-3.3.1.min.js}"></script>
 <script th:src="@{styles/bootstrap4/popper.js}"></script>
