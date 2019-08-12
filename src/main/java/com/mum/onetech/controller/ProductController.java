@@ -41,7 +41,7 @@ public class ProductController {
         }
 
         System.out.println("ppp "+product);
-//        product.setDiscountRate(product.getDiscountRate());
+        product.setDiscountRate(product.getDiscountRate());
         MultipartFile[] images=product.getProductImages();
         product.setPictureUrls(result);
         productService.save(product);
