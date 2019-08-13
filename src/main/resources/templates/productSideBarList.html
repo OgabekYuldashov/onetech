@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <h3 class="title-5 m-b-35">data table</h3>
+                            <h3 class="title-5 m-b-35">Product table</h3>
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
                                     <div class="rs-select2--light rs-select2--md">
@@ -123,7 +123,7 @@
                                                 <a  th:href="@{/productUpdate(id=${pro.id})}"  class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <button  th:class="rmvBtnn"  th:value="${pro.id}" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <button  th:class="item"  th:value="${pro.id}"  class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -182,7 +182,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('.rmvBtnn').click(function () {
+        $('.item').click(function () {
             let product = {};
             product.id = $(this).val();
             let newData=JSON.stringify(product);
