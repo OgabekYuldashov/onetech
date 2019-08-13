@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,10 +23,10 @@ public class Order {
     @NotNull
     private OrderStatus status = OrderStatus.PENDING;
 
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
 
-    private LocalDate createDate;
-
-
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @Valid
@@ -40,6 +40,7 @@ public class Order {
     @OneToMany
     private List<OrderItem> orderItems;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Buyer buyer;
 
 }

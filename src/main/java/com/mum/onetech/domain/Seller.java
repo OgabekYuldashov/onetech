@@ -3,6 +3,7 @@ package com.mum.onetech.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class Seller {
     @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Product> products;
 
     @ManyToMany(mappedBy = "sellers",cascade=CascadeType.ALL)

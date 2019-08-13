@@ -18,4 +18,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query(value = "SELECT count(p) FROM Product p")
     Long getCountAll();
+//    @Query(value = "UPDATE PRODUCT SET DESCRIPTION = :description  WHERE ID = :id")
+//    void update(Long id ,String description );
 }

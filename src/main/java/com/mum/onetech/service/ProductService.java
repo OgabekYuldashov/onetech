@@ -12,4 +12,5 @@ public interface ProductService {
     Long getCountAll();
     Product getOneProductById(Long id);
     Product delete(Product product);
+    void update(Product product);
 }

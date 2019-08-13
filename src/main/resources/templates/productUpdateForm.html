@@ -60,32 +60,37 @@
                             </div>
                             <div class="card-body card-block">
                                 <form th:action="@{/productUpdate}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label class=" form-control-label">Static</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <p class="form-control-static">Username</p>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
+
+                                    <div class="row form-group"  disabled>
                                         <div class="col col-md-3">
                                             <label for="selectLg" class=" form-control-label">Category</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select  th:field="*{category.name}"  name="selectLg" id="selectLg"
+                                            <select  th:field="*{category.name}"   name="selectLg" id="selectLg"
                                                      class="form-control-lg form-control">
                                                 <option value="0">Please select</option>
                                                 <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.name}"></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row form-group">
+                                    <div class="row form-group"  disabled>
+                                        <div class="col col-md-3">
+                                            <label for="selectLg" class=" form-control-label">Brand</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <select  th:field="*{brand.name}"  name="selectLg" id="selectLgb"
+                                                     class="form-control-lg form-control">
+                                                <option value="0">Please select</option>
+                                                <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group" hidden >
                                         <div class="col col-md-3">
                                             <label for="text-input" class=" form-control-label">Id</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="text-input6" th:field="*{id}" name="text-input" placeholder="Text"
+                                            <input type="text" id="text-input6"   th:field="*{id}" name="text-input" placeholder="Text"
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
                                         </div>

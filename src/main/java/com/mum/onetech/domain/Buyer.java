@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,4 +37,7 @@ public class Buyer {
 
     @OneToMany(mappedBy = "buyer")
     private List<Review> reviews;
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
+    private List<Order> orders = new ArrayList<>();
 }

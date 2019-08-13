@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -114,19 +115,20 @@ public class ProductController {
 //    }
 
     @GetMapping("/productUpdate")
-    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpSession session){
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpServletRequest request){
         model.addAttribute("product",productService.getOneProductById(id));
-        session.setAttribute("productUp",productService.getOneProductById(id));
+//        HttpSession session=request.getSession();
+//        session.setAttribute("productUp",productService.getOneProductById(id));
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
-    public String updateProduct( Product product,HttpSession session){
-        System.out.println("idddd" +session.getAttribute("productUp"));
-        productService.delete(product);
+    public String updateProduct( Product product,HttpServletRequest request){
+//        System.out.println("idddd" +request.getSession().getAttribute("productUp"));
+//        productService.delete(product);
+//        product.setId(null);
 
-        product.setId(null);
         productService.save(product);
-        return "welcome";
+        return "productSideBarList";
     }
 
     @PostMapping("/productDelete")
