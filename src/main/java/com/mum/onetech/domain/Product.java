@@ -52,15 +52,16 @@ public class Product {
     private PromoteType promote=PromoteType.NONE;
     @ManyToOne
     private Seller seller;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ProductImage> productImgs;
 
      @Transient
-    private MultipartFile[] productImages =new MultipartFile[3] ;
+    private MultipartFile[] productImages  ;
 
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
-    private String pictureUrls;
+//    private String pictureUrls;
 
     public void calculateDiscount(Double discRate){
         this.discountRate = discRate;
