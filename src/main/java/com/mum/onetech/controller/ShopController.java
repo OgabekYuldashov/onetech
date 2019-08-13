@@ -35,6 +35,7 @@ public class ShopController {
     @RequestMapping("/index")
     public String index(Model model) {
 
+
         return "index";
     }
 

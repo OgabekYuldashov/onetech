@@ -89,7 +89,7 @@
 
                 <div class="tab-pane fade signup-form" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <h2 class="form-title">Sign up as Seller</h2>
-                    <form  th:action="@{/seller/}"  th:object="${seller}" method="POST"  class="register-form" id="register-form">
+                    <form  th:action="@{/seller}"  th:object="${seller}" method="POST"  class="register-form" id="register-form1">
                         <div class="form-group">
                             <label for="firstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
                             <input type="text" th:field="*{credentials.firstName}" name="firstName" id="firstName" placeholder="First Name"/>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="db-head">
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Tables</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="db/css/font-face.css" rel="stylesheet" media="all">
+    <link href="db/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="db/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="db/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="db/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="db/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="db/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="db/css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+
+    <!-- MENU SIDEBAR-->
+    <aside th:replace="fragments/frg_db_menu-sidebar :: menu-sidebar"></aside>
+    <!-- END MENU SIDEBAR-->
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
+       <header th:replace=" fragments/frg_db_header-desktop :: header-desktop"></header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Product Add Form</strong>
+                </div>
+                <div class="card-body card-block">
+                    <form th:action="@{/addProduct}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">Static</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <p class="form-control-static">Username</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="selectLg" class=" form-control-label">Category</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select  th:field="*{category.name}"  name="selectLg" id="selectLg"
+                                         class="form-control-lg form-control">
+                                    <option value="0">Please select</option>
+                                    <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="selectLg" class=" form-control-label">Brand</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select  th:field="*{brand.name}"  name="selectLg" id="selectLgb"
+                                         class="form-control-lg form-control">
+                                    <option value="0">Please select</option>
+                                    <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Product Name</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" th:field="*{name}" name="text-input" placeholder="Text"
+                                       class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="textarea-input" class=" form-control-label">Description </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                                <textarea name="textarea-input" id="textarea-input" rows="2" th:field="*{description}"
+                                                          placeholder="Content..." class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Price</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="text-number" th:field="*{price}" name="text-input" placeholder="price"
+                                       class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Discount Rate</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="number" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="Discount Rate"
+                                       class="form-control">
+                                <small class="form-text text-muted">This is a help text</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">New Arrival</label>
+                            </div>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="radio" id="inline-radio1"  th:field="*{isNewArrival}"  th:value="yes" name="inline-radios"
+                                               value="option1" class="form-check-input" >yes
+                                    </label>
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="radio" id="inline-radio2"  th:field="*{isNewArrival}"  th:value="no" name="inline-radios"
+                                               value="option1" class="form-check-input">no
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="file-multiple-input" class=" form-control-label">Multiple
+                                    File input</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="file" id="file-multiple-input"  name="productImagesFile" th:field="*{productImages}"
+                                       multiple="" class="form-control-file">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-outline-primary btn-sm"  cvalue="ADD-PRODUCT">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+            <div class="section__content section__content--p30">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                        href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:fragment="scriptlink">
+    <!-- Jquery JS-->
+    <script src="db/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="db/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="db/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="db/vendor/slick/slick.min.js">
+    </script>
+    <script src="db/vendor/wow/wow.min.js"></script>
+    <script src="db/vendor/animsition/animsition.min.js"></script>
+    <script src="db/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="db/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="db/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="db/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="db/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="db/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="db/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="db/js/main.js"></script>
+</div>
+</body>
+
+</html>
+<!-- end document-->

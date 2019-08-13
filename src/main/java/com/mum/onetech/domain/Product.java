@@ -10,7 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -25,6 +28,10 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Brand brand;
+
     @NotBlank
     private String name;
 
@@ -37,28 +44,35 @@ public class Product {
     //Don't set it in the from
     private Double oldPrice;
 
+    @Temporal(TemporalType.DATE)
+    private Date dateProductAdded;
 
-    private Double discountRate ;
-
+    private Double discountRate=0.0 ;
 
     private Boolean isNewArrival = false;
 
-    @OneToOne
-    private Brand brand;
-//    @ManyToOne
-//    private Seller seller;
-//
-     @OneToMany
-    private List<ProductImage> productImages =new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "product")
-//    private List<Review> reviews;
+    @Enumerated(EnumType.STRING)
+    private PromoteType promote = PromoteType.NONE;
 
-//    public void setDiscountRate(Double discRate){
-//        this.discountRate = discRate;
-//        this.oldPrice = this.price;
-//        this.price -= this.price *discRate / 100;
-//        this.price = Double.valueOf(Util.df2.format(this.price));
-//    }
+    @ManyToOne
+    private Seller seller;
+
+    @OneToMany
+    private List<ProductImage> productImgs;
+
+    @Transient
+    private MultipartFile[] productImages =new MultipartFile[3] ;
+
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+
+    private String pictureUrls;
+
+    public void calculateDiscount(Double discRate){
+        this.discountRate = discRate;
+        this.oldPrice = this.price;
+        this.price -= this.price *discRate / 100;
+        this.price = Double.valueOf(Util.df2.format(this.price));
+    }
 
 }
