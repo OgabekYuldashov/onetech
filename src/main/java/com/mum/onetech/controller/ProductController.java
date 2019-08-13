@@ -33,7 +33,7 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images";
+    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
     @ModelAttribute("categories")
     public List<Category> addCategories(Model model){
@@ -77,9 +77,10 @@ public class ProductController {
             if (file.isEmpty()) {
                 continue;
             }
-            String uploadFilePath =  Util.randomUUID()+".jpg";
+            String fname=Util.randomUUID()+".jpg";
+            String uploadFilePath =uploadDirectory +fname;
             ProductImage productImage = new ProductImage();
-            productImage.setImgName(uploadFilePath);
+            productImage.setImgName(fname);
             images.add(productImage);
 
             byte[] bytes = file.getBytes();
