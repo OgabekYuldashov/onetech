@@ -40,6 +40,8 @@ public class Order {
     @OneToMany
     private List<OrderItem> orderItems;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Buyer buyer;
 
 
 }

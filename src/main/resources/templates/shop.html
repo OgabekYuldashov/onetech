@@ -110,15 +110,17 @@
 							<!-- Product Item -->
 							<div class="product_item is_new" th:each="p : ${products}">
 								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img th:src="@{images/{img}(img=${p.getProductImages().get(0)})}" alt=""></div>
+								<div class="product_image d-flex flex-column align-items-center justify-content-center">
+									<img th:src="@{/images/pimgs/{img}(img=${p.productImgs.get(0).imgName})}" alt="">
+								</div>
 								<div class="product_content">
 									<div class="product_price">$<span th:text="${p.price}" th:remove="tag">225</span></div>
 									<div class="product_name"><div><a th:href="@{/product/{pid}(pid=${p.id})}" tabindex="0" th:text="${p.name}">Philips BT6900A</a></div></div>
 								</div>
 								<div class="product_fav"><i class="fas fa-heart"></i></div>
 								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
+									<li th:if="${p.discountRate > 0.0}" class="product_mark product_discount" >-<span th:text="${p.discountRate}" th:remove="tag">25</span>%</li>
+									<li th:if="${p.isNewArrival}" class="product_mark product_new">new</li>
 								</ul>
 							</div>
 

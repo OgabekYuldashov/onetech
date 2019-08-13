@@ -44,7 +44,7 @@ public class Product {
     @Temporal(TemporalType.DATE)
     private Date dateProductAdded;
 
-   private Double discountRate=0.0 ;
+    private Double discountRate=0.0 ;
 
 
     private Boolean isNewArrival = false;
@@ -52,6 +52,7 @@ public class Product {
     private PromoteType promote=PromoteType.NONE;
     @ManyToOne
     private Seller seller;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProductImage> productImgs;
 

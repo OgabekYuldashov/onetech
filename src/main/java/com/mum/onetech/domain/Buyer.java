@@ -46,6 +46,9 @@ public class Buyer {
     @OneToMany(cascade=CascadeType.ALL)
     private List<Product> favoriteProducts = new ArrayList<>();
 
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
+    private List<Order> orders = new ArrayList<>();
+
     @OneToOne(cascade = CascadeType.ALL)
     private Cart shoppingCart;
 
