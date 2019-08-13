@@ -42,4 +42,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id).get();
     }
 
+    @Override
+    public Product delete(Product product) {
+        productRepository.delete(product);
+        return product;
+    }
+
+
 }

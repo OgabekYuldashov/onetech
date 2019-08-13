@@ -109,7 +109,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="pro:${products}">
+                                    <tr th:each="pro:${products}" id="item_"+${pro.id}>
                                         <td th:text="${pro.dateProductAdded}" ></td>
                                         <td th:text="${pro.category.name}"></td>
                                         <td th:text="${pro.description}"></td>
@@ -123,7 +123,7 @@
                                                 <a  th:href="@{/productUpdate(id=${pro.id})}"  class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <button id="rmvBtn" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="More">

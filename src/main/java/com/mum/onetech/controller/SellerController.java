@@ -29,7 +29,7 @@ public class SellerController {
 
     @GetMapping("/seller")
     public String getSellerRegistrationForm(@ModelAttribute("seller") Seller seller) {
-        return "productSideBar";
+        return "productSideBarList";
     }
     @PostMapping("/seller")
     public String processRegistrationForm(Seller seller , Model model){

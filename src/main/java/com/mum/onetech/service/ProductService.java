@@ -11,4 +11,5 @@ public interface ProductService {
     Long getCountByCategoryId(Long catId);
     Long getCountAll();
     Product getOneProductById(Long id);
+    Product delete(Product product);
 }

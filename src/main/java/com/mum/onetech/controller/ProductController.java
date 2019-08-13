@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -77,17 +79,22 @@ public class ProductController {
     }
 
     @GetMapping("/productUpdate")
-    public String getProductForUpdate(@RequestParam ("id") Long id,Model model){
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpSession session){
         model.addAttribute("product",productService.getOneProductById(id));
+        session.setAttribute("productID",id);
         System.out.println("hereeeee");
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
-    public String updateProduct(Product product){
-        System.out.println("idddd" +product.getId());
+    public String updateProduct( Product product,HttpSession session){
+        System.out.println("idddd" +session.getAttribute("productID"));
+        product.setId(1L);
+        productService.delete(product);
+        product.setId(null);
         productService.save(product);
-        return "";
+        return "welcome";
     }
+
 
 
 }
