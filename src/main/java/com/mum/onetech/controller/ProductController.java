@@ -5,6 +5,7 @@ import com.mum.onetech.domain.Product;
 import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
+import com.mum.onetech.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-    public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
+    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images";
 
     @ModelAttribute("categories")
     public List<Category> addCategories(Model model){
@@ -71,7 +72,7 @@ public class ProductController {
             if (file.isEmpty()) {
                 continue;
             }
-            String uploadFilePath = uploadDirectory + "/" + file.getOriginalFilename();
+            String uploadFilePath = uploadDirectory + "/" + file.getOriginalFilename()+ Util.randomUUID();
 
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadFilePath);
