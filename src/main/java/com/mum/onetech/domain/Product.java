@@ -28,6 +28,8 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Brand brand;
     @NotBlank
     private String name;
 

@@ -2,6 +2,7 @@ package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,14 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private BrandService brandService;
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
 
     @ModelAttribute("categories")
-    public List<Category> addCategories(){
+    public List<Category> addCategories(Model model){
+        model.addAttribute("brands" ,brandService.findAll());
        return categoryService.findAll();
     }
 
@@ -81,15 +85,14 @@ public class ProductController {
     @GetMapping("/productUpdate")
     public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpSession session){
         model.addAttribute("product",productService.getOneProductById(id));
-        session.setAttribute("productID",id);
-        System.out.println("hereeeee");
+        session.setAttribute("productUp",productService.getOneProductById(id));
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
     public String updateProduct( Product product,HttpSession session){
-        System.out.println("idddd" +session.getAttribute("productID"));
-        product.setId(1L);
+        System.out.println("idddd" +session.getAttribute("productUp"));
         productService.delete(product);
+
         product.setId(null);
         productService.save(product);
         return "welcome";

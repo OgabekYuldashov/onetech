@@ -35,3 +35,8 @@ INSERT INTO Category (`NAME`) VALUES ('Gadgets');
 INSERT INTO Category (`NAME`) VALUES ('Car Electronics');
 INSERT INTO Category (`NAME`) VALUES ('Video Games $ Consoles');
 INSERT INTO Category (`NAME`) VALUES ('Accessories');
+
+INSERT INTO Brand (`NAME`) VALUES ('Computers & Laptops');
+INSERT INTO Brand (`NAME`) VALUES ('Cameras & Photos');
+INSERT INTO Brand (`NAME`) VALUES ('Hardware');
+INSERT INTO Brand (`NAME`) VALUES ('Smartphones & Tablets');
