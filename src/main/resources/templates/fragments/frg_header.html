@@ -18,22 +18,22 @@
                     <div class="top_bar_content ml-auto">
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
-                                <li>
+                                <!--<li>
                                     <a href="#">English<i class="fas fa-chevron-down"></i></a>
                                     <ul>
                                         <li><a href="#">Italian</a></li>
                                         <li><a href="#">Spanish</a></li>
                                         <li><a href="#">Japanese</a></li>
                                     </ul>
-                                </li>
-                                <li>
+                                </li>-->
+                                <!--<li>
                                     <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
                                     <ul>
                                         <li><a href="#">EUR Euro</a></li>
                                         <li><a href="#">GBP British Pound</a></li>
                                         <li><a href="#">JPY Japanese Yen</a></li>
                                     </ul>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                         <div class="top_bar_user">
@@ -56,7 +56,7 @@
                 <!-- Logo -->
                 <div class="col-lg-2 col-sm-3 col-3 order-1">
                     <div class="logo_container">
-                        <div class="logo"><a href="#">OneTech</a></div>
+                        <div class="logo"><a th:href="@{/}">OneTech</a></div>
                     </div>
                 </div>
 
@@ -72,12 +72,14 @@
                                             <span class="custom_dropdown_placeholder clc">All Categories</span>
                                             <i class="fas fa-chevron-down"></i>
                                             <ul class="custom_list clc">
-                                                <li><a class="clc" href="#">All Categories</a></li>
-                                                <li><a class="clc" href="#">Computers</a></li>
+                                                <li><a class="clc" th:data="0" href="#">All Categories</a></li>
+                                                <li th:each="cat : ${categories}"><a class="clc" th:data="${cat.id}" th:text="${cat.name}" href="#">All Categories</a></li>
+
+                                                <!--<li><a class="clc" href="#">Computers</a></li>
                                                 <li><a class="clc" href="#">Laptops</a></li>
                                                 <li><a class="clc" href="#">Cameras</a></li>
                                                 <li><a class="clc" href="#">Hardware</a></li>
-                                                <li><a class="clc" href="#">Smartphones</a></li>
+                                                <li><a class="clc" href="#">Smartphones</a></li>-->
                                             </ul>
                                         </div>
                                     </div>
@@ -95,6 +97,7 @@
                             <div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
                             <div class="wishlist_content">
                                 <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                <!--<div class="wishlist_count" th:text="${buyer.favoriteProducts.size()} ?: 0">115</div>-->
                                 <div class="wishlist_count">115</div>
                             </div>
                         </div>
@@ -104,11 +107,13 @@
                             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                 <div class="cart_icon">
                                     <img src="images/cart.png" alt="">
+                                    <!--<div class="cart_count"><span th:text="${buyer.shoppingCart.cartItems.size} ?: 0">10</span></div>-->
                                     <div class="cart_count"><span>10</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a href="#">Cart</a></div>
-                                    <div class="cart_price">$85</div>
+                                    <div class="cart_text"><a th:href="@{cart}">Cart</a></div>
+                                    <!--<div class="cart_price">$<span th:text="${buyer.shoppingCart.totalAmount}" th:remove="tag">85</span></div>-->
+                                    <div class="cart_price">$<span>85</span></div>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +143,8 @@
                             <ul class="cat_menu">
 
                                 <li th:each="cat : ${categories}">
-                                    <a th:href="@{/products/{catid}(catid=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>
+                                    <!--<a th:href="@{/products/{catid}(catid=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>-->
+                                    <a th:href="@{products(cat=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -147,7 +153,7 @@
 
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
-                                <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a th:href="@{/}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 <li class="hassubs">
                                     <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
                                     <ul>
@@ -183,17 +189,13 @@
                                 <li class="hassubs">
                                     <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                                     <ul>
-                                        <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{shop}">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{products}">Products<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{cart}">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
                                     </ul>
                                 </li>
-                                <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a th:href="@{contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
 

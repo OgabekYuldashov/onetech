@@ -38,11 +38,13 @@ public class Product {
     private Double oldPrice;
 
 
-   private Double discountRate ;
+    private Double discountRate ;
 
 
     private Boolean isNewArrival = false;
 
+    @OneToOne
+    private Brand brand;
 //    @ManyToOne
 //    private Seller seller;
 //

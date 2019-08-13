@@ -29,7 +29,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/register/buyer")
-    public String registerBuyer(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult){
+    public String registerBuyer(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult, Model model){
+        model.addAttribute("seller", new Seller());
 
         System.out.println("**************BUYER*************");
         System.out.println(buyer);
@@ -46,13 +47,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/register/seller")
-    public String registerSeller(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult){
+    public String registerSeller(@Valid @ModelAttribute("seller") Seller seller, BindingResult bindingResult, Model model){
+        model.addAttribute("buyer", new Buyer());
 
         if(bindingResult.hasErrors()){
             return "register";
         }
 
-        return "";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
@@ -91,7 +93,7 @@ public class RegistrationController {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("email", "error.user",
+                    .rejectValue("email", "err.user",
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {

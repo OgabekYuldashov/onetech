@@ -6,13 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Buyer {
+
+    public Buyer() {
+        this.shoppingCart = new Cart();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +42,11 @@ public class Buyer {
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
     private List<Review> reviews;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Product> favoriteProducts = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart shoppingCart;
+
 }

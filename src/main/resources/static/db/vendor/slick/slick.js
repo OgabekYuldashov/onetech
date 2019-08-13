@@ -1573,7 +1573,7 @@
                     image
                         .removeAttr( 'data-lazy' )
                         .removeClass( 'slick-loading' )
-                        .addClass( 'slick-lazyload-error' );
+                        .addClass( 'slick-lazyload-err' );
 
                     _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
 
@@ -1811,7 +1811,7 @@
                     image
                         .removeAttr( 'data-lazy' )
                         .removeClass( 'slick-loading' )
-                        .addClass( 'slick-lazyload-error' );
+                        .addClass( 'slick-lazyload-err' );
 
                     _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
 

@@ -23,8 +23,14 @@ public class OrderItem {
     @OneToOne
     private Product product;
 
+    public OrderItem(Product product, Integer quantity) {
+        this.quantity = quantity;
+        this.product = product;
+        this.unitPrice = product.getPrice();
+    }
 
     @ManyToOne
 //    @JoinTable
     private Order order;
+
 }

@@ -69,7 +69,7 @@
 ////                .and()
 ////                .formLogin() //enable form login instead of basic login
 ////                .loginPage("/login")
-////                .failureUrl("/login-error")
+////                .failureUrl("/login-err")
 ////                .usernameParameter("email")
 ////                .passwordParameter("password")
 ////                .defaultSuccessUrl("/")
@@ -80,7 +80,7 @@
 ////                .and().csrf()
 ////                .ignoringAntMatchers("/h2-console/**") //don't apply CSRF protection to /h2-console
 ////                .and()
-////                .exceptionHandling().accessDeniedPage("/error/access-denied")
+////                .exceptionHandling().accessDeniedPage("/err/access-denied")
 ////                .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository())
 ////        ;
 ////        http.rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret");
