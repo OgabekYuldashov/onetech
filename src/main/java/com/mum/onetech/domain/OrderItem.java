@@ -25,6 +25,6 @@ public class OrderItem {
 
 
     @ManyToOne
-//    @JoinTable
+//   @JoinTable
     private Order order;
 }
