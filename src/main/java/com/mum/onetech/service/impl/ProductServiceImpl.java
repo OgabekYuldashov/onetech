@@ -24,6 +24,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product findById(Long pid) {
+        return productRepository.findById(pid).orElse(null);
+    }
+
+    @Override
     public List<Product> findAllByCategoryId(Long catId) {
         return productRepository.findAllByCategoryId(catId);
     }
@@ -37,4 +42,17 @@ public class ProductServiceImpl implements ProductService {
     public Long getCountAll() {
         return productRepository.getCountAll();
     }
+
+    @Override
+    public Product getOneProductById(Long id) {
+        return productRepository.findById(id).get();
+    }
+
+    @Override
+    public Product delete(Product product) {
+        productRepository.delete(product);
+        return product;
+    }
+
+
 }

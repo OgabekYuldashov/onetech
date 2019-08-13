@@ -5,35 +5,51 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Buyer {
+
+    public Buyer() {
+        this.shoppingCart = new Cart();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
+    @Valid
     private Credentials credentials;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Address> shippingAddresses;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Address> billingAddresses;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<Seller> sellers;
 
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "receiver")
     private List<Notification> notificationsReceived;
 
-
-    @OneToMany(mappedBy = "buyer")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
     private List<Review> reviews;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Product> favoriteProducts = new ArrayList<>();
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart shoppingCart;
+
 }

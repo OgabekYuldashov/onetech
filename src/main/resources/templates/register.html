@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" th:href="@{/reg/fonts/material-icon/css/material-design-iconic-font.min.css}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Main css -->
+    <link rel="stylesheet" th:href="@{/reg/css/style.css}">
+
+    <style>
+        .tab-custom{
+            width: 50%;
+            border: none;
+            font-size: 1.5rem;
+            text-align: center;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('#nav-buyer-tab').click(function (event) {
+                $(this).css("border-left-color", "#fff")
+                    .css("border-top-right-radius", "1rem");
+            });
+            $('#nav-seller-tab').click(function (event) {
+                $(this).css("border-right-color", "#fff")
+                    .css("border-top-left-radius", "1rem");
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="main">
+
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link tab-custom active" style="border-left-color: #fff; border-top-right-radius: 1rem;" id="nav-buyer-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">BUYER</a>
+                    <a class="nav-item nav-link tab-custom" id="nav-seller-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SELLER</a>
+                </div>
+            </nav>
+            <div class="tab-content signup-content" id="nav-tabContent">
+                <div class="tab-pane fade signup-form show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <h2 class="form-title">Sign up as Buyer</h2>
+                    <form th:object="${buyer}" th:action="@{/register/buyer}" method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{credentials.firstName}" name="firstName" id="firstName" placeholder="First Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{credentials.lastName}" name="lastName" id="lastName" placeholder="First Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" th:field="*{credentials.email}" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" th:field="*{credentials.password}" name="password" id="password" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree to the <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade signup-form" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <h2 class="form-title">Sign up as Seller</h2>
+                    <form  th:action="@{/seller}"  th:object="${seller}" method="POST"  class="register-form" id="register-form1">
+                        <div class="form-group">
+                            <label for="firstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{credentials.firstName}" name="firstName" id="firstName" placeholder="First Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{credentials.lastName}"name="name" id="lastName" placeholder="Last Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="street"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{address.street}" name="firstName" id="street" placeholder="Street "/>
+                        </div>
+                        <div class="form-group">
+                            <label for="city"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{address.city}"name="name" id="city" placeholder="city"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="city"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{address.state}"name="name" id="state" placeholder="sate"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="city"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" th:field="*{address.zip}"name="name" id="zip" placeholder="Zip code"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email"  th:field="*{credentials.email}" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password"  th:field="*{credentials.password}"name="pass" id="pass" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="signup-image">
+                    <figure><img th:src="@{/reg/images/signup-image.jpg}" alt="sing up image"></figure>
+                    <a th:href="@{/login}" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+
+<!-- JS -->
+<script th:src="@{/reg/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/reg/js/main.js}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

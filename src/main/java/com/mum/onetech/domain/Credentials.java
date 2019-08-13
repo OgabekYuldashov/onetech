@@ -30,7 +30,7 @@ public class Credentials {
     @NotBlank
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 
     private Integer verified = 0;

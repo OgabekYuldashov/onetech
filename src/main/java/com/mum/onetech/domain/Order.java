@@ -20,7 +20,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+//    @NotNull
     private OrderStatus status = OrderStatus.PENDING;
 
 
@@ -40,6 +40,8 @@ public class Order {
     @OneToMany
     private List<OrderItem> orderItems;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Buyer buyer;
 
 
 }
