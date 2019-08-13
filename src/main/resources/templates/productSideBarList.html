@@ -109,8 +109,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="pro:${products}" id="item_"+${pro.id}>
-                                        <td th:text="${pro.dateProductAdded}" ></td>
+                                    <tr th:each="pro:${products}" th:id="${pro.id}">
+                                        <td  th:text="${pro.dateProductAdded}" ></td>
                                         <td th:text="${pro.category.name}"></td>
                                         <td th:text="${pro.description}"></td>
                                         <td th:text="${pro.discountRate}"></td>
@@ -123,7 +123,7 @@
                                                 <a  th:href="@{/productUpdate(id=${pro.id})}"  class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <button id="rmvBtn" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <button  th:class="rmvBtnn"  th:value="${pro.id}" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -180,6 +180,34 @@
     <!-- Main JS-->
     <script src="db/js/main.js"></script>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.rmvBtnn').click(function () {
+            let product = {};
+            product.id = $(this).val();
+            let newData=JSON.stringify(product);
+            console.log(JSON.stringify(product));
+            $.ajax({
+                type:'post',
+                url:'/productDelete',
+                data: newData,
+                datatype:'JSON',
+                contentType:'application/json',
+                success:function (item) {
+                    console.log("successs" +item.id);
+                    $('#'+item.id).remove();
+                },
+                error:function () {
+                    console.log("error");
+                }
+
+            })
+
+        })
+    })
+
+
+</script>
 </body>
 
 </html>

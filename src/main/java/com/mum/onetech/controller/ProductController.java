@@ -95,6 +95,12 @@ public class ProductController {
         return "welcome";
     }
 
+    @PostMapping("/productDelete")
+    public @ResponseBody Product updateDelete(@RequestBody Product product){
+        System.out.println("product"+product);
+          productService.delete(product);
+        return product;
+    }
 
 
 }
