@@ -36,4 +36,17 @@ public class ProductServiceImpl implements ProductService {
     public Long getCountAll() {
         return productRepository.getCountAll();
     }
+
+    @Override
+    public Product getOneProductById(Long id) {
+        return productRepository.findById(id).get();
+    }
+
+    @Override
+    public Product delete(Product product) {
+        productRepository.delete(product);
+        return product;
+    }
+
+
 }

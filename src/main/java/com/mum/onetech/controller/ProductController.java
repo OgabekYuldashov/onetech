@@ -1,19 +1,27 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.ProductImage;
+import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
-import org.apache.tomcat.jni.File;
+import com.mum.onetech.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -22,60 +30,91 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private BrandService brandService;
 
-    public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
+    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
-    @GetMapping("/product")
-    public String getProductForm(@ModelAttribute("product") Product product , Model model){
-        model.addAttribute("categories",categoryService.findAll());
-        return "product";
+    @ModelAttribute("categories")
+    public List<Category> addCategories(Model model){
+        model.addAttribute("brands" ,brandService.findAll());
+       return categoryService.findAll();
     }
-    @PostMapping("/product")
-    public String addProduct(Product product, @RequestParam("productImagesFile") MultipartFile[] files){
-        StringBuilder filenames=new StringBuilder();
-        for(MultipartFile file:files){
-            Path filenameandpath= Paths.get(uploadDirectory,file.getOriginalFilename());
-            filenames.append(file.getOriginalFilename());
-            try {
-                Files.write(filenameandpath, file.getBytes());
-            }catch (IOException e){
-             e.printStackTrace();
-            }
+
+    @GetMapping("/addProduct")
+    public String getProductForm(@ModelAttribute("product") Product product , Model model){
+        return "productAddForm";
+    }
+    @PostMapping("/addProduct")
+    public String addProduct(Product product){
+
+        String result = null;
+        List<ProductImage> result2= new ArrayList<>();
+//        try {
+//            result = this.saveUploadedFiles(product.getProductImages());
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+        try {
+            result2 = this.saveImages(product.getProductImages());
+        }catch (IOException e){
+            e.printStackTrace();
         }
 
-        System.out.println("ppp "+product);
-//        product.setDiscountRate(product.getDiscountRate());
-
-
+        product.setProductImgs(result2);
+        product.calculateDiscount( product.getDiscountRate());
+//        product.setPictureUrls(result);
+        product.setDateProductAdded(new Date());
         productService.save(product);
-       return "welcome";
+       return "productAddForm";
     }
 
+    private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
+          List<ProductImage> images = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+
+            if (file.isEmpty()) {
+                continue;
+            }
+            String fname=Util.randomUUID()+".jpg";
+            String uploadFilePath =uploadDirectory +fname;
+            ProductImage productImage = new ProductImage();
+            productImage.setImgName(fname);
+            images.add(productImage);
+
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(uploadFilePath);
+            Files.write(path, bytes);
 
 
-//    @Autowired
-//    CategoryService categoryService;
-//    @Autowired
-//    ProductService productService;
-//
-//    @ModelAttribute("categories")
-//    List<Category> getAllCategories(){
-//        return categoryService.findAll();
-//    }
-//
-//    @GetMapping("/products")
-//    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId, Model model){
-//        if(Util.isPositiveInteger(catId)){
-//            model.addAttribute("products", productService.findAllByCategoryId(Long.valueOf(catId)));
-//            model.addAttribute("count", productService.getCountByCategoryId(Long.valueOf(catId)));
-//        }else {
-//            model.addAttribute("products", productService.findAll());
-//            model.addAttribute("count", productService.getCountAll());
-//        }
-//
-//        Product p = new Product();
-//
-//        return "shop";
-//    }
+        }
+
+        return images;
+    }
+
+    @GetMapping("/productUpdate")
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpSession session){
+        model.addAttribute("product",productService.getOneProductById(id));
+        session.setAttribute("productUp",productService.getOneProductById(id));
+        return "productUpdateForm";
+    }
+    @PostMapping("/productUpdate")
+    public String updateProduct( Product product,HttpSession session){
+        System.out.println("idddd" +session.getAttribute("productUp"));
+        productService.delete(product);
+
+        product.setId(null);
+        productService.save(product);
+        return "welcome";
+    }
+
+    @PostMapping("/productDelete")
+    public @ResponseBody Product updateDelete(@RequestBody Product product){
+        System.out.println("product"+product);
+          productService.delete(product);
+        return product;
+    }
+
 
 }
