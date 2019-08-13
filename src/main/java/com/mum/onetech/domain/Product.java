@@ -50,16 +50,17 @@ public class Product {
     private Boolean isNewArrival = false;
     @Enumerated(EnumType.STRING)
     private PromoteType promote=PromoteType.NONE;
-//    @ManyToOne
-//    private Seller seller;
-//
+    @ManyToOne
+    private Seller seller;
 
-    private String pictureUrls;
+
      @Transient
     private MultipartFile[] productImages =new MultipartFile[3] ;
 
-//    @OneToMany(mappedBy = "product")
-//    private List<Review> reviews;
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+
+    private String pictureUrls;
 
     public void calculateDiscount(Double discRate){
         this.discountRate = discRate;
