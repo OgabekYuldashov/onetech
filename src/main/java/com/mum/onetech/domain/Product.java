@@ -28,10 +28,8 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Brand brand;
-
     @NotBlank
     private String name;
 
@@ -43,30 +41,27 @@ public class Product {
 
     //Don't set it in the from
     private Double oldPrice;
-
     @Temporal(TemporalType.DATE)
     private Date dateProductAdded;
 
-    private Double discountRate=0.0 ;
+   private Double discountRate=0.0 ;
+
 
     private Boolean isNewArrival = false;
-
     @Enumerated(EnumType.STRING)
-    private PromoteType promote = PromoteType.NONE;
-
+    private PromoteType promote=PromoteType.NONE;
     @ManyToOne
     private Seller seller;
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ProductImage> productImgs;
 
-    @Transient
-    private MultipartFile[] productImages =new MultipartFile[3] ;
+     @Transient
+    private MultipartFile[] productImages  ;
 
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
-    private String pictureUrls;
+//    private String pictureUrls;
 
     public void calculateDiscount(Double discRate){
         this.discountRate = discRate;

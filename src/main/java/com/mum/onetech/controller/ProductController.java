@@ -2,6 +2,7 @@ package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.ProductImage;
 import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
@@ -34,7 +35,7 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-    public static String uploadDirectory=System.getProperty("user.dir")+"/uploads";
+    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
     @ModelAttribute("categories")
     public List<Category> addCategories(Model model){
@@ -109,7 +110,6 @@ public class ProductController {
 //        model.addAttribute("categories", categoryService.findAll());
         return "shop";
     }
-
     @GetMapping("/addProduct")
     public String getProductForm(@ModelAttribute("product") Product product , Model model){
         return "productAddForm";
@@ -118,40 +118,48 @@ public class ProductController {
     public String addProduct(Product product){
 
         String result = null;
+        List<ProductImage> result2= new ArrayList<>();
+//        try {
+//            result = this.saveUploadedFiles(product.getProductImages());
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
         try {
-            result = this.saveUploadedFiles(product.getProductImages());
+            result2 = this.saveImages(product.getProductImages());
         }catch (IOException e){
             e.printStackTrace();
         }
 
-        System.out.println("ppp "+product.getDiscountRate());
-
+        product.setProductImgs(result2);
         product.calculateDiscount( product.getDiscountRate());
-        MultipartFile[] images=product.getProductImages();
-        product.setPictureUrls(result);
+//        product.setPictureUrls(result);
         product.setDateProductAdded(new Date());
         productService.save(product);
         return "productAddForm";
     }
 
-    private String saveUploadedFiles(MultipartFile[] files) throws IOException {
-
-        StringBuilder sb = new StringBuilder();
+    private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
+        List<ProductImage> images = new ArrayList<>();
 
         for (MultipartFile file : files) {
 
             if (file.isEmpty()) {
                 continue;
             }
-            String uploadFilePath = uploadDirectory + "/" + file.getOriginalFilename();
+            String fname=Util.randomUUID()+".jpg";
+            String uploadFilePath =uploadDirectory +fname;
+            ProductImage productImage = new ProductImage();
+            productImage.setImgName(fname);
+            images.add(productImage);
 
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadFilePath);
             Files.write(path, bytes);
 
-            sb.append(uploadFilePath).append("\n");
+
         }
-        return sb.toString();
+
+        return images;
     }
 
     @GetMapping("/productUpdate")
@@ -176,4 +184,5 @@ public class ProductController {
         productService.delete(product);
         return product;
     }
+
 }
