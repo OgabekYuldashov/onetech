@@ -91,6 +91,21 @@ public class AdminController {
 
     @GetMapping("/reviews")
     public String getReviewsPage(@RequestParam(value = "status", required = false) String status, Seller seller, Model model) {
+//        List<Review> reviews = new ArrayList<>();
+//
+//        if (status == null || status.equals("")) {
+//            reviews = reviewService.findAll();
+//        } else {
+//            if (status.equalsIgnoreCase("promote")) {
+//                reviews = reviewService.findReviewByStatusPending(ReviewStatus.APPROVED);
+//            } else if (status.equalsIgnoreCase("pending")) {
+//                reviews = reviewService.findReviewByStatusPending(ReviewStatus.PENDING);
+//            }else {
+//                return "redirect:/reviews";
+//            }
+//        }
+
+      //  model.addAttribute("productList", reviews);
 
         return "reviewList";
     }
