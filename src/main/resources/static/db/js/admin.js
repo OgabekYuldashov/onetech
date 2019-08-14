@@ -6,7 +6,14 @@ $(document).ready(function(){
 
         let sid = $(this)[0].dataset.sid;
 
+        let obj = {
+            sid: 1,
+            quantity: 1
+        };
+
+
         let row = $(this).closest("tr");
+        let data = JSON.stringify(obj);
         $.ajax({
             type: 'POST',
             url: '/admin/verifySeller/'+ sid,
