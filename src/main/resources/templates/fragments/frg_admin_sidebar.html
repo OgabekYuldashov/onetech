@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<aside class="menu-sidebar d-none d-lg-block" th:fragment="sidebar">
+    <div class="logo">
+        <a href="#">
+            <img src="images/icon/logo.png" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li>
+                    <a th:href="@{/sellers}">
+                        <i class="fas fa-chart-bar"></i>Sellers</a>
+                </li>
+                <li>
+                    <a th:href="@{/advertised}">
+                        <i class="fas fa-chart-bar"></i>Advertised Products</a>
+                </li>
+                <li>
+                    <a th:href="@{/reviews}">
+                        <i class="fas fa-chart-bar"></i>Reviews</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+</body>
+</html>

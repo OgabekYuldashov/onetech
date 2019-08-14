@@ -1,8 +1,9 @@
-package com.mum.onetech.service;
+package com.mum.onetech.service.impl;
 
 import com.mum.onetech.domain.Brand;
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.repository.BrandRepository;
+import com.mum.onetech.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

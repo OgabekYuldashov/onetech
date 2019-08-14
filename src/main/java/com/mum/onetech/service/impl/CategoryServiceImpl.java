@@ -1,7 +1,8 @@
-package com.mum.onetech.service;
+package com.mum.onetech.service.impl;
 
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.repository.CategoryRepository;
+import com.mum.onetech.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

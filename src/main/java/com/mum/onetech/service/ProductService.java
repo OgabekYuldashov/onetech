@@ -1,6 +1,7 @@
 package com.mum.onetech.service;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.PromoteType;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface ProductService {
     Long getCountAll();
     Product getOneProductById(Long id);
     Product delete(Product product);
+    List<Product> findProductByStatus(PromoteType promote);
 }

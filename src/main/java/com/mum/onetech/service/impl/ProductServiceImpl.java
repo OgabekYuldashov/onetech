@@ -1,6 +1,7 @@
 package com.mum.onetech.service.impl;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.PromoteType;
 import com.mum.onetech.repository.ProductRepository;
 import com.mum.onetech.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ public class ProductServiceImpl implements ProductService {
     public Product delete(Product product) {
         productRepository.delete(product);
         return product;
+    }
+
+    @Override
+    public List<Product> findProductByStatus(PromoteType promote) {
+        return productRepository.findProductByStatus(promote.name());
     }
 
 

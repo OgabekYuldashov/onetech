@@ -1,6 +1,9 @@
 package com.mum.onetech.repository;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.Review;
+import com.mum.onetech.domain.Seller;
+import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +22,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "SELECT count(p) FROM Product p")
     Long getCountAll();
 
-    
+    @Query("SELECT p FROM Product p WHERE p.promote = :promote")
+    public List<Product> findProductByStatus(@Param("promote") String promote);
 }
