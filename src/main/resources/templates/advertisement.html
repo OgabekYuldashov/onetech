@@ -379,30 +379,30 @@
                         <tr>
                             <th>Id</th>
                             <th>Product image</th>
-                            <th>Product name</th>
-                            <th>Brand</th>
+                            <th>Price</th>
                             <th>Description</th>
                             <th>Verification</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="sel : ${productList}">
                             <td th:text="${sel.id}"></td>
-                            <td th:text="${sel.productImages}"></td>
+                            <td th:text="${sel.price}"></td>
                             <td th:text="${sel.name}"></td>
-                            <td th:text="${sel.brand.name}">
                             <td th:text="${sel.description}">
-                            <td th:text="${sel.description}">
+<!--                            <td th:text="${sel.description}">-->
+                            </td><td class="td-status1"  th:text="${sel.promote.PROMOTE}? 'PENDING' : 'PROMOTE'"></td>
                             <td>
                                 <!--                                                    <form th:id="verfication_table">-->
                                 <div id="verify_seller">
-                                    <input class="verify" type="button" th:value="Verify" th:attr="data-sid=${sel.id}" data-placement="top" title="Verify" />
-                                    <input class="decline" type="button" th:value="Decline"  th:attr="data-sid=${sel.id}" data-placement="top" title="Decline"/>
+                                    <input id="btn" class="approve" type="button" th:value="Approve" th:attr="data-sid1=${sel.id}" data-placement="top" title="Verify" />
+                                    <input id="btn1" class="decline" type="button" th:value="Decline"  th:attr="data-sid1=${sel.id}" data-placement="top" title="Decline"/>
                                 </div>
                                 <!--                                                    </form>-->
                             </td>
 
-                            </td><td th:text="${sel.promote.PROMOTE}? 'PROMOTE' : 'PENDING'"></td>
+
 
 
                         </tr>
@@ -449,6 +449,7 @@
 
 <!-- Main JS-->
 <script  th:src="@{/db/js/main.js}"></script>
+<script  th:src="@{/db/js/advertisement.js}"></script>
 
 </body>
 

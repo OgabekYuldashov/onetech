@@ -65,4 +65,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductByStatusNotPromoted(promote.name());
     }
 
+
+
 }

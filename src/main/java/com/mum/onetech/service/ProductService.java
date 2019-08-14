@@ -16,4 +16,6 @@ public interface ProductService {
     Product delete(Product product);
     List<Product> findProductByStatusPromoted(PromoteType promote);
     List<Product> findProductByStatusNotPromoted(PromoteType promote);
+    //Product findProductById(Long id);
+
 }

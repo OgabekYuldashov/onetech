@@ -6,8 +6,6 @@ import com.mum.onetech.service.ProductService;
 import com.mum.onetech.service.ReviewService;
 import com.mum.onetech.service.SellerService;
 import com.mum.onetech.util.Util;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +51,7 @@ public class AdminController {
         model.addAttribute("sellerList", sellersToReturn);
         return "sellers";
     }
+
     @RequestMapping(value="/verifySeller/{sid}",method = RequestMethod.POST)
     @ResponseBody
     public Seller verifySeller(@PathVariable("sid") String sid){
@@ -77,7 +76,7 @@ public class AdminController {
         } else {
             if (status.equalsIgnoreCase("promoted")) {
                 products = productService.findProductByStatusPromoted(PromoteType.PROMOTE);
-            } else if (status.equalsIgnoreCase("notpromoted")) {
+            } else if (status.equalsIgnoreCase("Pending")) {
                 products = productService.findProductByStatusNotPromoted(PromoteType.PENDING);
             }else {
                 return "redirect:/advertised";
@@ -87,6 +86,20 @@ public class AdminController {
         model.addAttribute("productList", products);
 
         return "advertisement";
+    }
+    @RequestMapping(value="/acceptPromotion/{aid}",method = RequestMethod.POST)
+    @ResponseBody
+    public Product verifyAdvertisement(@PathVariable("aid") String aid){
+
+//        if(!Util.isPositiveInteger(aid))
+//            return null;
+
+        Product product = productService.findById(Long.valueOf(aid));
+        if(product == null) return null;
+
+       product.setPromote(PromoteType.PENDING);
+        return productService.save(product);
+
     }
 
     @GetMapping("/reviews")

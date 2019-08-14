@@ -25,6 +25,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.promote = :promote")
     public List<Product> findProductByStatusPromoted(@Param("promote") String promote);
 
-    @Query("SELECT p FROM Product p WHERE p.promote = :notPromoted")
-    public List<Product> findProductByStatusNotPromoted(@Param("notPromote") String promote);
+    @Query("SELECT p FROM Product p WHERE p.promote = :pending")
+    public List<Product> findProductByStatusNotPromoted(@Param("pending") String promote);
+
+//    @Query("SELECT p FROM Product  WHERE p.id=:id2 ")
+//    public Product findById(@Param("id2") Long id);
 }
