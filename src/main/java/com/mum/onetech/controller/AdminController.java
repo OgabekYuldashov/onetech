@@ -1,10 +1,9 @@
 package com.mum.onetech.controller;
 
-import com.mum.onetech.domain.Credentials;
-import com.mum.onetech.domain.Product;
-import com.mum.onetech.domain.PromoteType;
-import com.mum.onetech.domain.Seller;
+import com.mum.onetech.domain.*;
+import com.mum.onetech.repository.ReviewRepository;
 import com.mum.onetech.service.ProductService;
+import com.mum.onetech.service.ReviewService;
 import com.mum.onetech.service.SellerService;
 import com.mum.onetech.util.Util;
 import org.slf4j.Logger;
@@ -20,18 +19,17 @@ import java.util.List;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
-//    private static  final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
+
+
     @Autowired
     ProductService productService;
+
     @Autowired
     SellerService sellerService;
 
-    @GetMapping("/adminForm")
-    public String LoginPage() {
-        return "adminForm";
-    }
-
-
+    @Autowired
+    ReviewService reviewService;
     /*//////////////////////////////////*/
 
     @GetMapping("/sellers")
@@ -74,25 +72,24 @@ public class AdminController {
         List<Product> products = new ArrayList<>();
 
         if (status == null || status.equals("")) {
-           // products = productService.findProductByStatus(PromoteType);
+            products = productService.findAll();
         } else {
             if (status.equalsIgnoreCase("promoted")) {
-                products = productService.get;
+                products = productService.findProductByStatusPromoted(PromoteType.PROMOTE);
             } else if (status.equalsIgnoreCase("notpromoted")) {
-                products = productService.get
+                products = productService.findProductByStatusNotPromoted(PromoteType.PENDING);
             }else {
-                return "redirect:/sellers";
+                return "redirect:/advertised";
             }
         }
 
-        model.addAttribute("sellerList", sellersToReturn);
-        return "sellers";
-      model.addAttribute("newModel",model);
+        model.addAttribute("productList", products);
+
         return "advertisement";
     }
 
     @GetMapping("/reviews")
-    public String getReviewsPage() {
+    public String getReviewsPage(@RequestParam(value = "status", required = false) String status, Seller seller, Model model) {
 
         return "reviewList";
     }
