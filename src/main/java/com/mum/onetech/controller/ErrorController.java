@@ -14,5 +14,11 @@ public class ErrorController {
         return "403";
     }
 
+    @GetMapping("/login-err")
+    public String loginError(){
+
+        return "login";
+    }
+
 
 }

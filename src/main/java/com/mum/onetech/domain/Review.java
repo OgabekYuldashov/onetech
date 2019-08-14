@@ -23,6 +23,7 @@ public class Review {
     private String message;
 
     @NotBlank
+    @Enumerated(EnumType.STRING)
     private ReviewStatus status = ReviewStatus.PENDING;
 
     @ManyToOne

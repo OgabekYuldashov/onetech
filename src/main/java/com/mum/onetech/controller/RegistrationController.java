@@ -32,9 +32,6 @@ public class RegistrationController {
     public String registerBuyer(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult, Model model){
         model.addAttribute("seller", new Seller());
 
-        System.out.println("**************BUYER*************");
-        System.out.println(buyer);
-
         if(bindingResult.hasErrors()){
             return "register";
         }
@@ -43,7 +40,7 @@ public class RegistrationController {
         buyer.getCredentials().setVerified(1);
         buyerService.addNew(buyer);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @PostMapping("/register/seller")

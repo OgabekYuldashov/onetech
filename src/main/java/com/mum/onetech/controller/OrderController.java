@@ -23,13 +23,13 @@ public class OrderController {
         return "order";
     }
 
-//    @PostMapping("/cart/add")
-//    @ResponseBody
-//    public Cart addToCart(@Valid @RequestBody CartItemModel cartItemModel){
-//        Product p = productService.findById(cartItemModel.getPid());
-//        if(p != null){
-//
-//        }
-//        return categoryService.save(category);
-//    }
+    /*@PostMapping("/cart/add")
+    @ResponseBody
+    public Cart addToCart(@Valid @RequestBody CartItemModel cartItemModel){
+        Product p = productService.findById(cartItemModel.getPid());
+        if(p != null){
+
+        }
+        return categoryService.save(category);
+    }*/
 }

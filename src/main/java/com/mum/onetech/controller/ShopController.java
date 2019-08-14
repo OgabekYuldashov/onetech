@@ -6,12 +6,14 @@ import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,9 +34,15 @@ public class ShopController {
         return categoryService.findAll();
     }
 
-    @RequestMapping("/index")
-    public String index(Model model) {
 
+    @RequestMapping("/index")
+    public String index(Model model, HttpServletRequest request, Authentication authentication) {
+
+        System.out.println("*******EMAIL******");
+
+        if(authentication != null){
+            System.out.println(authentication.getName());
+        }
 
         return "index";
     }
