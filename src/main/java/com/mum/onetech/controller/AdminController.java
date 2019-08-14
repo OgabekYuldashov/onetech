@@ -1,5 +1,6 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Product;
 import com.mum.onetech.domain.Seller;
 import com.mum.onetech.service.SellerService;
 import com.mum.onetech.util.Util;
@@ -49,20 +50,22 @@ public class AdminController {
     @RequestMapping(value="/verifySeller/{sid}",method = RequestMethod.POST)
     @ResponseBody
     public Seller verifySeller(@PathVariable("sid") String sid){
-//    logger.info("seller form submitted::"+ seller);
+
 
         if(!Util.isPositiveInteger(sid)) return null;
 
-        Seller seller = sellerService.findById(Long.valueOf(sid));
+        Seller seller = sellerService.findSellerById(Long.valueOf(sid));
         if(seller == null) return null;
 
-        seller = sellerService.save(seller);
-        return seller;
+        return sellerService.save(seller);
+
     }
 
     @GetMapping("/advertised")
-    public String getAdvertisedProductsPage() {
+    public String getAdvertisedProductsPage(Model model ) {
+        List<Product> products = new ArrayList<>();
 
+      model.addAttribute("newModel",model);
         return "advertisement";
     }
 

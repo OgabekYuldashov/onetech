@@ -17,5 +17,8 @@ public interface SellerRepository extends CrudRepository<Seller,Long> {
 
     @Query("SELECT s FROM Seller s WHERE s.credentials.verified = 0 ")
     public List<Seller> findUnVerifiedSellers();
+
+    @Query("SELECT s FROM Seller s WHERE s.id=:id1 ")
+      public Seller findSellerById(@Param("id1") Long id);
 }
 

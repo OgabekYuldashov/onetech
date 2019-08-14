@@ -31,4 +31,16 @@ public class SellerServiceImp implements SellerService {
     public List<Seller> getUnverifiedSellers() {
         return sellerRepository.findUnVerifiedSellers();
     }
+
+    @Override
+    public Seller save(Seller seller) {
+        return sellerRepository.save(seller);
+    }
+
+    @Override
+    public Seller findSellerById(Long id) {
+        return sellerRepository.findSellerById(id);
+    }
+
+
 }

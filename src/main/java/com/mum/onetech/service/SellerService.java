@@ -9,4 +9,8 @@ public interface SellerService {
     List<Seller> findAllSellers();
     List<Seller> getVerifiedSellers();
     List<Seller> getUnverifiedSellers();
+
+    Seller save(Seller seller);
+
+    Seller findSellerById(Long id);
 }
