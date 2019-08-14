@@ -15,19 +15,14 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-//    @Override
-//    public List<Review> findReviewByStatusApproved(ReviewStatus status) {
-//        return reviewRepository.findReviewByStatusApproved(status.toString());
-//    }
-//
-//    @Override
-//    public List<Review> findReviewByStatusPending(ReviewStatus status) {
-//        return reviewRepository.findReviewByStatusPending(status.toString());
-//    }
+    @Override
+    public List<Review> findReviewByStatusApproved(ReviewStatus status) {
+        return reviewRepository.findReviewByStatusApproved(status.toString());
+    }
 
     @Override
-    public List<Review> findByStatus(ReviewStatus status) {
-        return null;
+    public List<Review> findReviewByStatusPending(ReviewStatus status) {
+        return reviewRepository.findReviewByStatusPending(status.toString());
     }
 
     @Override

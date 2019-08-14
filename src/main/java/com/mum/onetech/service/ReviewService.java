@@ -5,10 +5,10 @@ package com.mum.onetech.service;
         import org.springframework.stereotype.Service;
 
         import java.util.List;
-@Service
+
  public interface ReviewService {
-     List<Review> findByStatus(ReviewStatus status);
-//     List<Review> findReviewByStatusApproved(ReviewStatus status);
-//    List<Review> findReviewByStatusPending(ReviewStatus status);
+   //  List<Review> findByStatus(ReviewStatus status);
+     List<Review> findReviewByStatusApproved(ReviewStatus status);
+    List<Review> findReviewByStatusPending(ReviewStatus status);
     List<Review> findAll();
 }

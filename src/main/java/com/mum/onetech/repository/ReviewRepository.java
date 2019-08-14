@@ -14,13 +14,13 @@ import java.util.List;
 public interface ReviewRepository extends CrudRepository<Review,Long> {
 
 
-    @Query("SELECT r FROM Review r WHERE r.status = :status")
-    public List<Review> findByStatus(@Param("status") String status);
+//    @Query("SELECT r FROM Review r WHERE r.status = :status")
+//    public List<Review> findByStatus(@Param("status") String status);
 
-//    @Query("SELECT p FROM Review p WHERE p.satus = :approved")
-//    public List<Review> findReviewByStatusApproved(@Param("approved") String promote);
-//
-//    @Query("SELECT p FROM Review p WHERE p.status = :pending")
-//    public List<Review> findReviewByStatusPending(@Param("pending") String promote);
+    @Query("SELECT r FROM Review r WHERE r.status = :approved")
+    public List<Review> findReviewByStatusApproved(@Param("approved") String status);
+
+    @Query("SELECT r FROM Review r WHERE r.status = :pending")
+    public List<Review> findReviewByStatusPending(@Param("pending") String status);
 
 }
