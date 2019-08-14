@@ -122,7 +122,21 @@ public class AdminController {
 
         return "reviewList";
     }
-
+//    @RequestMapping(value="/acceptPromotion/{pid}",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Review reviewApproval(@PathVariable("pid") String aid){
+//
+////        if(!Util.isPositiveInteger(pid))
+////            return null;
+//
+//        Review review = reviewService.find(Long.valueOf(aid));
+//        if(review == null) return null;
+//
+//        //review.setPromote(PromoteType.PENDING);
+//        review.
+//        return productService.save(review);
+//
+//    }
 }
 
 

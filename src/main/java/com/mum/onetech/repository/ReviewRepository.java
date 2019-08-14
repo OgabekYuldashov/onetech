@@ -13,9 +13,8 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends CrudRepository<Review,Long> {
 
-
-//    @Query("SELECT r FROM Review r WHERE r.status = :status")
-//    public List<Review> findByStatus(@Param("status") String status);
+//    @Query("SELECT r FROM Review  WHERE r.id=:id2 ")
+//      public Review findReviewById(@Param("id2") Long id);
 
     @Query("SELECT r FROM Review r WHERE r.status = :approved")
     public List<Review> findReviewByStatusApproved(@Param("approved") String status);
