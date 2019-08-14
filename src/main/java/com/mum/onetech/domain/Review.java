@@ -30,5 +30,5 @@ public class Review {
     private Product product;
 
     @ManyToOne
-    private Buyer buyer;
+    private Buyer byr;
 }

@@ -90,10 +90,7 @@
 									<li>
 										<span class="sorting_text" th:text="${sortMethod} ?: 'none'">dwwd<i class="fas fa-chevron-down"></i></span>
 										<ul>
-											<!--<li class="shop_sorting_button"><a th:href="@{/products(sort=name)}">name</a></li>-->
-											<!--<li class="shop_sorting_button"><a th:href="@{/products(sort=price)}">price</a></li>-->
 											<div th:with="currentUrl=(${@currentUrlWithoutParam.apply('sort')})" th:remove="tag">
-												<!--<a th:href="@{${currentUrl}(myparam=test)}">click here</a>-->
 												<li class="shop_sorting_button"><a th:href="@{${currentUrl}}">none</a></li>
 												<li class="shop_sorting_button"><a th:href="@{${currentUrl}(sort=name)}">name</a></li>
 												<li class="shop_sorting_button"><a th:href="@{${currentUrl}(sort=price)}">price</a></li>
@@ -467,6 +464,7 @@
 <script th:src="@{plugins/jquery-ui-1.12.1.custom/jquery-ui.js}"></script>
 <script th:src="@{plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{js/shop_custom.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

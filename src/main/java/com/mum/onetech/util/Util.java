@@ -14,9 +14,9 @@ public class Util {
     public static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
-        public static String randomUUID() {
-            // Creating a random UUID (Universally unique identifier)
-            return UUID.randomUUID().toString();
-        }
+    public static String randomUUID() {
+        // Creating a random UUID (Universally unique identifier)
+        return UUID.randomUUID().toString();
+    }
 
 }

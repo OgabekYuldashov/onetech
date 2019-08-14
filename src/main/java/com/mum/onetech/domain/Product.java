@@ -52,8 +52,8 @@ public class Product {
     private PromoteType promote=PromoteType.NONE;
     @ManyToOne
     private Seller seller;
-    @OneToMany(cascade = CascadeType.PERSIST)
 
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ProductImage> productImgs;
 
      @Transient

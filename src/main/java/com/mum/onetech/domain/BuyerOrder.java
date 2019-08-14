@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,33 +16,42 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class BuyerOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+//    @NotNull
+    @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
+
 
     @Temporal(TemporalType.DATE)
     private Date createDate;
+
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @Valid
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address billingAddr;
 
     @Valid
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address shippingAddr;
 
-    @OneToMany
-    private List<OrderItem> orderItems;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Buyer buyer;
 
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+    }
+    public BuyerOrder(Buyer buyer) {
+        this.buyer = buyer;
+    }
 }

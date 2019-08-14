@@ -5,7 +5,6 @@ import com.mum.onetech.domain.Role;
 import com.mum.onetech.domain.RoleType;
 import com.mum.onetech.domain.Seller;
 import com.mum.onetech.service.BuyerService;
-import com.mum.onetech.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +38,7 @@ public class RegistrationController {
 
         buyer.getCredentials().setRole(new Role(RoleType.BUYER));
         buyer.getCredentials().setVerified(1);
-        buyerService.addNew(buyer);
+        buyerService.save(buyer);
 
         return "redirect:/login";
     }
@@ -60,7 +59,6 @@ public class RegistrationController {
         sellerService.save(seller);
         return "redirect:/login";
     }
-
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -74,43 +72,8 @@ public class RegistrationController {
 
 
 
-/*
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private RoleService roleService;
 
-    @ModelAttribute("roles")
-    public List<Role> getRoles(Model model) {
-        return roleService.findAll();
-    }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(@ModelAttribute("user") User user) {
 
-        return "registration";
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createNewUser(@Valid User user, BindingResult bindingResult, Model model) {
-        ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "err.user",
-                            "There is already a user registered with the email provided");
-        }
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        } else {
-            user.getRoles().forEach(System.out::println);
-            userService.saveUser(user);
-            model.addAttribute("successMessage", "User has been registered successfully");
-            model.addAttribute("user", new User());
-            return "registration";
-
-        }
-
-    }*/
 }

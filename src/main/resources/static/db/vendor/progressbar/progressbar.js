@@ -1203,7 +1203,7 @@ var Tweenable = (function () {
  * matching easing curves can make for some interesting motion in your
  * animations.
  *
- * The order of the space-separated easing curves correspond the token values
+ * The buyerOrder of the space-separated easing curves correspond the token values
  * they apply to.  If there are more token values than easing curves listed,
  * the last easing curve listed is used.
  * @submodule Tweenable.token
