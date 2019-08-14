@@ -328,10 +328,10 @@
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
                                     <div class="rs-select2--light rs-select2--md">
-                                        <select class="js-select2" name="property">
-                                            <option selected="selected">All Properties</option>
-                                            <option value="">Option 1</option>
-                                            <option value="">Option 2</option>
+                                        <select class="js-select2" name="property" onchange="location = this.value;">
+                                            <option value="#" selected="selected">Select Status</option>
+                                            <option th:value="${'/admin/sellers?status=verified'}">verified</option>
+                                            <option th:value="${'/admin/sellers?status=unverified'}">unverified</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
