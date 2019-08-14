@@ -346,18 +346,7 @@
                         <button class="au-btn-filter">
                             <i class="zmdi zmdi-filter-list"></i>filters</button>
                     </div>
-                    <div class="table-data__tool-right">
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            <i class="zmdi zmdi-plus"></i>add item</button>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Export</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- END DATA TABLE -->
@@ -371,18 +360,21 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Product name</th>
                             <th>Product image</th>
+                            <th>Product name</th>
                             <th>Brand</th>
-                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Verification</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="sel : ${sellerList}">
+                        <tr th:each="sel : ${productList}">
                             <td th:text="${sel.id}"></td>
-                            <td th:text="${sel.credentials.firstName}"></td>
-                            <td th:text="${sel.credentials.lastName}"></td>
-                            <td th:text="${sel.credentials.email}">
+                            <td th:text="${sel.productImages}"></td>
+                            <td th:text="${sel.name}"></td>
+                            <td th:text="${sel.brand.name}">
+                            <td th:text="${sel.description}">
+                            <td th:text="${sel.description}">
                             <td>
                                 <!--                                                    <form th:id="verfication_table">-->
                                 <div id="verify_seller">
@@ -392,7 +384,7 @@
                                 <!--                                                    </form>-->
                             </td>
 
-                            </td><td th:text="${sel.credentials.verified}? 'VERIFIED' : 'PENDING'"></td>
+                            </td><td th:text="${sel.promote.PROMOTE}? 'PROMOTE' : 'PENDING'"></td>
 
 
                         </tr>
