@@ -87,11 +87,11 @@ public class AdminController {
 
         return "advertisement";
     }
-    @RequestMapping(value="/acceptPromotion/{aid}",method = RequestMethod.POST)
+    @RequestMapping(value="/acceptPromotion/{pid}",method = RequestMethod.POST)
     @ResponseBody
-    public Product verifyAdvertisement(@PathVariable("aid") String aid){
+    public Product verifyAdvertisement(@PathVariable("pid") String aid){
 
-//        if(!Util.isPositiveInteger(aid))
+//        if(!Util.isPositiveInteger(pid))
 //            return null;
 
         Product product = productService.findById(Long.valueOf(aid));
@@ -104,21 +104,21 @@ public class AdminController {
 
     @GetMapping("/reviews")
     public String getReviewsPage(@RequestParam(value = "status", required = false) String status, Seller seller, Model model) {
-//        List<Review> reviews = new ArrayList<>();
-//
-//        if (status == null || status.equals("")) {
-//            reviews = reviewService.findAll();
-//        } else {
-//            if (status.equalsIgnoreCase("promote")) {
-//                reviews = reviewService.findReviewByStatusPending(ReviewStatus.APPROVED);
-//            } else if (status.equalsIgnoreCase("pending")) {
-//                reviews = reviewService.findReviewByStatusPending(ReviewStatus.PENDING);
-//            }else {
-//                return "redirect:/reviews";
-//            }
-//        }
+        List<Review> reviews = new ArrayList<>();
 
-      //  model.addAttribute("productList", reviews);
+        if (status == null || status.equals("")) {
+            reviews = reviewService.findAll();
+        } else {
+            if (status.equalsIgnoreCase("promote")) {
+                reviews = reviewService.findReviewByStatusPending(ReviewStatus.APPROVED);
+            } else if (status.equalsIgnoreCase("pending")) {
+                reviews = reviewService.findReviewByStatusPending(ReviewStatus.PENDING);
+            }else {
+                return "redirect:/reviews";
+            }
+        }
+
+        model.addAttribute("reviewList", reviews);
 
         return "reviewList";
     }

@@ -371,32 +371,34 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Customer First Name</th>
+                            <th>Customer Last Name</th>
                             <th>Review</th>
                             <th>Verification</th>
                             <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="sel : ${sellerList}">
-                            <td th:text="${sel.id}"></td>
-                            <td th:text="${sel.credentials.firstName}"></td>
-                            <td th:text="${sel.credentials.lastName}"></td>
-                            <td th:text="${sel.credentials.email}">
-                            <td>
-                                <!--                                                    <form th:id="verfication_table">-->
-                                <div id="verify_seller">
-                                    <input class="verify" type="button" th:value="Verify" th:attr="data-rid=${sel.id}" data-placement="top" title="Verify" />
-                                    <input class="decline" type="button" th:value="Decline"  th:attr="data-rid=${sel.id}" data-placement="top" title="Decline"/>
-                                </div>
-                                <!--                                                    </form>-->
-                            </td>
 
-                            </td><td th:text="${sel.credentials.verified}? 'VERIFIED' : 'PENDING'"></td>
+                        <div id="seller_Result">
+                            <tr th:each="rev : ${reviewList}">
+                                <td th:text="${rev.id}"></td>
+                                <td th:text="${rev.buyer.credentials.firstName}"></td>
+                                <td th:text="${rev.buyer.credentials.lastName}"></td>
+                                <td th:text="${rev.buyer.credentials.email}"></td>
+                                <td th:text="${rev.message}"></td>
+                                <td class="td-status" th:text="${rev.status.PENDING}? 'PENDING' : 'APPROVED'"></td>
+                                <td>
+                                    <div id="verify_seller">
+                                        <input id="btn" class="verify" type="button" th:value="Verify" th:attr="data-sid=${rev.id}" data-placement="top" title="Verify" />
+                                        <input id="btn1" class="decline" type="button" th:value="Decline"  th:attr="data-sid=${rev.id}" data-placement="top" title="Decline"/>
+                                    </div>
+                                </td>
 
 
-                        </tr>
+
+                            </tr>
+                        </div>
                         </tbody>
                     </table>
                 </div>

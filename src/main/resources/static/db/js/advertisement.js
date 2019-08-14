@@ -4,7 +4,7 @@ $(document).ready(function(){
         // event.stopPropagation();
         // let data = JSON.stringify($("#verfication_table").serializeFormJSON());
 
-        let sid = $(this)[0].dataset.aid;
+        let pid = $(this)[0].dataset.pid;
 
         let obj = {
             aid: 1,
@@ -16,20 +16,19 @@ $(document).ready(function(){
         let data = JSON.stringify(obj);
         $.ajax({
             type: 'POST',
-            url: '/admin//acceptPromotion/'+ aid,
+            url: '/admin//acceptPromotion/'+ pid,
             data: data,
             contentType: 'application/json',
             dataType: 'json',
-            success: function(jsonData){
-                //append to category list
-                let product = jsonData.responseJSON;
+            success: function(product){
 
-                let statusTd = $(row).find('.td-status1');
-                $(statusTd).empty();
-                $(statusTd).text("PROMOTE!!!");
-
-                // $(statusTd).text(seller.credentials.verified);
-                $(statusTd).text();
+                let statusTd1 = $(row).find('.td-status1');
+                $(statusTd1).empty();
+                if(product){
+                    $(statusTd1).text("PROMOTED!!");
+                }else{
+                    $(statusTd).text("PENDING!!");
+                }
 
             },
             error: function (xmlResponse) {
@@ -37,7 +36,6 @@ $(document).ready(function(){
                 var responseJson = xmlResponse.responseJSON;
 
                 console.log(responseJson);
-
             }
 
         });
