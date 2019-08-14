@@ -56,9 +56,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductByStatus(PromoteType promote) {
-        return productRepository.findProductByStatus(promote.name());
+    public List<Product> findProductByStatusPromoted(PromoteType promote) {
+        return productRepository.findProductByStatusNotPromoted(promote.name());
     }
 
+    @Override
+    public List<Product> findProductByStatusNotPromoted(PromoteType promote) {
+        return productRepository.findProductByStatusNotPromoted(promote.name());
+    }
 
 }

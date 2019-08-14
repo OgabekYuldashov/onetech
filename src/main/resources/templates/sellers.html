@@ -6,6 +6,24 @@
 <body class="animsition">
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
+    <style>
+        #btn{
+            background-color: #00b26f;
+            color: white;
+            padding: 7px 17px;
+            font-size: 14px;
+            border: black;
+            cursor: pointer;
+        }
+        #btn1{
+            background-color: red;
+            color: white;
+            padding: 7px 17px;
+            font-size: 14px;
+            border: black;
+            cursor: pointer;
+        }
+    </style> 
     <header class="header-mobile d-block d-lg-none">
         <div class="header-mobile__bar">
             <div class="container-fluid">
@@ -320,11 +338,9 @@
                         <div class="col-md-12">
                             <!-- DATA TABLE -->
 
+    <br>
 
-
-
-
-                            <h3 class="title-5 m-b-35">List of Table</h3>
+                            <h3 class="title-5 m-b-35">List of sellers Table</h3>
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
                                     <div class="rs-select2--light rs-select2--md">
@@ -345,20 +361,7 @@
                                     </div>
                                     <button class="au-btn-filter">
                                         <i class="zmdi zmdi-filter-list"></i>filters</button>
-                                </div>
-                                <div class="table-data__tool-right">
-                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                        <select class="js-select2" name="type">
-                                            <option selected="selected">Export</option>
-                                            <option value="">Option 1</option>
-                                            <option value="">Option 2</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <!-- END DATA TABLE -->
                         </div>
@@ -387,8 +390,8 @@
                                         <td>
                                             <!--                                                    <form th:id="verfication_table">-->
                                             <div id="verify_seller">
-                                                <input class="verify" type="button" th:value="Verify" th:attr="data-sid=${sel.id}" data-placement="top" title="Verify" />
-                                                <input class="decline" type="button" th:value="Decline"  th:attr="data-sid=${sel.id}" data-placement="top" title="Decline"/>
+                                                <input id="btn" class="verify" type="button" th:value="Verify" th:attr="data-sid=${sel.id}" data-placement="top" title="Verify" />
+                                                <input id="btn1" class="decline" type="button" th:value="Decline"  th:attr="data-sid=${sel.id}" data-placement="top" title="Decline"/>
                                             </div>
                                             <!--                                                    </form>-->
                                         </td>

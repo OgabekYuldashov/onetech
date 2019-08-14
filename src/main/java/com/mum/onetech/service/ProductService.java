@@ -14,5 +14,6 @@ public interface ProductService {
     Long getCountAll();
     Product getOneProductById(Long id);
     Product delete(Product product);
-    List<Product> findProductByStatus(PromoteType promote);
+    List<Product> findProductByStatusPromoted(PromoteType promote);
+    List<Product> findProductByStatusNotPromoted(PromoteType promote);
 }

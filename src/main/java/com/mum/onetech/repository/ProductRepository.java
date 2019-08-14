@@ -23,5 +23,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Long getCountAll();
 
     @Query("SELECT p FROM Product p WHERE p.promote = :promote")
-    public List<Product> findProductByStatus(@Param("promote") String promote);
+    public List<Product> findProductByStatusPromoted(@Param("promote") String promote);
+
+    @Query("SELECT p FROM Product p WHERE p.promote = :notPromoted")
+    public List<Product> findProductByStatusNotPromoted(@Param("notPromote") String promote);
 }
