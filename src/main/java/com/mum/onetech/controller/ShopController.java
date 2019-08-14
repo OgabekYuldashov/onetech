@@ -2,6 +2,7 @@ package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.Buyer;
 import com.mum.onetech.domain.Category;
+import com.mum.onetech.jsonmodel.CartModel;
 import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
@@ -9,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@SessionAttributes("cartDetails")
+@ControllerAdvice
 public class ShopController {
 
     @Autowired
@@ -34,15 +35,24 @@ public class ShopController {
         return categoryService.findAll();
     }
 
+    @ModelAttribute("cartDetails")
+    CartModel getUserCartDetails(Authentication authentication){
+        CartModel cartModel = new CartModel(0, 0.0);
+
+        if(authentication == null) return cartModel;
+
+        System.out.println("*******EMAIL******");
+        System.out.println(authentication.getName());
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+        if(buyer == null) return cartModel;
+
+        return new CartModel(buyer.getShoppingCart().getCartItems().size(), buyer.getShoppingCart().getTotalAmount());
+    }
+
 
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, Authentication authentication) {
-
-        System.out.println("*******EMAIL******");
-
-        if(authentication != null){
-            System.out.println(authentication.getName());
-        }
 
         return "index";
     }

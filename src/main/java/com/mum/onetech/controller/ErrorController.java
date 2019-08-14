@@ -17,7 +17,13 @@ public class ErrorController {
     @GetMapping("/login-err")
     public String loginError(){
 
-        return "login";
+        return "redirect:/login";
+    }
+
+    @GetMapping("/bad-request")
+    public String badRequest(){
+
+        return "redirect:/login";
     }
 
 

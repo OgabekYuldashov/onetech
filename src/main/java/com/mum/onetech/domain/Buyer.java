@@ -1,8 +1,6 @@
 package com.mum.onetech.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -16,7 +14,7 @@ import java.util.List;
 public class Buyer {
 
     public Buyer() {
-        this.shoppingCart = new Cart();
+//        this.shoppingCart = new Cart();
     }
 
     @Id
@@ -40,16 +38,20 @@ public class Buyer {
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "receiver")
     private List<Notification> notificationsReceived;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "byr")
     private List<Review> reviews;
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Product> favoriteProducts = new ArrayList<>();
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
-    private List<Order> orders = new ArrayList<>();
+    private List<BuyerOrder> buyerOrders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Cart shoppingCart;
+    private Cart shoppingCart = new Cart(this);
+
+    public void addOrder(BuyerOrder buyerOrder){
+        buyerOrders.add(buyerOrder);
+    }
 
 }

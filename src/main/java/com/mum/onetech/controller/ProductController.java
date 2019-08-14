@@ -1,14 +1,18 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Buyer;
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
 import com.mum.onetech.domain.ProductImage;
+import com.mum.onetech.jsonmodel.CartModel;
 import com.mum.onetech.service.BrandService;
+import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
 import com.mum.onetech.util.Util;
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +31,8 @@ import java.util.stream.Collectors;
 
 
 @Controller
+@SessionAttributes("cartDetails")
+@ControllerAdvice
 public class ProductController {
     @Autowired
     private CategoryService categoryService;
@@ -34,8 +40,11 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private BrandService brandService;
+    @Autowired
+    BuyerService buyerService;
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
+
 
     @ModelAttribute("categories")
     public List<Category> addCategories(Model model){

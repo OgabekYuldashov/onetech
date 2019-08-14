@@ -18,7 +18,7 @@ public class BuyerServiceImpl implements BuyerService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Buyer addNew(Buyer buyer) {
+    public Buyer save(Buyer buyer) {
         buyer.getCredentials().setPassword(passwordEncoder.encode(buyer.getCredentials().getPassword()));
         return buyerRepository.save(buyer);
     }
@@ -26,6 +26,11 @@ public class BuyerServiceImpl implements BuyerService {
     @Override
     public Buyer findById(Long bid) {
         return buyerRepository.findById(bid).orElse(null);
+    }
+
+    @Override
+    public Buyer findByEmail(String email) {
+        return buyerRepository.findOneByEmail(email);
     }
 
     @Override

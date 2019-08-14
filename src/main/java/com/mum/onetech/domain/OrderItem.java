@@ -19,8 +19,10 @@ public class OrderItem {
 
     private Double unitPrice;
 
+    @Enumerated(EnumType.STRING)
+    private OrderItemStatus orderItemStatus = OrderItemStatus.PENDING;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
     public OrderItem(Product product, Integer quantity) {
@@ -29,8 +31,14 @@ public class OrderItem {
         this.unitPrice = product.getPrice();
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
 //   @JoinTable
-    private Order order;
+    private BuyerOrder buyerOrder;
 
+    public OrderItem(Integer quantity, Double unitPrice, Product product, BuyerOrder buyerOrder) {
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.product = product;
+        this.buyerOrder = buyerOrder;
+    }
 }

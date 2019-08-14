@@ -1,6 +1,7 @@
 package com.mum.onetech.domain;
 
 import com.mum.onetech.util.Util;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,40 +9,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
+    @OneToOne(cascade = CascadeType.ALL)
     private Buyer buyer;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderItem> cartItems;
+    private List<CartItem> cartItems = new ArrayList<>();;
 
-    private Double totalAmount;
+    private Double totalAmount = 0.0;
 
-    public Cart() {
-        cartItems = new ArrayList<>();
+    public Cart(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     //Add product to the cart OR increase the quantity if already exists
     public void addIncreaseProduct(Product product, Integer quantity){
         boolean productExists = false;
-        for(OrderItem item : cartItems){
+        for(CartItem item : cartItems){
             if(item.getProduct() == product){
                 productExists = true;
                 item.setQuantity(item.getQuantity() + quantity);
                 break;
             }
         }
-        if(!productExists) cartItems.add(new OrderItem(product, quantity));
+        if(!productExists) cartItems.add(new CartItem(product, quantity));
+        updateTotalAmount();
     }
 
     public void mergeWithCart(Cart cart){
-        for(OrderItem item: cart.getCartItems()){
+        for(CartItem item: cart.getCartItems()){
             boolean itemFound = false;
-            for(OrderItem existingItem: cartItems){
+            for(CartItem existingItem: cartItems){
                 if(existingItem.getProduct() == item.getProduct()){
                     int diff = Math.abs(existingItem.getQuantity() - item.getQuantity());
                     if(existingItem.getQuantity() > item.getQuantity()){
@@ -57,13 +60,14 @@ public class Cart implements Serializable {
                 addIncreaseProduct(item.getProduct(), item.getQuantity());
             }
         }
+        updateTotalAmount();
     }
 
-    public List<OrderItem> getCartItems() {
+    public List<CartItem> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<OrderItem> cartItems) {
+    public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -77,13 +81,21 @@ public class Cart implements Serializable {
         }
     }
 
-    public double getTotalAmount() {
+    private void updateTotalAmount(){
         totalAmount = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity()).reduce((aDouble, aDouble2) -> aDouble+aDouble2).orElse(0.0);
         totalAmount = Double.valueOf(Util.df2.format(totalAmount));
+    }
+
+    public double getTotalAmount() {
         return totalAmount;
     }
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public void emptyCart(){
+        cartItems = new ArrayList<>();
+        totalAmount = 0.0;
     }
 }
