@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -25,7 +24,14 @@ public class OrderItem {
     @OneToOne(cascade =CascadeType.ALL)
     private Product product;
 
+    public OrderItem(Product product, Integer quantity) {
+        this.quantity = quantity;
+        this.product = product;
+        this.unitPrice = product.getPrice();
+    }
+
     @ManyToOne
 //   @JoinTable
     private Order order;
+
 }

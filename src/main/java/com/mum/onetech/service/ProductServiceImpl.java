@@ -1,6 +1,7 @@
 package com.mum.onetech.service;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.Seller;
 import com.mum.onetech.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         return (List<Product>) productRepository.findAll();
+    }
+
+    @Override
+    public Product findById(Long pid) {
+        return productRepository.findById(pid).orElse(null);
     }
 
     @Override
@@ -53,6 +59,11 @@ public class ProductServiceImpl implements ProductService {
     public void update(Product product) {
 //        productRepository.update(product.getId() , product.getDescription());
 //     return null;
+    }
+
+    @Override
+    public List<Product> findListOfProductBySeller(Seller seller) {
+        return productRepository.findListOfProductBySeller(seller);
     }
 
 

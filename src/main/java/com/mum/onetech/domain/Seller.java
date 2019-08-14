@@ -24,8 +24,8 @@ public class Seller {
     @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Product> products;
+//    @OneToMany(mappedBy = "seller",cascade=CascadeType.ALL)
+//    private List<Product> products;
 
     @ManyToMany(mappedBy = "sellers",cascade=CascadeType.ALL)
     private List<Buyer> followers;
