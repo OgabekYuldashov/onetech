@@ -1,6 +1,7 @@
 package com.mum.onetech.repository;
 
 import com.mum.onetech.domain.Product;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +19,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query(value = "SELECT count(p) FROM Product p")
     Long getCountAll();
-//    @Query(value = "UPDATE PRODUCT SET DESCRIPTION = :description  WHERE ID = :id")
-//    void update(Long id ,String description );
+
+//    @Query("UPDATE PRODUCT p SET p.DESCRIPTION =:descpt  WHERE ID = :id")
+//    void updateProduct(@Param("id") Long id , @Param("descpt") String descpt );
 }

@@ -28,6 +28,7 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Brand brand;
     @NotBlank
@@ -52,7 +53,8 @@ public class Product {
     private PromoteType promote=PromoteType.NONE;
     @ManyToOne
     private Seller seller;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
+
     private List<ProductImage> productImgs;
 
      @Transient

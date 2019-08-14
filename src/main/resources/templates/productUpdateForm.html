@@ -61,27 +61,27 @@
                             <div class="card-body card-block">
                                 <form th:action="@{/productUpdate}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                    <div class="row form-group"  disabled>
+                                    <div class="row form-group"  >
                                         <div class="col col-md-3">
                                             <label for="selectLg" class=" form-control-label">Category</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select  th:field="*{category.name}"   name="selectLg" id="selectLg"
+                                            <select  th:field="*{category.id}"   name="selectLg" id="selectLg"
                                                      class="form-control-lg form-control">
                                                 <option value="0">Please select</option>
-                                                <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.name}"></option>
+                                                <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.id}"></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row form-group"  disabled>
+                                    <div class="row form-group"  >
                                         <div class="col col-md-3">
                                             <label for="selectLg" class=" form-control-label">Brand</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select  th:field="*{brand.name}"  name="selectLg" id="selectLgb"
+                                            <select  th:field="*{brand.id}"  name="selectLg" id="selectLgb"
                                                      class="form-control-lg form-control">
-                                                <option value="0">Please select</option>
-                                                <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.name}"></option>
+                                                <option value="0">other</option>
+                                                <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.id}"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -94,6 +94,7 @@
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
                                         </div>
+
                                     </div>
 
                                     <div class="row form-group">
@@ -160,7 +161,7 @@
                                         </div>
                                         <div class="col-12 col-md-9">
                                             <input type="file" id="file-multiple-input"  name="productImagesFile" th:field="*{productImages}"
-                                                   multiple="" class="form-control-file">
+                                                   multiple="" class="form-control-file" th:value="*{productImages}">
                                         </div>
                                     </div>
                                     <div class="card-footer">

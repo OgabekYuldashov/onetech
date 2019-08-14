@@ -102,6 +102,7 @@
                                     <tr>
                                         <th>date</th>
                                         <th>category</th>
+                                        <th>Product Name</th>
                                         <th>description</th>
                                         <th>discount Rate</th>
                                         <th>price</th>
@@ -112,6 +113,7 @@
                                     <tr th:each="pro:${products}" th:id="${pro.id}">
                                         <td  th:text="${pro.dateProductAdded}" ></td>
                                         <td th:text="${pro.category.name}"></td>
+                                        <td th:text="${pro.name}"></td>
                                         <td th:text="${pro.description}"></td>
                                         <td th:text="${pro.discountRate}"></td>
                                         <td th:text="${pro.price}"></td>

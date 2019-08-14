@@ -1,5 +1,6 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Brand;
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.domain.Product;
 import com.mum.onetech.domain.ProductImage;
@@ -37,9 +38,12 @@ public class ProductController {
     public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
     @ModelAttribute("categories")
-    public List<Category> addCategories(Model model){
-        model.addAttribute("brands" ,brandService.findAll());
+    public List<Category> addCategories(){
        return categoryService.findAll();
+    }
+    @ModelAttribute("brands")
+    public List<Brand> addBrands(){
+        return brandService.findAll();
     }
 
     @GetMapping("/addProduct")
@@ -51,11 +55,6 @@ public class ProductController {
 
         String result = null;
         List<ProductImage> result2= new ArrayList<>();
-//        try {
-//            result = this.saveUploadedFiles(product.getProductImages());
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
         try {
             result2 = this.saveImages(product.getProductImages());
         }catch (IOException e){
@@ -64,7 +63,6 @@ public class ProductController {
 
         product.setProductImgs(result2);
         product.calculateDiscount( product.getDiscountRate());
-//        product.setPictureUrls(result);
         product.setDateProductAdded(new Date());
         productService.save(product);
        return "productAddForm";
@@ -115,18 +113,16 @@ public class ProductController {
 //    }
 
     @GetMapping("/productUpdate")
-    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpServletRequest request){
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model){
         model.addAttribute("product",productService.getOneProductById(id));
-//        HttpSession session=request.getSession();
-//        session.setAttribute("productUp",productService.getOneProductById(id));
+
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
     public String updateProduct( Product product,HttpServletRequest request){
-//        System.out.println("idddd" +request.getSession().getAttribute("productUp"));
-//        productService.delete(product);
-//        product.setId(null);
 
+        System.out.println("**************************************");
+           System.out.println(product);
         productService.save(product);
         return "productSideBarList";
     }
