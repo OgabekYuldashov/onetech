@@ -57,11 +57,12 @@ public class AdminController {
     @ResponseBody
     public Seller verifySeller(@PathVariable("sid") String sid){
 
-
         if(!Util.isPositiveInteger(sid)) return null;
 
         Seller seller = sellerService.findSellerById(Long.valueOf(sid));
         if(seller == null) return null;
+
+        seller.getCredentials().setVerified(1);
 
         return sellerService.save(seller);
 
