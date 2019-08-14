@@ -54,4 +54,7 @@ public class Buyer {
         buyerOrders.add(buyerOrder);
     }
 
+    public void addReview(Review review){
+        reviews.add(review);
+    }
 }

@@ -13,4 +13,5 @@ public class GenericJsonRespModel {
     private GenericRespStatus respStatus;
     private String nextUrl;
     private List<Object> arrData;
+    private String message = "";
 }
