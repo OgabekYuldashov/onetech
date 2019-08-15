@@ -358,37 +358,37 @@
     <!-- Main JS-->
     <script src="db/js/main.js"></script>
 
-    <script>
+<!--    <script>-->
 
 
-            $('.item').click(function () {
-                let product = {};
-                product.id = $(this).val();
-                let newData = JSON.stringify(product);
-                console.log(newData);
-                $.ajax({
-                    type: 'post',
-                    url: '/productDelete',
-                    data: newData,
-                    datatype: 'JSON',
-                    contentType: 'application/json',
-                    success: function (item) {
-                        console.log("successs" + item.id);
-                        $('#' + item.id).remove();
-                    },
-                    error: function () {
-                        console.log("errorrrrr");
+<!--            $('.item').click(function () {-->
+<!--                let product = {};-->
+<!--                product.id = $(this).val();-->
+<!--                let newData = JSON.stringify(product);-->
+<!--                console.log(newData);-->
+<!--                $.ajax({-->
+<!--                    type: 'post',-->
+<!--                    url: '/productDelete',-->
+<!--                    data: newData,-->
+<!--                    datatype: 'JSON',-->
+<!--                    contentType: 'application/json',-->
+<!--                    success: function (item) {-->
+<!--                        console.log("successs" + item.id);-->
+<!--                        $('#' + item.id).remove();-->
+<!--                    },-->
+<!--                    error: function () {-->
+<!--                        console.log("errorrrrr");-->
 
 
-                    }
+<!--                    }-->
 
-                })
+<!--                })-->
 
-            })
+<!--            })-->
 
 
 
-    </script>
+<!--    </script>-->
 </div>
 
 </body>

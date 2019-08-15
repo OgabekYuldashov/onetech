@@ -174,20 +174,20 @@
                                             doe</a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
-                                        <div class="info clearfix">
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg"
-                                                         th:alt="${seller.credentials.firstName}"/>
-                                                </a>
-                                            </div>
-                                            <div class="content">
-                                                <h5 class="name">
-                                                    <a href="#" th:text="${seller.credentials.firstName}">john doe</a>
-                                                </h5>
-                                                <span class="email" th:text="${seller.credentials.email}">johndoe@example.com</span>
-                                            </div>
-                                        </div>
+<!--                                        <div class="info clearfix">-->
+<!--                                            <div class="image">-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="images/icon/avatar-01.jpg"-->
+<!--                                                         th:alt="${seller.credentials.firstName}"/>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                            <div class="content">-->
+<!--                                                <h5 class="name">-->
+<!--                                                    <a href="#" th:text="${seller.credentials.firstName}">john doe</a>-->
+<!--                                                </h5>-->
+<!--                                                <span class="email" th:text="${seller.credentials.email}">johndoe@example.com</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <a href="#">
@@ -271,7 +271,7 @@
 
                                     <th>name</th>
                                     <th>email</th>
-                                    <th>description</th>
+                                    <th>Brand</th>
                                     <th>date</th>
                                     <th>status</th>
                                     <th>price</th>
@@ -281,19 +281,14 @@
                                     </thead>
                                     <tbody>
                                     <tr class="tr-shadow" th:each="orItem:${orderItems}" th:id="${orItem.id}">
-                                        <td th:text="${orItem.id}"></td>
-                                        <!--                                        <td th:text="${orItem.buyerOrder.buyer.credentials.firstName}"></td>-->
-                                        <!--                                        <td  th:text="${orItem.buyerOrder.buyer.credentials.email}">></td>-->
-                                        <td></td>
-                                        <td class="desc" th:text="${orItem.product.brand.name}">></td>
-                                        <!--                                        <td  th:text="${orItem.buyerOrder.createDate}"></td>-->
-                                        <td></td>
-                                        <td class="status--process" th:id="'d'+${orItem.id}"
-                                            th:text="${orItem.orderItemStatus}"></td>
+                                        <td th:text="${orItem.buyerOrder.buyer.credentials.firstName}"></td>
+                                        <td  th:text="${orItem.buyerOrder.buyer.credentials.email}"></td>
+                                        <td class="desc" th:text="${orItem.product.brand.name}"></td>
+                                        <td  th:text="${orItem.buyerOrder.createDate}"></td>
 
-
+                                        <td class="status--process" th:id="'d'+${orItem.id}" th:text="${orItem.orderItemStatus}"></td>
                                         <td th:text="${orItem.product.price}"></td>
-                                        <!--                                        <td  th:text="${orItem.quantity}"></td>-->
+                                        <td  th:text="${orItem.quantity}"></td>
                                         <td></td>
                                         <td>
                                             <div class="table-data-feature">
@@ -364,63 +359,63 @@
     <!-- Main JS-->
     <script src="db/js/main.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.item').click(function () {
-                let OrderItem = {};
-
-                let value = $(this).val();
-                let val1 = value.split("/", 1).pop();
-                let val2 = value.split("/", 2).pop();
-                console.log(value);
-                console.log(val1);
-                console.log(val2);
-                // OrderItem.id = $(this).val();
-                if (val1 === 's') {
-                    OrderItem.id = val2;
-                    let newData = JSON.stringify(OrderItem);
-                    console.log(JSON.stringify(OrderItem));
-                    $.ajax({
-                        type: 'post',
-                        url: '/OrderItemStatusUpdate',
-                        data: newData,
-                        datatype: 'JSON',
-                        contentType: 'application/json',
-                        success: function (item) {
-                            console.log("successs " + item);
-                            $('#' + 'd' + item.id).html(item.orderItemStatus)
-                        },
-                        error: function () {
-                            console.log("error");
-                        }
-
-                    })
-                } else {
-
-                    OrderItem.id = val2;
-                    let newData = JSON.stringify(OrderItem);
-                    console.log(JSON.stringify(OrderItem));
-                    $.ajax({
-                        type: 'post',
-                        url: '/OrderItemStatusCancelled',
-                        data: newData,
-                        datatype: 'JSON',
-                        contentType: 'application/json',
-                        success: function (item) {
-                            console.log("successs " + item);
-                            $('#' + 'd' + item.id).html(item.orderItemStatus);
-                        },
-                        error: function () {
-                            console.log("error");
-                        }
-
-                    })
-
-
-                }
-
-            })
-
-        })
+        // $(document).ready(function () {
+        //     $('.item').click(function () {
+        //         let OrderItem = {};
+        //
+        //         let value = $(this).val();
+        //         let val1 = value.split("/", 1).pop();
+        //         let val2 = value.split("/", 2).pop();
+        //         console.log(value);
+        //         console.log(val1);
+        //         console.log(val2);
+        //         // OrderItem.id = $(this).val();
+        //         if (val1 === 's') {
+        //             OrderItem.id = val2;
+        //             let newData = JSON.stringify(OrderItem);
+        //             console.log(JSON.stringify(OrderItem));
+        //             $.ajax({
+        //                 type: 'post',
+        //                 url: '/OrderItemStatusUpdate',
+        //                 data: newData,
+        //                 datatype: 'JSON',
+        //                 contentType: 'application/json',
+        //                 success: function (item) {
+        //                     console.log("successs " + item);
+        //                     $('#' + 'd' + item.id).html(item.orderItemStatus)
+        //                 },
+        //                 error: function () {
+        //                     console.log("error");
+        //                 }
+        //
+        //             })
+        //         } else {
+        //
+        //             OrderItem.id = val2;
+        //             let newData = JSON.stringify(OrderItem);
+        //             console.log(JSON.stringify(OrderItem));
+        //             $.ajax({
+        //                 type: 'post',
+        //                 url: '/OrderItemStatusCancelled',
+        //                 data: newData,
+        //                 datatype: 'JSON',
+        //                 contentType: 'application/json',
+        //                 success: function (item) {
+        //                     console.log("successs " + item);
+        //                     $('#' + 'd' + item.id).html(item.orderItemStatus);
+        //                 },
+        //                 error: function () {
+        //                     console.log("error");
+        //                 }
+        //
+        //             })
+        //
+        //
+        //         }
+        //
+        //     })
+        //
+        // })
 
 
     </script>

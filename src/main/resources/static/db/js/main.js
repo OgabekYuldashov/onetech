@@ -249,12 +249,12 @@
     }
 
     // Recent Report
-    const brandProduct = 'rgba(0,181,233,0.8)'
-    const brandService = 'rgba(0,173,95,0.8)'
+    const brandProduct = 'rgba(0,181,233,0.8)';
+    const brandService = 'rgba(0,173,95,0.8)';
 
-    var elements = 10
-    var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
-    var data2 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90]
+    var elements = 10;
+    var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115];
+    var data2 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90];
 
     var ctx = document.getElementById("recent-rep-chart");
     if (ctx) {
@@ -395,13 +395,13 @@
   try {
 
     // Recent Report 2
-    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
-    const bd_brandService2 = 'rgba(0,173,95,0.9)'
-    const brandProduct2 = 'rgba(0,181,233,0.2)'
-    const brandService2 = 'rgba(0,173,95,0.2)'
+    const bd_brandProduct2 = 'rgba(0,181,233,0.9)';
+    const bd_brandService2 = 'rgba(0,173,95,0.9)';
+    const brandProduct2 = 'rgba(0,181,233,0.2)';
+    const brandService2 = 'rgba(0,173,95,0.2)';
 
-    var data3 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
-    var data4 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90]
+    var data3 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115];
+    var data4 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90];
 
     var ctx = document.getElementById("recent-rep2-chart");
     if (ctx) {
@@ -1668,3 +1668,88 @@
   }
 
 })(jQuery);
+$(document).ready(function () {
+  $('.item').click(function () {
+    let OrderItem = {};
+
+    let value = $(this).val();
+    let val1 = value.split("/", 1).pop();
+    let val2 = value.split("/", 2).pop();
+    console.log(value);
+    console.log(val1);
+    console.log(val2);
+    // OrderItem.id = $(this).val();
+    if (val1 === 's') {
+      OrderItem.id = val2;
+      let newData = JSON.stringify(OrderItem);
+      console.log(JSON.stringify(OrderItem));
+      $.ajax({
+        type: 'post',
+        url: '/OrderItemStatusUpdate',
+        data: newData,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success: function (item) {
+          console.log("successs " + item);
+          $('#' + 'd' + item.id).html(item.orderItemStatus)
+        },
+        error: function () {
+          console.log("error");
+        }
+
+      })
+    } else {
+
+      OrderItem.id = val2;
+      let newData = JSON.stringify(OrderItem);
+      console.log(JSON.stringify(OrderItem));
+      $.ajax({
+        type: 'post',
+        url: '/OrderItemStatusCancelled',
+        data: newData,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success: function (item) {
+          console.log("successs " + item);
+          $('#' + 'd' + item.id).html(item.orderItemStatus);
+        },
+        error: function () {
+          console.log("error");
+        }
+
+      })
+
+
+    }
+
+  })
+
+});
+
+$(document).ready(function () {
+
+  $('.item').click(function () {
+    let product = {};
+    product.id = $(this).val();
+    let newData = JSON.stringify(product);
+    console.log(newData);
+    $.ajax({
+      type: 'post',
+      url: '/productDelete',
+      data: newData,
+      datatype: 'JSON',
+      contentType: 'application/json',
+      success: function (item) {
+        console.log("successs" + item.id);
+        $('#' + item.id).remove();
+      },
+      error: function () {
+        console.log("errorrrrr");
+
+
+      }
+
+    })
+
+  })
+});

@@ -24,4 +24,9 @@ public class SellerServiceImp implements SellerService {
     public Seller findOneByEmail(String email) {
         return sellerRepository.findOneByEmail(email);
     }
+
+    @Override
+    public Seller findById(Long valueOf) {
+        return sellerRepository.findById(valueOf).get();
+    }
 }
