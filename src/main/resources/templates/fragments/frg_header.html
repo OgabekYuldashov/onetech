@@ -7,6 +7,8 @@
 <body>
 <header class="header" th:fragment="header">
 
+
+
     <!-- Top Bar -->
 
     <div class="top_bar">
@@ -36,7 +38,24 @@
                                 </li>-->
                             </ul>
                         </div>
-                        <div class="top_bar_user">
+                        <!--<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+                            Logged in user: <span sec:authentication="name"></span> |
+                            Roles: <span sec:authentication="principal.authorities"></span>
+                            <div>
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" value="Logout" />
+                                </form>
+                            </div>
+                        </div>-->
+                        <div sec:authorize="isAuthenticated()" class="top_bar_user logout" th:fragment="logout">
+                            <div class="user_icon"><img th:src="@{/images/user.svg}" alt=""></div>
+                            <div><a th:href="@{/register}" sec:authentication="name"></a><span sec:authentication="principal.authorities"></span></div>
+                            <form style="display: inline;" action="#" th:action="@{/logout}" method="post">
+                                <input class="btn btn-light" type="submit" value="Logout" />
+                            </form>
+                            <!--<div><a th:href="@{/login}">Logout</a></div>-->
+                        </div>
+                        <div sec:authorize="!isAuthenticated()" class="top_bar_user">
                             <div class="user_icon"><img th:src="@{/images/user.svg}" alt=""></div>
                             <div><a th:href="@{/register}">Register</a></div>
                             <div><a th:href="@{/login}">Login</a></div>
