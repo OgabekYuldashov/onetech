@@ -33,13 +33,13 @@ public class Buyer {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
-    private List<Seller> sellers;
+    private List<Seller> sellers = new ArrayList<>();
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "receiver")
     private List<Notification> notificationsReceived = new ArrayList<>();
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "byr")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Product> favoriteProducts = new ArrayList<>();
@@ -72,5 +72,11 @@ public class Buyer {
 
     public void addShippingAddress(Address address){
         shippingAddresses.add(address);
+    }
+
+    public void addSellerToFollow(Seller seller){
+        if (sellers.stream().noneMatch(s -> s.getId().equals(seller.getId()))) {
+            sellers.add(seller);
+        }
     }
 }

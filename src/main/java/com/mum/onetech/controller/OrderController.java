@@ -34,7 +34,7 @@ public class OrderController {
 
     @GetMapping("/order_success")
     public String orderSuccess(){
-        return "order_placed";
+        return "order-complete";
     }
 
 }
