@@ -33,4 +33,8 @@ public class Seller {
 
     @OneToMany(mappedBy = "sender",cascade=CascadeType.ALL)
     private List<Notification> notificationsSent;
+
+    public String getFullName(){
+        return credentials.getFirstName() + " " + credentials.getLastName();
+    }
 }

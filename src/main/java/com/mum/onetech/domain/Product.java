@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -49,6 +50,7 @@ public class Product {
 
 
     private Boolean isNewArrival = false;
+
     @Enumerated(EnumType.STRING)
     private PromoteType promote=PromoteType.NONE;
     @ManyToOne
@@ -58,10 +60,10 @@ public class Product {
     @Valid
     private List<ProductImage> productImgs;
 
-     @Transient
+    @Transient
     private MultipartFile[] productImages  ;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Review> reviews;
 
 //    private String pictureUrls;
@@ -73,4 +75,7 @@ public class Product {
         this.price = Double.valueOf(Util.df2.format(this.price));
     }
 
+    public List<Review> getPublicReviews(){
+        return reviews.stream().filter(review -> review.getStatus().equals(ReviewStatus.APPROVED)).collect(Collectors.toList());
+    }
 }

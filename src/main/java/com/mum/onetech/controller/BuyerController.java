@@ -1,13 +1,11 @@
 package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.*;
-import com.mum.onetech.jsonmodel.CartItemModel;
-import com.mum.onetech.jsonmodel.CartModel;
-import com.mum.onetech.jsonmodel.GenericJsonRespModel;
-import com.mum.onetech.jsonmodel.GenericRespStatus;
+import com.mum.onetech.jsonmodel.*;
 import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.OrderService;
 import com.mum.onetech.service.ProductService;
+import com.mum.onetech.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -112,4 +110,40 @@ public class BuyerController {
         respModel.setNextUrl("/order_success");
         return respModel;
     }
+
+    @PostMapping("/addreview/{pid}")
+    @ResponseBody
+//    @IsBuyer
+    public GenericJsonRespModel addReview(@RequestBody @Valid ReviewModel reviewModel, @PathVariable("pid") String pid, Authentication authentication){
+        GenericJsonRespModel respModel = new GenericJsonRespModel();
+        respModel.setRespStatus(GenericRespStatus.FAILED);
+
+        if(authentication == null){
+            respModel.setMessage("You must be logged in to post a review");
+            return respModel;
+        }
+
+        if(!Util.isPositiveInteger(pid)){
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        Product p = productService.getOneProductById(Long.valueOf(pid));
+        if(p == null){
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+
+        Review newReview = new Review(reviewModel.getTitle(), reviewModel.getMessage(), Date.valueOf(LocalDate.now()), p, buyer);
+        buyer.addReview(newReview);
+
+        buyer = buyerService.save(buyer);
+
+        respModel.setRespStatus(GenericRespStatus.SUCCESS);
+        respModel.setMessage("Review accepted. You'll be notified by email when it is approved");
+        return respModel;
+    }
+
 }

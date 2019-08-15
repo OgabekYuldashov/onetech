@@ -77,7 +77,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId, @RequestParam(name = "sort", required = false) String sortMethod, Model model){
+    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId, @RequestParam(name = "sid", required = false) String sid, @RequestParam(name = "sort", required = false) String sortMethod, Model model){
 
 //        Product p = new Product();
 //        productService.save(p);

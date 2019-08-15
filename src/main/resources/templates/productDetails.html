@@ -14,6 +14,30 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles/product_styles.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/styles/product_responsive.css}">
 
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" th:href="@{/comments/css/bootstrap.min.css}" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" th:href="@{/comments/css/slick.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/comments/css/slick-theme.css}" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" th:href="@{/comments/css/nouislider.min.css}" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{/comments/css/font-awesome.min.css}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" th:href="@{/comments/css/style.css}" />
+
+
+    <!--JNOTY-->
+    <link rel="stylesheet" type="text/css" th:href="@{/jnoty/jnoty.css}">
+    
 </head>
 
 <body>
@@ -99,9 +123,178 @@
         </div>
     </div>
 
+    <!-- Seller Info & Reviews -->
+    <div class="reviews">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-tab">
+                        <ul class="tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Seller Information</a></li>
+                            <li><a data-toggle="tab" href="#tab2">Reviews (<span th:text="${currProduct.getPublicReviews().size()}" th:remove="tag">3</span>)</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane fade in active">
+                                <h4 th:text="${currProduct.seller.getFullName()}">Seller Name</h4>
+
+                                <p>Email: <span th:text="${currProduct.seller.credentials.email}">email@email.com</span></p>
+                                <h5><a th:href="@{/products(sid=${currProduct.seller.id})}">Explore Products of this seller</a></h5>
+                                <p><button id="btnFollowSeller" class="primary-btn" th:attr="data-sid=${currProduct.seller.id}">Follow Seller</button></p>
+
+                            </div>
+                            <div id="tab2" class="tab-pane fade in">
+
+                                <div class="row">
+                                    <div th:if="${currProduct.getPublicReviews().size() > 0}" class="col-md-6">
+                                        <div class="product-reviews">
+                                            <div class="single-review" th:each="review : ${currProduct.getPublicReviews()}">
+                                                <h4 th:text="${review.title}">This is a review title</h4>
+                                                <div class="review-heading">
+                                                    <div><a href="#" th:text="${review.byr.credentials.firstName}"><i class="fa fa-user-o"></i> John</a></div>
+                                                    <div><a href="#" th:text="${review.datePosted}"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
+                                                    <!--<div class="review-rating pull-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>-->
+                                                </div>
+                                                <div class="review-body">
+                                                    <p th:text="${review.message}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="single-review">
+                                                <h4>This is a review title</h4>
+                                                <div class="review-heading">
+                                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
+                                                    <!--<div class="review-rating pull-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>-->
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="single-review">
+                                                <h4>This is a review title</h4>
+                                                <div class="review-heading">
+                                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
+                                                    <!--<div class="review-rating pull-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>-->
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                                </div>
+                                            </div>
+
+                                            <!--<ul class="reviews-pages">
+                                                <li class="active">1</li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                            </ul>-->
+                                        </div>
+                                    </div>
+                                    <div th:if="${currProduct.getPublicReviews().size() > 0}" class="col-md-6">
+                                        <h4 class="text-uppercase">Write Your Review</h4>
+                                        <p>Your review will appear after moderation.</p>
+                                        <form class="review-form" id="formReview">
+                                            <div class="form-group">
+                                                <input id="inputReviewTitle" class="input" type="text" placeholder="Review Title" />
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="inputReviewMessage" class="input" placeholder="Your review"></textarea>
+                                            </div>
+                                            <!--<div class="form-group">
+                                                <div class="input-rating">
+                                                    <strong class="text-uppercase">Your Rating: </strong>
+                                                    <div class="stars">
+                                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <button id="btnPostReview" class="primary-btn" th:attr="data-pid=${currProduct.id}">Post Review</button>
+                                        </form>
+                                    </div>
+                                    <div th:if="${currProduct.getPublicReviews().size() <= 0}" class="col-md-12">
+                                        <h4 class="text-uppercase">Write Your Review</h4>
+                                        <p>Your review will appear after moderation.</p>
+                                        <form class="review-form" id="formReview">
+                                            <div class="form-group">
+                                                <input id="inputReviewTitle" class="input" type="text" placeholder="Review Title" />
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="inputReviewMessage" class="input" placeholder="Your review"></textarea>
+                                            </div>
+                                            <!--<div class="form-group">
+                                                <div class="input-rating">
+                                                    <strong class="text-uppercase">Your Rating: </strong>
+                                                    <div class="stars">
+                                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <button id="btnPostReview" class="primary-btn" th:attr="data-pid=${currProduct.id}">Post Review</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col">-->
+                    <!--<div class="panel panel-default">-->
+                        <!--<div class="panel-heading">Panel heading without title</div>-->
+                        <!--<div class="panel-body">-->
+                            <!--Panel content-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="panel panel-default">-->
+                        <!--<div class="panel-heading">-->
+                            <!--<h3 class="panel-title">Panel title</h3>-->
+                        <!--</div>-->
+                        <!--<div class="panel-body">-->
+                            <!--Panel content-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+
     <!-- Recently Viewed -->
 
-    <div th:replace="fragments/frg_viewed :: viewed"></div>
+    <!--<div th:replace="fragments/frg_viewed :: viewed"></div>-->
 
     <!-- Brands -->
 
@@ -129,7 +322,24 @@
 <script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
 <script th:src="@{/plugins/easing/easing.js}"></script>
 <script th:src="@{/js/product_custom.js}"></script>
+
+<!-- jQuery Plugins -->
+<script th:src="@{/comments/js/jquery.min.js}"></script>
+<script th:src="@{/comments/js/bootstrap.min.js}"></script>
+<script th:src="@{/comments/js/slick.min.js}"></script>
+<script th:src="@{/comments/js/nouislider.min.js}"></script>
+<script th:src="@{/comments/js/jquery.zoom.min.js}"></script>
+<script th:src="@{/comments/js/main.js}"></script>
+
+<!--Custom JS FIles-->
 <script th:src="@{/js/main.js}"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+<!--JNOTY-->
+<script type="text/javascript" th:src="@{/jnoty/jnoty.js}"></script>
+
+
 </body>
 
 
