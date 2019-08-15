@@ -2,6 +2,7 @@ package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.*;
 import com.mum.onetech.jsonmodel.CartModel;
+import com.mum.onetech.jsonmodel.ProductModel;
 import com.mum.onetech.service.*;
 import com.mum.onetech.util.Util;
 import org.apache.tomcat.jni.File;
@@ -53,6 +54,16 @@ public class ProductController {
     @ModelAttribute("brands")
     public List<Brand> addBrands(){
         return brandService.findAll();
+    }
+
+    @PostMapping("/productDelete")
+    public @ResponseBody ProductModel updateDelete(@RequestBody Product product){
+        System.out.println("********************"+product);
+        Long id=product.getId();
+       ProductModel product1= new ProductModel();
+       product1.setId(id);
+        productService.delete(product);
+        return product1;
     }
 
     @GetMapping("/product/{pid}")
@@ -223,15 +234,6 @@ public class ProductController {
         productService.save(product);
         return "redirect:/seller";
     }
-    @CrossOrigin
-    @PostMapping("/productDelete")
-    public @ResponseBody Product updateDelete(@RequestBody Product product){
-        System.out.println("********************"+product.getId());
-        System.out.println("********************"+productService.getOneProductById(product.getId()));
-          product.setSeller(null);
-          productService.save(product);
-        productService.delete(product);
-        return product;
-    }
+
 
 }

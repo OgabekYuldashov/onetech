@@ -292,10 +292,7 @@
                                         <td th:text="${pro.price}"></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="Send">
-                                                    <i class="zmdi zmdi-mail-send"></i>
-                                                </button>
+
                                                 <a th:href="@{/productUpdate(id=${pro.id})}" class="item"
                                                    data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>

@@ -1,17 +1,17 @@
 package com.mum.onetech.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mum.onetech.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +37,8 @@ public class Product {
 
     @NotBlank
     private String description;
-
+    @Min(value = 0, message = "{Min.Product.price.validation}")
+    @Digits(integer = 8, fraction = 2, message = "{Digits.Product.price.validation}")
     @NotNull
     private Double price;
 
@@ -45,7 +46,8 @@ public class Product {
     private Double oldPrice;
     @Temporal(TemporalType.DATE)
     private Date dateProductAdded;
-
+    @Min(value = 0, message = "{Min.Product.price.validation}")
+    @Digits(integer = 8, fraction = 2, message = "{Digits.Product.price.validation}")
    private Double discountRate=0.0 ;
 
 
@@ -62,7 +64,7 @@ public class Product {
 
     @Transient
     private MultipartFile[] productImages  ;
-
+     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Review> reviews;
 

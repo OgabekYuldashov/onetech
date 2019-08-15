@@ -55,14 +55,7 @@
                 </div>
                 <div class="card-body card-block">
                     <form th:action="@{/addProduct}"  th:object="${product}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label class=" form-control-label">Static</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <p class="form-control-static">Username</p>
-                            </div>
-                        </div>
+
 
                         <div class="row form-group">
                             <div class="col col-md-3">
@@ -118,7 +111,7 @@
                                 <label for="text-input" class=" form-control-label">Price</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="number" id="text-number" th:field="*{price}" name="text-input" placeholder="price"
+                                <input type="text" id="text-number" th:field="*{price}" name="text-input" placeholder="price"
                                        class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                                 <p  class="alert-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError">Incorrect price</p>
@@ -130,7 +123,7 @@
                                 <label for="text-input" class=" form-control-label">Discount Rate</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="number" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="Discount Rate"
+                                <input type="text" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="Discount Rate"
                                        class="form-control">
                                 <small class="form-text text-muted">This is a help text</small>
                                 <p  class="alert-danger" th:if="${#fields.hasErrors('discountRate')}" th:errors="*{discountRate}" th:errorclass="fieldError">Incorrect discountRate</p>
