@@ -12,25 +12,25 @@
     <title>Tables</title>
 
     <!-- Fontfaces CSS-->
-    <link href="db/css/font-face.css" rel="stylesheet" media="all">
-    <link href="db/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link th:href="@{/db/css/font-face.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/font-awesome-5/css/fontawesome-all.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="db/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/bootstrap-4.1/bootstrap.min.css}" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="db/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="db/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="db/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="db/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/wow/animate.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/slick/slick.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/db/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="db/css/theme.css" rel="stylesheet" media="all">
+    <link th:href="@{/db/css/theme.css}" rel="stylesheet" media="all">
 
 </head>
 
@@ -38,181 +38,39 @@
 <div class="page-wrapper">
 
     <!-- MENU SIDEBAR-->
-    <aside th:replace="fragments/frg_db_menu-sidebar :: menu-sidebar"></aside>
+    <!--<aside th:replace="fragments/frg_db_menu-sidebar :: menu-sidebar"></aside>-->
+    <aside class="menu-sidebar d-none d-lg-block" th:fragment="menu-sidebar">
+        <div class="logo">
+            <a th:href="@{/seller}">
+                <img th:src="@{/images/img_lights.jpg}" alt="One Tech"/>
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+
+                    <li>
+                        <a th:href="@{/seller}" role="button">
+                            <i class="fas fa-table"></i>Product</a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{/allOrderItem}" role="button">
+                            <i class="far fa-check-square"></i>Order Item</a>
+                    </li>
+
+
+
+                </ul>
+            </nav>
+        </div>
+    </aside>
     <!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
         <!-- HEADER DESKTOP-->
 
-        <header class="header-desktop" th:fragment="header-desktop">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
-                        </form>
-                        <div class="header-button">
-                            <div>
-                                <div>
-
-                                    <span class="quantity"></span>
-                                    <div>
-                                        <div class="mess__title">
-                                            <p></p>
-                                        </div>
-                                        <div>
-                                            <div>
-
-                                            </div>
-                                            <div class="content">
-                                                <h6></h6>
-                                                <p></p>
-                                                <span class="time"></span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div>
-
-                                            </div>
-                                            <div class="content">
-                                                <h6></h6>
-                                                <p></p>
-                                                <span class="time"></span>
-                                            </div>
-                                        </div>
-                                        <div class="mess__footer">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-
-                                    <span class="quantity"></span>
-                                    <div>
-                                        <div class="email__title">
-                                            <p></p>
-                                        </div>
-                                        <div class="email__item">
-                                            <div>
-
-                                            </div>
-                                            <div class="content">
-                                                <p></p>
-
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div>
-
-                                            </div>
-                                            <div class="content">
-                                                <p></p>
-
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-
-                                            </div>
-                                            <div class="content">
-                                                <p></p>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="email__footer">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-
-
-                                    <div>
-                                        <div>
-                                            <p></p>
-                                        </div>
-                                        <div>
-                                            <div>
-
-                                            </div>
-                                            <div>
-                                                <p></p>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div>
-
-                                            </div>
-                                            <div>
-                                                <p></p>
-
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div>
-
-                                            </div>
-                                            <div class="content">
-                                                <p></p>
-                                                <span class="date"></span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__footer">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="account-wrap" >
-                                <div class="account-item clearfix js-item-menu">
-                                    <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" th:alt="${seller.credentials.firstName}"/>
-                                    </div>
-                                    <div class="content">
-                                        <a class="js-acc-btn" th:text="${seller.credentials.firstName}" href="#">john
-                                            doe</a>
-                                    </div>
-                                    <div class="account-dropdown js-dropdown">
-                                        <!--                                        <div class="info clearfix">-->
-                                        <!--                                            <div class="image">-->
-                                        <!--                                                <a href="#">-->
-                                        <!--                                                    <img src="images/icon/avatar-01.jpg"-->
-                                        <!--                                                         th:alt="${seller.credentials.firstName}"/>-->
-                                        <!--                                                </a>-->
-                                        <!--                                            </div>-->
-                                        <!--                                            <div class="content">-->
-                                        <!--                                                <h5 class="name">-->
-                                        <!--                                                    <a href="#" th:text="${seller.credentials.firstName}">john doe</a>-->
-                                        <!--                                                </h5>-->
-                                        <!--                                                <span class="email" th:text="${seller.credentials.email}">johndoe@example.com</span>-->
-                                        <!--                                            </div>-->
-                                        <!--                                        </div>-->
-                                        <div class="account-dropdown__body">
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Account</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-settings"></i>Setting</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                            </div>
-                                        </div>
-                                        <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <header th:replace="fragments/frg_db_header-desktop :: header-desktop">
         </header>
 
 
@@ -336,90 +194,31 @@
 </div>
 <div th:fragment="scriptlink">
     <!-- Jquery JS-->
-    <script src="db/vendor/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/db/vendor/jquery-3.2.1.min.js}"></script>
     <!-- Bootstrap JS-->
-    <script src="db/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="db/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script th:src="@{/db/vendor/bootstrap-4.1/popper.min.js}"></script>
+    <script th:src="@{/db/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
     <!-- Vendor JS       -->
-    <script src="db/vendor/slick/slick.min.js">
+    <script th:src="@{/db/vendor/slick/slick.min.js}">
     </script>
-    <script src="db/vendor/wow/wow.min.js"></script>
-    <script src="db/vendor/animsition/animsition.min.js"></script>
-    <script src="db/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script th:src="@{/db/vendor/wow/wow.min.js}"></script>
+    <script th:src="@{/db/vendor/animsition/animsition.min.js}"></script>
+    <script th:src="@{/db/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}">
     </script>
-    <script src="db/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="db/vendor/counter-up/jquery.counterup.min.js">
+    <script th:src="@{/db/vendor/counter-up/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/db/vendor/counter-up/jquery.counterup.min.js}">
     </script>
-    <script src="db/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="db/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="db/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="db/vendor/select2/select2.min.js">
+    <script th:src="@{/db/vendor/circle-progress/circle-progress.min.js}"></script>
+    <script th:src="@{/db/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
+    <script th:src="@{/db/vendor/chartjs/Chart.bundle.min.js}"></script>
+    <script th:src="@{/db/vendor/select2/select2.min.js}">
     </script>
 
     <!-- Main JS-->
-    <script src="db/js/main.js"></script>
-    
-    <script>
-        $(document).ready(function () {
-            $('.item').click(function () {
-                let OrderItem = {};
+    <script th:src="@{/db/js/main.js}"></script>
+    <script th:src="@{/db/js/sellerjs.js}"></script>
+    <!--<script th:src="@{/db/js/sellerjs.js}"></script>-->
 
-                let value = $(this).val();
-                let val1 = value.split("/", 1).pop();
-                let val2 = value.split("/", 2).pop();
-                console.log(value);
-                console.log(val1);
-                console.log(val2);
-                // OrderItem.id = $(this).val();
-                if (val1 === 's') {
-                    OrderItem.id = val2;
-                    let newData = JSON.stringify(OrderItem);
-                    console.log(JSON.stringify(OrderItem));
-                    $.ajax({
-                        type: 'post',
-                        url: '/OrderItemStatusUpdate',
-                        data: newData,
-                        datatype: 'JSON',
-                        contentType: 'application/json',
-                        success: function (item) {
-                            console.log("successs " + item);
-                            $('#' + 'd' + item.id).html('SHIPPED')
-                        },
-                        error: function () {
-                            console.log("error");
-                        }
-
-                    })
-                } else {
-
-                    OrderItem.id = val2;
-                    let newData = JSON.stringify(OrderItem);
-                    console.log(JSON.stringify(OrderItem));
-                    $.ajax({
-                        type: 'post',
-                        url: '/OrderItemStatusCancelled',
-                        data: newData,
-                        datatype: 'JSON',
-                        contentType: 'application/json',
-                        success: function (item) {
-                            console.log("successs " + item);
-                            $('#' + 'd' + item.id).html('CANCELLED');
-                        },
-                        error: function () {
-                            console.log("error");
-                        }
-
-                    })
-
-
-                }
-
-            })
-
-        })
-
-
-    </script>
 </div>
 </body>
 

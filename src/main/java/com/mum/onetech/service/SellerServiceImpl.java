@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SellerServiceImp implements SellerService {
+public class SellerServiceImpl implements SellerService {
     @Autowired
     private SellerRepository sellerRepository;
 
@@ -16,6 +16,11 @@ public class SellerServiceImp implements SellerService {
 
     @Override
     public Seller save(Seller seller) {
+        return sellerRepository.save(seller);
+    }
+
+    @Override
+    public Seller register(Seller seller) {
         seller.getCredentials().setPassword(passwordEncoder.encode(seller.getCredentials().getPassword()));
         return sellerRepository.save(seller);
     }

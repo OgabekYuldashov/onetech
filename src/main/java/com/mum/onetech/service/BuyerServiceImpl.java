@@ -19,6 +19,11 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public Buyer save(Buyer buyer) {
+        return buyerRepository.save(buyer);
+    }
+
+    @Override
+    public Buyer register(Buyer buyer) {
         buyer.getCredentials().setPassword(passwordEncoder.encode(buyer.getCredentials().getPassword()));
         return buyerRepository.save(buyer);
     }

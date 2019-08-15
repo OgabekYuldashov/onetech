@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface BuyerService {
     Buyer save(Buyer buyer);
+    Buyer register(Buyer buyer);
     Buyer findById(Long bid);
     Buyer findByEmail(String email);
     List<Buyer> findAll();

@@ -32,6 +32,8 @@ public class RegistrationController {
         model.addAttribute("seller", new Seller());
         model.addAttribute("buyer", new Buyer());
 
+        model.addAttribute("activeTab", "buyer");
+
         return "register";
     }
 
@@ -39,18 +41,20 @@ public class RegistrationController {
     public String registerBuyer(@Valid @ModelAttribute("buyer") Buyer buyer, BindingResult bindingResult, Model model){
         model.addAttribute("seller", new Seller());
 
+        model.addAttribute("activeTab", "buyer");
+
         if(bindingResult.hasErrors()){
             return "register";
         }
 
         if(credentialsService.isEmailInUse(buyer.getCredentials().getEmail())){
-            model.addAttribute("emailInUse", true);
+            model.addAttribute("buyerEmailInUse", true);
             return "register";
         }
 
         buyer.getCredentials().setRole(new Role(RoleType.BUYER));
         buyer.getCredentials().setVerified(1);
-        buyerService.save(buyer);
+        buyerService.register(buyer);
 
         return "redirect:/login";
     }
@@ -59,16 +63,23 @@ public class RegistrationController {
     public String registerSeller( @Valid @ModelAttribute("seller") Seller seller, BindingResult bindingResult, Model model){
         model.addAttribute("buyer", new Buyer());
 
+        model.addAttribute("activeTab", "seller");
+
         if(bindingResult.hasErrors()){
-            System.out.println(" ******error ======" +seller);
             return "register";
         }
-        System.out.println("******" +seller);
+
+        if(credentialsService.isEmailInUse(seller.getCredentials().getEmail())){
+            model.addAttribute("sellerEmailInUse", true);
+            return "register";
+        }
+
         Role role =new Role();
         role.setRole(RoleType.SELLER);
         seller.getCredentials().setRole(role);
         seller.getCredentials().setVerified(1);
-        sellerService.save(seller);
+        sellerService.register(seller);
+
         return "redirect:/seller";
     }
 

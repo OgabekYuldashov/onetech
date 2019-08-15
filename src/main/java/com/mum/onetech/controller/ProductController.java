@@ -5,7 +5,6 @@ import com.mum.onetech.jsonmodel.CartModel;
 import com.mum.onetech.jsonmodel.ProductModel;
 import com.mum.onetech.service.*;
 import com.mum.onetech.util.Util;
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,7 +44,6 @@ public class ProductController {
     SellerService sellerService;
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
-
 
 
     @ModelAttribute("categories")
@@ -137,10 +137,22 @@ public class ProductController {
 //        model.addAttribute("categories", categoryService.findAll());
         return "shop";
     }
+
     @GetMapping("/addProduct")
-    public String getProductForm(@ModelAttribute("product") Product product , Model model){
+    public String getProductForm(@ModelAttribute("product") Product product , Model model, Authentication authentication){
+        if(authentication == null){
+            return "redirect:/login";
+        }
+
+        Seller seller=sellerService.findOneByEmail(authentication.getName());
+        if(seller == null){
+            return "redirect:/login";
+        }
+
+        model.addAttribute("seller", seller);
         return "productAddForm";
     }
+
     @PostMapping("/addProduct")
     public String addProduct(@Valid Product product, BindingResult bindingResult, Authentication authentication){
         if(bindingResult.hasErrors()){
@@ -148,15 +160,12 @@ public class ProductController {
         }
 
         if(authentication != null){
-            System.out.println("****************"+authentication.getName());
             Seller seller=sellerService.findOneByEmail(authentication.getName());
-            System.out.println("****************"+seller );
             if(seller.getFollowers()!=null){
                 List<Buyer> buyers=seller.getFollowers();
                 Util.addNotificationforFollower(buyers,"New Product");
             }
             product.setSeller(seller);
-
         }
 
 
@@ -180,6 +189,44 @@ public class ProductController {
     private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
         List<ProductImage> images = new ArrayList<>();
 
+
+        for (MultipartFile file : files) {
+
+            String fileName = Util.randomUUID()+".jpg";
+//            fileName = "56b7aae6-0f52-4a66-b249-86cc147cf43a.jpg";
+
+            if (file.isEmpty()) {
+                continue;
+            }
+            ProductImage productImage = new ProductImage();
+            productImage.setImgName(fileName);
+            images.add(productImage);
+
+            byte[] bytes = file.getBytes();
+
+            String fileLocation1 = new File("static\\images\\pimgs").getAbsolutePath() + "\\" + fileName;
+            String fileLocation2 = new File("src\\main\\resources\\static\\images\\pimgs").getAbsolutePath() + "\\" + fileName;
+            FileOutputStream fos = new FileOutputStream(fileLocation2);
+            fos.write(bytes);
+            fos.close();
+
+        }
+
+        return images;
+    }
+
+    /*
+    private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
+        List<ProductImage> images = new ArrayList<>();
+
+
+        byte[] imageByteArray ....
+        String fileName = "image.png";
+        String fileLocation = new File("static\\images").getAbsolutePath() + "\\" + fileName;
+        FileOutputStream fos = new FileOutputStream(fileLocation);
+        fos.write(imageByteArray);
+        fos.close();
+
         for (MultipartFile file : files) {
 
             if (file.isEmpty()) {
@@ -200,13 +247,24 @@ public class ProductController {
 
         return images;
     }
-
+*/
     @GetMapping("/productUpdate")
-    public String getProductForUpdate(@RequestParam ("id") Long id, Model model){
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, Authentication authentication){
         model.addAttribute("product",productService.getOneProductById(id));
+        if(authentication == null){
+            return "redirect:/login";
+        }
+
+        Seller seller=sellerService.findOneByEmail(authentication.getName());
+        if(seller == null){
+            return "redirect:/login";
+        }
+
+        model.addAttribute("seller", seller);
 
         return "productUpdateForm";
     }
+
     @PostMapping("/productUpdate")
     public String updateProduct( @Valid Product product,BindingResult bindingResult,Authentication authentication){
         if(bindingResult.hasErrors()){
