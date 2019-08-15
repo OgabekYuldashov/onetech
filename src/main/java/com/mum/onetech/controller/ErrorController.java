@@ -1,6 +1,7 @@
 package com.mum.onetech.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ErrorController {
 
     @GetMapping("/access-denied")
-    public String accessDenied(){
+    public String accessDenied(Model model){
 
-        return "403";
+        model.addAttribute("errTitle", "403 oops!");
+        model.addAttribute("errMessage", "You need to authenticate to access this resource");
+        return "error-custom";
     }
 
     @GetMapping("/login-err")

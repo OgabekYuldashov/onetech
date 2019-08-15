@@ -5,10 +5,12 @@ import com.mum.onetech.domain.Role;
 import com.mum.onetech.domain.RoleType;
 import com.mum.onetech.domain.Seller;
 import com.mum.onetech.service.BuyerService;
+import com.mum.onetech.service.CredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +19,9 @@ import javax.validation.Valid;
 public class RegistrationController {
     @Autowired
     BuyerService buyerService;
+
+    @Autowired
+    CredentialsService credentialsService;
 
     @GetMapping("/register")
     public String getSellerRegistrationForm(Model model) {
@@ -31,6 +36,11 @@ public class RegistrationController {
         model.addAttribute("seller", new Seller());
 
         if(bindingResult.hasErrors()){
+            return "register";
+        }
+
+        if(credentialsService.isEmailInUse(buyer.getCredentials().getEmail())){
+            model.addAttribute("emailInUse", true);
             return "register";
         }
 

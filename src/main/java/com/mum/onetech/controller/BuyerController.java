@@ -5,6 +5,7 @@ import com.mum.onetech.jsonmodel.*;
 import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.OrderService;
 import com.mum.onetech.service.ProductService;
+import com.mum.onetech.service.SellerService;
 import com.mum.onetech.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Iterator;
 
 @RequestMapping("/buyer")
 @Controller
@@ -28,18 +30,8 @@ public class BuyerController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/cartdetails")
-    @ResponseBody
-//    @IsBuyer
-    public CartModel addToCart(Authentication authentication){
-
-        if(authentication == null) return null;
-
-        Buyer buyer = buyerService.findByEmail(authentication.getName());
-        if(buyer == null || buyer.getCredentials().getRole().getRole() != RoleType.BUYER) return null;
-
-        return new CartModel(buyer.getShoppingCart().getCartItems().size(), buyer.getShoppingCart().getTotalAmount());
-    }
+    @Autowired
+    SellerService sellerService;
 
 
     @GetMapping("/cart")
@@ -55,21 +47,63 @@ public class BuyerController {
         return "cart";
     }
 
+
+    @GetMapping("/orders")
+    public String getOrderHistory(Model model, Authentication authentication){
+
+        if(authentication == null) return "redirect:/error/access-denied";
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+        if(buyer == null || buyer.getCredentials().getRole().getRole() != RoleType.BUYER) return "redirect:/error/access-denied";
+
+
+        model.addAttribute("userCart", buyer.getShoppingCart());
+        return "cart";
+    }
+
+
+    @PostMapping("/cartdetails")
+    @ResponseBody
+//    @IsBuyer
+    public CartModel addToCart(Authentication authentication){
+
+        if(authentication == null) return null;
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+        if(buyer == null || buyer.getCredentials().getRole().getRole() != RoleType.BUYER) return null;
+
+        return new CartModel(buyer.getShoppingCart().getCartItems().size(), buyer.getShoppingCart().getTotalAmount());
+    }
+
+
     @PostMapping("/cart/add")
     @ResponseBody
 //    @IsBuyer
     public CartModel addToCart(@Valid @RequestBody CartItemModel cartItemModel, Authentication authentication){
 
-        if(authentication == null) return null;
+        CartModel cartModel = new CartModel();
+        cartModel.getGenericRes().setRespStatus(GenericRespStatus.FAILED);
+
+        if(authentication == null){
+            cartModel.getGenericRes().setMessage("Please login before adding to cart");
+            return cartModel;
+        }
 
         Product p = productService.getOneProductById(cartItemModel.getPid());
-        if(p == null) return null;
+        if(p == null){
+            cartModel.getGenericRes().setMessage("Product does not exist! Try again.");
+            return cartModel;
+        }
 
         Buyer buyer = buyerService.findByEmail(authentication.getName());
         buyer.getShoppingCart().addIncreaseProduct(p, cartItemModel.getQuantity());
         buyer = buyerService.save(buyer);
 
-        return new CartModel(buyer.getShoppingCart().getCartItems().size(), buyer.getShoppingCart().getTotalAmount());
+        cartModel.getGenericRes().setRespStatus(GenericRespStatus.SUCCESS);
+        cartModel.setItemCount(buyer.getShoppingCart().getCartItems().size());
+        cartModel.setTotalAmount(buyer.getShoppingCart().getTotalAmount());
+
+        return cartModel;
     }
 
     @PostMapping("/place_order")
@@ -143,6 +177,73 @@ public class BuyerController {
 
         respModel.setRespStatus(GenericRespStatus.SUCCESS);
         respModel.setMessage("Review accepted. You'll be notified by email when it is approved");
+        return respModel;
+    }
+
+    @PostMapping("/follow/{sid}")
+    @ResponseBody
+//    @IsBuyer
+    public GenericJsonRespModel followSeller(@PathVariable("sid") String sid, Authentication authentication){
+        GenericJsonRespModel respModel = new GenericJsonRespModel();
+        respModel.setRespStatus(GenericRespStatus.FAILED);
+
+        if(authentication == null){
+            respModel.setMessage("You must be logged in to follow");
+            return respModel;
+        }
+
+        if(!Util.isPositiveInteger(sid)){
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        Seller seller = sellerService.findById(Long.valueOf(sid));
+        if(seller == null){
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+
+        buyer.addSellerToFollow(seller);
+        buyer = buyerService.save(buyer);
+
+        respModel.setRespStatus(GenericRespStatus.SUCCESS);
+        respModel.setMessage("Following");
+        return respModel;
+    }
+
+    @PostMapping("/removecartitem/{itemId}")
+    @ResponseBody
+//    @IsBuyer
+    public GenericJsonRespModel removeCartItem(@PathVariable("itemId") String itemId, Authentication authentication){
+        GenericJsonRespModel respModel = new GenericJsonRespModel();
+        respModel.setRespStatus(GenericRespStatus.FAILED);
+
+        if(authentication == null){
+            respModel.setMessage("You must be logged in to remove");
+            return respModel;
+        }
+
+        if(!Util.isPositiveInteger(itemId)){
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        Buyer buyer = buyerService.findByEmail(authentication.getName());
+        if (!buyer.getShoppingCart().containsOrderItem(Long.valueOf(itemId))) {
+            respModel.setMessage("Bad request");
+            return respModel;
+        }
+
+        //Remove CartItem from the cart
+        buyer.getShoppingCart().removeCartItemById(Long.valueOf(itemId));
+
+        buyer = buyerService.save(buyer);
+
+        respModel.setRespStatus(GenericRespStatus.SUCCESS);
+        respModel.setMessage("Removed");
+        respModel.getDataMap().put("totalAmount", buyer.getShoppingCart().getTotalAmount());
         return respModel;
     }
 

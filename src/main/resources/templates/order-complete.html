@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -7,16 +7,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Error</title>
+	<title>Success</title>
 
 	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kanit:200" rel="stylesheet">
 
 	<!-- Font Awesome Icon -->
-	<link type="text/css" rel="stylesheet" th:href="@{err/css/font-awesome.min.css}" />
+	<link type="text/css" rel="stylesheet" th:href="@{/comments/css/font-awesome.min.css}" />
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" th:href="@{err/css/style.css}" />
+	<link type="text/css" rel="stylesheet" th:href="@{/styles/style-success-page.css}" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,16 +31,17 @@
 
 	<div id="notfound">
 		<div class="notfound">
-			<div class="notfound-bg">
-				<div></div>
-				<div></div>
-				<div></div>
+			<div class="notfound-404">
+				<h1>Successful</h1>
 			</div>
-			<div>
-				<h1>oops!</h1>
-				<h2>We've experienced an issue. It's not you... It's us...</h2>
+			<h2>Transaction Complete</h2>
+			<p>We have received your order. It will be delivered soon.<a th:href="@{/}">Return to homepage</a></p>
+			<div class="notfound-social">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-pinterest"></i></a>
+				<a href="#"><i class="fa fa-google-plus"></i></a>
 			</div>
-			<a th:href="@{/}">Home page</a>
 		</div>
 	</div>
 

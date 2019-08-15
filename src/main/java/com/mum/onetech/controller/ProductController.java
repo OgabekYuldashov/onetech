@@ -1,9 +1,6 @@
 package com.mum.onetech.controller;
 
-import com.mum.onetech.domain.Buyer;
-import com.mum.onetech.domain.Category;
-import com.mum.onetech.domain.Product;
-import com.mum.onetech.domain.ProductImage;
+import com.mum.onetech.domain.*;
 import com.mum.onetech.jsonmodel.CartModel;
 import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.BuyerService;
@@ -48,8 +45,12 @@ public class ProductController {
 
     @ModelAttribute("categories")
     public List<Category> addCategories(Model model){
-        model.addAttribute("brands" ,brandService.findAll());
         return categoryService.findAll();
+    }
+
+    @ModelAttribute("brands")
+    public List<Brand> getAllBrands(){
+        return brandService.findAll();
     }
 
     @GetMapping("/product/{pid}")
@@ -74,7 +75,10 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId, @RequestParam(name = "sid", required = false) String sid, @RequestParam(name = "sort", required = false) String sortMethod, Model model){
+    public String getAllProducts(@RequestParam(name = "cat", required = false) String catId,
+                                 @RequestParam(name = "bid", required = false) String bid,
+                                 @RequestParam(name = "sid", required = false) String sid,
+                                 @RequestParam(name = "sort", required = false) String sortMethod, Model model){
 
 //        Product p = new Product();
 //        productService.save(p);

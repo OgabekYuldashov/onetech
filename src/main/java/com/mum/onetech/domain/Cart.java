@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -97,5 +98,22 @@ public class Cart implements Serializable {
     public void emptyCart(){
         cartItems = new ArrayList<>();
         totalAmount = 0.0;
+    }
+
+    public boolean containsOrderItem(Long itemId){
+        return cartItems.stream().anyMatch(cartItem -> cartItem.getId().equals(itemId));
+    }
+
+    public void removeCartItemById(Long itemId){
+        Iterator itr = cartItems.iterator();
+        while (itr.hasNext())
+        {
+            CartItem x = (CartItem)itr.next();
+            if (x.getId().equals(itemId)){
+                itr.remove();
+                break;
+            }
+        }
+        updateTotalAmount();
     }
 }

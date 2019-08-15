@@ -36,7 +36,7 @@ public class SellerController {
         Role role =new Role();
         role.setRole(RoleType.SELLER);
         seller.getCredentials().setRole(role);
-        sellerService.registerSeller(seller);
+        sellerService.save(seller);
         System.out.println("seller" + seller);
         model.addAttribute("product", new Product());
         return "product";

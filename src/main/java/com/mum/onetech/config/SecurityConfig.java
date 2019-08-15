@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/").hasAuthority("BUYER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/seller/**").hasAuthority("SELLER")
+                .antMatchers("/cart/**").hasAuthority("BUYER")
                 .anyRequest().permitAll() //all other urls can be accessed by any authenticated role
                 .and()
                 .formLogin() //enable form login instead of basic login

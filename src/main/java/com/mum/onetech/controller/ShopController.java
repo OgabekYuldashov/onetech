@@ -1,8 +1,10 @@
 package com.mum.onetech.controller;
 
+import com.mum.onetech.domain.Brand;
 import com.mum.onetech.domain.Buyer;
 import com.mum.onetech.domain.Category;
 import com.mum.onetech.jsonmodel.CartModel;
+import com.mum.onetech.service.BrandService;
 import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.CategoryService;
 import com.mum.onetech.service.ProductService;
@@ -27,12 +29,18 @@ public class ShopController {
     ProductService productService;
 
     @Autowired
-    BuyerService buyerService;
+    private BrandService brandService;
 
+    @Autowired
+    BuyerService buyerService;
 
     @ModelAttribute("categories")
     List<Category> getAllCategories(){
         return categoryService.findAll();
+    }
+    @ModelAttribute("brands")
+    public List<Brand> getAllBrands(){
+        return brandService.findAll();
     }
 
     @ModelAttribute("cartDetails")
@@ -40,9 +48,6 @@ public class ShopController {
         CartModel cartModel = new CartModel(0, 0.0);
 
         if(authentication == null) return cartModel;
-
-        System.out.println("*******EMAIL******");
-        System.out.println(authentication.getName());
 
         Buyer buyer = buyerService.findByEmail(authentication.getName());
         if(buyer == null) return cartModel;
@@ -53,6 +58,12 @@ public class ShopController {
 
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, Authentication authentication) {
+
+        if(authentication != null){
+            if(buyerService.findByEmail(authentication.getName()) != null){
+                model.addAttribute("currentBuyer", authentication.getName());
+            }
+        }
 
         return "index";
     }

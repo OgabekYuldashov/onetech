@@ -10,7 +10,12 @@ public class SellerServiceImp implements SellerService {
     @Autowired
     private SellerRepository sellerRepository;
     @Override
-    public Seller registerSeller(Seller seller) {
+    public Seller save(Seller seller) {
         return sellerRepository.save(seller);
+    }
+
+    @Override
+    public Seller findById(Long sid) {
+        return sellerRepository.findById(sid).orElse(null);
     }
 }

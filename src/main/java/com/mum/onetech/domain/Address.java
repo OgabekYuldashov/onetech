@@ -33,6 +33,8 @@ public class Address {
     @NotBlank
     private String zip;
 
-
-
+    @Override
+    public String toString() {
+        return street + ", " + city + ", " + state + ", " + zip;
+    }
 }

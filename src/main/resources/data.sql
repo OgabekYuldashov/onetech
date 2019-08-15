@@ -24,14 +24,15 @@ insert into role (id, role) values (2, 'BUYER');
 insert into role (id, role) values (3, 'ADMIN');
 
 
-INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (1, 'Tina', 'Xing','seller@seller.com', '132', 1, 1);
+-- PASSWORD is '123'
+INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (1, 'Tina', 'Xing','seller@seller.com', '$2a$10$9iC/DKLxg4vlDJSmIxEbbePVekUUTrRNakyduFaocTUKWbB/mMbgq', 1, 1);
 INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (1, 'Fairfield', 'IA', '1000 N 4th', '52556');
 INSERT INTO Seller (`ID`, `ADDRESS_ID`, `CREDENTIALS_ID`) VALUES (1, 1, 1);
 
-INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (2, 'Ogabek', 'Yuldashov','ogabek.yuldashov@gmail.com', '123', 1, 2);
+INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (2, 'John', 'Doe','john.doe@gmail.com', '$2a$10$9iC/DKLxg4vlDJSmIxEbbePVekUUTrRNakyduFaocTUKWbB/mMbgq', 1, 2);
 -- INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (2, 'Fairfield', 'IA', '1000 N 4th', '52557');
-INSERT INTO Buyer (`ID`, `CREDENTIALS_ID`, `SHOPPING_CART_ID`) VALUES (1, 2, 1);
-insert into cart (id, buyer_id, total_amount) values (1, 1, 0);
+INSERT INTO Buyer (`ID`, `CREDENTIALS_ID`, `SHOPPING_CART_ID`) VALUES (1, 2, null);
+-- insert into cart (id, buyer_id, total_amount) values (1, 1, 0);
 
 
 INSERT INTO Product (`DATE_PRODUCT_ADDED`,`DESCRIPTION`,`DISCOUNT_RATE`,`IS_NEW_ARRIVAL`, `NAME`, `OLD_PRICE`, `PRICE`,`BRAND_ID`, `CATEGORY_ID`, `SELLER_ID`) VALUES (DATE '2019-08-13','Lorem Ipsum Dolor sit amet. Lorem Ipsum Dolor sit amet',3,FALSE, 'HP Envy 17', 1352, 1299,1, 1, 1);
