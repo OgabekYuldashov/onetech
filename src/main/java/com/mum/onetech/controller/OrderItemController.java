@@ -43,12 +43,29 @@ public class OrderItemController {
     }
 
     @PostMapping("/OrderItemStatusUpdate")
-    public @ResponseBody OrderItem updateDelete(@RequestBody OrderItem orderItem){
+    public @ResponseBody OrderItem updateShipped(@RequestBody OrderItem orderItem){
         System.out.println("product"+orderItem);
         OrderItem orderItem1=orderItem;
         if(orderItem.getId()!=null){
            orderItem1=orderItemService.findById(orderItem.getId()) ;
             orderItem1.setOrderItemStatus(OrderItemStatus.SHIPPED);
+            orderItem1=orderItemService.save(orderItem1);
+        }
+        else {
+
+        }
+
+        return orderItem1;
+    }
+
+
+    @PostMapping("/OrderItemStatusCancelled")
+    public @ResponseBody OrderItem updateCancelled(@RequestBody OrderItem orderItem){
+        System.out.println("product"+orderItem);
+        OrderItem orderItem1=orderItem;
+        if(orderItem.getId()!=null){
+            orderItem1=orderItemService.findById(orderItem.getId()) ;
+            orderItem1.setOrderItemStatus(OrderItemStatus.CANCELLED);
             orderItem1=orderItemService.save(orderItem1);
         }
         else {
