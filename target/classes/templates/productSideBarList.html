@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head  th:fragment="db-head">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   >
+<head th:fragment="db-head">
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,8 +12,8 @@
     <title>Tables</title>
 
     <!-- Fontfaces CSS-->
-    <link  href="db/css/font-face.css" rel="stylesheet" media="all">
-    <link  href="db/vendor/font-awesome-4.7/css/font-awesome.min.css"  rel="stylesheet" media="all">
+    <link href="db/css/font-face.css" rel="stylesheet" media="all">
+    <link href="db/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="db/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="db/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
@@ -38,29 +38,29 @@
 <div class="page-wrapper">
 
     <!-- MENU SIDEBAR-->
-    <aside th:replace="fragments/frg_db_menu-sidebar :: menu-sidebar" ></aside>
+    <aside th:replace="fragments/frg_db_menu-sidebar :: menu-sidebar"></aside>
     <!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
         <!-- HEADER DESKTOP-->
 
-        <header class="header-desktop"  >
+        <header class="header-desktop">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="POST">
                         </form>
                         <div class="header-button">
-                            <div >
-                                <div >
+                            <div>
+                                <div>
 
                                     <span class="quantity"></span>
-                                    <div >
+                                    <div>
                                         <div class="mess__title">
                                             <p></p>
                                         </div>
-                                        <div >
+                                        <div>
                                             <div>
 
                                             </div>
@@ -70,8 +70,8 @@
                                                 <span class="time"></span>
                                             </div>
                                         </div>
-                                        <div >
-                                            <div >
+                                        <div>
+                                            <div>
 
                                             </div>
                                             <div class="content">
@@ -85,15 +85,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div >
+                                <div>
 
                                     <span class="quantity"></span>
-                                    <div >
+                                    <div>
                                         <div class="email__title">
                                             <p></p>
                                         </div>
                                         <div class="email__item">
-                                            <div >
+                                            <div>
 
                                             </div>
                                             <div class="content">
@@ -102,7 +102,7 @@
                                             </div>
                                         </div>
                                         <div class="email__item">
-                                            <div >
+                                            <div>
 
                                             </div>
                                             <div class="content">
@@ -124,33 +124,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div >
+                                <div>
 
 
-                                    <div >
-                                        <div >
+                                    <div>
+                                        <div>
                                             <p></p>
                                         </div>
-                                        <div >
-                                            <div >
+                                        <div>
+                                            <div>
 
                                             </div>
-                                            <div >
+                                            <div>
                                                 <p></p>
-                                                <span ></span>
+                                                <span></span>
                                             </div>
                                         </div>
-                                        <div >
-                                            <div >
+                                        <div>
+                                            <div>
 
                                             </div>
-                                            <div >
+                                            <div>
                                                 <p></p>
 
                                             </div>
                                         </div>
-                                        <div >
-                                            <div >
+                                        <div>
+                                            <div>
 
                                             </div>
                                             <div class="content">
@@ -165,47 +165,50 @@
                                 </div>
                             </div>
                             <div class="account-wrap">
-                                <!--                                <div class="account-item clearfix js-item-menu">-->
-                                <!--                                    <div class="image">-->
-                                <!--                                        <img src="images/icon/avatar-01.jpg" th:alt="${seller.credentials.firstName}"/>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="content" >-->
-                                <!--                                        <a class="js-acc-btn" th:text="${seller.credentials.firstName}"  href="#">john doe</a>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="account-dropdown js-dropdown">-->
-                                <!--                                        <div class="info clearfix">-->
-                                <!--                                            <div class="image">-->
-                                <!--                                                <a href="#">-->
-                                <!--                                                    <img src="images/icon/avatar-01.jpg" th:alt="${seller.credentials.firstName}"/>-->
-                                <!--                                                </a>-->
-                                <!--                                            </div>-->
-                                <!--                                            <div class="content">-->
-                                <!--                                                <h5 class="name">-->
-                                <!--                                                    <a href="#" th:text="${seller.credentials.firstName}">john doe</a>-->
-                                <!--                                                </h5>-->
-                                <!--                                                <span class="email" th:text="${seller.credentials.email}">johndoe@example.com</span>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                        <div class="account-dropdown__body">-->
-                                <!--                                            <div class="account-dropdown__item">-->
-                                <!--                                                <a href="#">-->
-                                <!--                                                    <i class="zmdi zmdi-account" ></i>Account</a>-->
-                                <!--                                            </div>-->
-                                <!--                                            <div class="account-dropdown__item">-->
-                                <!--                                                <a href="#">-->
-                                <!--                                                    <i class="zmdi zmdi-settings"></i>Setting</a>-->
-                                <!--                                            </div>-->
-                                <!--                                            <div class="account-dropdown__item">-->
-                                <!--                                                <a href="#">-->
-                                <!--                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                        <div class="account-dropdown__footer">-->
-                                <!--                                            <a href="#">-->
-                                <!--                                                <i class="zmdi zmdi-power"></i>Logout</a>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
+                                <div class="account-item clearfix js-item-menu" >
+                                    <div class="image">
+                                        <img src="images/icon/avatar-01.jpg" th:alt="${seller.credentials.firstName}"/>
+
+                                    </div>
+                                    <div class="content">
+                                        <a class="js-acc-btn" th:text="${seller.credentials.firstName}" href="#">john
+                                            doe</a>
+                                    </div>
+                                    <div class="account-dropdown js-dropdown">
+                                        <div class="info clearfix">
+                                            <div class="image">
+                                                <a href="#">
+                                                    <img src="images/icon/avatar-01.jpg"
+                                                         th:alt="${seller.credentials.firstName}"/>
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <h5 class="name">
+                                                    <a href="#" th:text="${seller.credentials.firstName}">john doe</a>
+                                                </h5>
+                                                <span class="email" th:text="${seller.credentials.email}">johndoe@example.com</span>
+                                            </div>
+                                        </div>
+                                        <div class="account-dropdown__body">
+                                            <div class="account-dropdown__item">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-account"></i>Account</a>
+                                            </div>
+                                            <div class="account-dropdown__item">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-settings"></i>Setting</a>
+                                            </div>
+                                            <div class="account-dropdown__item">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                            </div>
+                                        </div>
+                                        <div class="account-dropdown__footer">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -241,13 +244,16 @@
                                         <div class="dropDownSelect2"></div>
                                     </div>
                                     <button class="au-btn-filter">
-                                        <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                        <i class="zmdi zmdi-filter-list"></i>filters
+                                    </button>
                                 </div>
 
                                 <div class="table-data__tool-right">
 
-                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small"  onClick="parent.location='addProduct'"  >
-                                        <i class="zmdi zmdi-plus"></i> add Product</button>
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small"
+                                            onClick="parent.location='addProduct'">
+                                        <i class="zmdi zmdi-plus"></i> add Product
+                                    </button>
 
 
                                     <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
@@ -278,7 +284,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="pro:${products}" th:id="${pro.id}">
-                                        <td  th:text="${pro.dateProductAdded}" ></td>
+                                        <td th:text="${pro.dateProductAdded}"></td>
                                         <td th:text="${pro.category.name}"></td>
                                         <td th:text="${pro.name}"></td>
                                         <td th:text="${pro.description}"></td>
@@ -286,16 +292,20 @@
                                         <td th:text="${pro.price}"></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                                <button class="item" data-toggle="tooltip" data-placement="top"
+                                                        title="Send">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button>
-                                                <a  th:href="@{/productUpdate(id=${pro.id})}"  class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <a th:href="@{/productUpdate(id=${pro.id})}" class="item"
+                                                   data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <button  th:class="item"  th:value="${pro.id}"  class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <button th:class="item" th:value="${pro.id}" class="item"
+                                                        data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-                                                <a  th:href="@{/product/id(id=${pro.id})}" class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                                <a th:href="@{/product/id(id=${pro.id})}" class="item"
+                                                   data-toggle="tooltip" data-placement="top" title="More">
                                                     <i class="zmdi zmdi-more"></i>
                                                 </a>
                                             </div>
@@ -314,7 +324,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                        href="https://colorlib.com">Colorlib</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -324,6 +335,7 @@
     </div>
 
 </div>
+
 <div th:fragment="scriptlink">
     <!-- Jquery JS-->
     <script src="db/vendor/jquery-3.2.1.min.js"></script>
@@ -348,35 +360,40 @@
 
     <!-- Main JS-->
     <script src="db/js/main.js"></script>
-</div>
-<script>
-    $(document).ready(function () {
-        $('.item').click(function () {
-            let product = {};
-            product.id = $(this).val();
-            let newData=JSON.stringify(product);
-            console.log(JSON.stringify(product));
-            $.ajax({
-                type:'post',
-                url:'/productDelete',
-                data: newData,
-                datatype:'JSON',
-                contentType:'application/json',
-                success:function (item) {
-                    console.log("successs" +item.id);
-                    $('#'+item.id).remove();
-                },
-                error:function () {
-                    console.log("error");
-                }
+
+    <script>
+        $(document).ready(function () {
+
+            $('.item').click(function () {
+                let product = {};
+                product.id = $(this).val();
+                let newData = JSON.stringify(product);
+                console.log(newData);
+                $.ajax({
+                    type: 'post',
+                    url: '/productDelete',
+                    data: newData,
+                    datatype: 'JSON',
+                    contentType: 'application/json',
+                    success: function (item) {
+                        console.log("successs" + item.id);
+                        $('#' + item.id).remove();
+                    },
+                    error: function () {
+                        console.log("errorrrrr");
+
+
+                    }
+
+                })
 
             })
-
         })
-    })
 
 
-</script>
+    </script>
+</div>
+
 </body>
 
 </html>

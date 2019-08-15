@@ -1,6 +1,10 @@
 package com.mum.onetech.util;
 
+import com.mum.onetech.domain.Buyer;
+import com.mum.onetech.domain.Notification;
+
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.UUID;
 
 public class Util {
@@ -18,5 +22,14 @@ public class Util {
         // Creating a random UUID (Universally unique identifier)
         return UUID.randomUUID().toString();
     }
+
+    public static boolean addNotificationforFollower(List<Buyer> buyers , String message){
+        for(Buyer buyer:buyers){
+            Notification notification =new Notification();
+            notification.setMessage(message);
+            buyer.addNotification(notification);        }
+        return true;
+    }
+
 
 }

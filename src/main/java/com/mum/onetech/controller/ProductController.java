@@ -137,6 +137,10 @@ public class ProductController {
             System.out.println("****************"+authentication.getName());
             Seller seller=sellerService.findOneByEmail(authentication.getName());
             System.out.println("****************"+seller );
+            if(seller.getFollowers()!=null){
+                List<Buyer> buyers=seller.getFollowers();
+                Util.addNotificationforFollower(buyers,"New Product");
+            }
             product.setSeller(seller);
 
         }
@@ -222,7 +226,8 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/productDelete")
     public @ResponseBody Product updateDelete(@RequestBody Product product){
-        System.out.println("product"+product);
+        System.out.println("********************"+product.getId());
+        System.out.println("********************"+productService.getOneProductById(product.getId()));
         productService.delete(product);
         return product;
     }

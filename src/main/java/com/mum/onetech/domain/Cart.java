@@ -15,11 +15,11 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy ="shoppingCart" ,cascade = CascadeType.ALL)
     private Buyer buyer;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<CartItem> cartItems = new ArrayList<>();;
+    private List<CartItem> cartItems = new ArrayList<>();
 
     private Double totalAmount = 0.0;
 

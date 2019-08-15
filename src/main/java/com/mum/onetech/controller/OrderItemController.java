@@ -22,14 +22,14 @@ public class OrderItemController {
     private SellerService sellerService;
 
     @ModelAttribute("orderItems")
-    public List<OrderItem> allOrderItems(){
-//        if(authentication != null){
-//            System.out.println("****************"+authentication.getName());
-//            Seller seller=sellerService.findOneByEmail(authentication.getName());
-//            System.out.println("****************"+seller );
-//            model.addAttribute("seller",seller);
-//            return orderItemService.findListOfOrderListBySelle(seller);
-//        }
+    public List<OrderItem> allOrderItems(Authentication authentication,Model model){
+        if(authentication != null){
+            System.out.println("****************"+authentication.getName());
+            Seller seller=sellerService.findOneByEmail(authentication.getName());
+            System.out.println("****************"+seller );
+            model.addAttribute("seller",seller);
+            return orderItemService.findListOfOrderListBySelle(seller);
+        }
         return orderItemService.findAll();
     }
 
