@@ -1,24 +1,20 @@
 package com.mum.onetech.controller;
 
-import com.mum.onetech.domain.Buyer;
-import com.mum.onetech.domain.Category;
-import com.mum.onetech.domain.Product;
-import com.mum.onetech.domain.ProductImage;
+import com.mum.onetech.domain.*;
 import com.mum.onetech.jsonmodel.CartModel;
-import com.mum.onetech.service.BrandService;
-import com.mum.onetech.service.BuyerService;
-import com.mum.onetech.service.CategoryService;
-import com.mum.onetech.service.ProductService;
+import com.mum.onetech.service.*;
 import com.mum.onetech.util.Util;
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -145,7 +141,7 @@ public class ProductController {
 
         }
 
-        String result = null;
+
         List<ProductImage> result2= new ArrayList<>();
 
         try {
@@ -160,8 +156,10 @@ public class ProductController {
         product.setDateProductAdded(new Date());
 
         productService.save(product);
-        return "productAddForm";
+        return "redirect:/seller";
     }
+
+
 
     private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
         List<ProductImage> images = new ArrayList<>();
@@ -194,12 +192,31 @@ public class ProductController {
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
-    public String updateProduct( Product product){
+    public String updateProduct( Product product,Authentication authentication){
+
 
         System.out.println("**************************************");
         System.out.println(product);
+        if(authentication != null){
+            System.out.println("****************"+authentication.getName());
+            Seller seller=sellerService.findOneByEmail(authentication.getName());
+            System.out.println("****************"+seller );
+            product.setSeller(seller);
+
+        }
+        product.calculateDiscount( product.getDiscountRate());
+        product.setDateProductAdded(new Date());
+        List<ProductImage> result= new ArrayList<>();
+
+        try {
+            result = this.saveImages(product.getProductImages());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        product.setProductImgs(result);
         productService.save(product);
-        return "productSideBarList";
+        return "redirect:/seller";
     }
     @CrossOrigin
     @PostMapping("/productDelete")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -54,6 +55,7 @@ public class Product {
     private Seller seller;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @Valid
     private List<ProductImage> productImgs;
 
      @Transient

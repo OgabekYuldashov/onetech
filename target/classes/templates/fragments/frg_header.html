@@ -54,14 +54,14 @@
             <div class="row">
 
                 <!-- Logo -->
-                <div class="col-lg-2 col-sm-3 col-3 order-1">
+                <div class="col-lg-2 col-sm-3 col-3 buyerOrder-1">
                     <div class="logo_container">
                         <div class="logo"><a th:href="@{/}">OneTech</a></div>
                     </div>
                 </div>
 
                 <!-- Search -->
-                <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                <div class="col-lg-6 col-12 buyerOrder-lg-2 buyerOrder-3 text-lg-left text-right">
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Wishlist -->
-                <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                <div class="col-lg-4 col-9 buyerOrder-lg-3 buyerOrder-2 text-lg-left text-right">
                     <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist_icon"><img th:src="@{/images/heart.png}" alt=""></div>
@@ -108,12 +108,12 @@
                                 <div class="cart_icon">
                                     <img th:src="@{/images/cart.png}" alt="">
                                     <!--<div class="cart_count"><span th:text="${buyer.shoppingCart.cartItems.size} ?: 0">10</span></div>-->
-                                    <div class="cart_count"><span>10</span></div>
+                                    <div class="cart_count"><span id="cartItemCount" th:text="${cartDetails.itemCount}">10</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a th:href="@{/cart}">Cart</a></div>
+                                    <div class="cart_text"><a th:href="@{/buyer/cart}">Cart</a></div>
                                     <!--<div class="cart_price">$<span th:text="${buyer.shoppingCart.totalAmount}" th:remove="tag">85</span></div>-->
-                                    <div class="cart_price">$<span>85</span></div>
+                                    <div class="cart_price">$<span id="cartTotalAmount" th:text="${cartDetails.totalAmount}">85</span></div>
                                 </div>
                             </div>
                         </div>

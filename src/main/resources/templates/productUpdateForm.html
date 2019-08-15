@@ -68,7 +68,6 @@
                                         <div class="col-12 col-md-9">
                                             <select  th:field="*{category.id}"   name="selectLg" id="selectLg"
                                                      class="form-control-lg form-control">
-                                                <option value="0">Please select</option>
                                                 <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.id}"></option>
                                             </select>
                                         </div>
@@ -80,7 +79,6 @@
                                         <div class="col-12 col-md-9">
                                             <select  th:field="*{brand.id}"  name="selectLg" id="selectLgb"
                                                      class="form-control-lg form-control">
-                                                <option value="0">other</option>
                                                 <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.id}"></option>
                                             </select>
                                         </div>

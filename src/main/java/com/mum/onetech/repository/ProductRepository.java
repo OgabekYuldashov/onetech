@@ -1,6 +1,7 @@
 package com.mum.onetech.repository;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.Seller;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

@@ -54,14 +54,7 @@ public class Buyer {
         buyerOrders.add(buyerOrder);
     }
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
-    private List<Order> orders = new ArrayList<>();
+    private List<BuyerOrder> orders = new ArrayList<>();
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Product> favoriteProducts = new ArrayList<>();
-
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cart shoppingCart;
 
 }

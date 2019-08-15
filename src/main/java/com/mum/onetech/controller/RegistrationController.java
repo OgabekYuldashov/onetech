@@ -5,6 +5,7 @@ import com.mum.onetech.domain.Role;
 import com.mum.onetech.domain.RoleType;
 import com.mum.onetech.domain.Seller;
 import com.mum.onetech.service.BuyerService;
+import com.mum.onetech.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
