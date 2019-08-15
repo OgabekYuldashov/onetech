@@ -19,11 +19,19 @@ INSERT INTO Brand (`NAME`) VALUES ('Sony');
 INSERT INTO Brand (`NAME`) VALUES ('Xiaomi');
 INSERT INTO Brand (`NAME`) VALUES ('Other');
 
-INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`) VALUES (1, 'Tina', 'Xing','seller@seller.com', '132',1);
+insert into role (id, role) values (1, 'SELLER');
+insert into role (id, role) values (2, 'BUYER');
+insert into role (id, role) values (3, 'ADMIN');
 
-INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (1, 'Fairfield', 'IA', '1000 N 4th', '52557');
 
+INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (1, 'Tina', 'Xing','seller@seller.com', '132', 1, 1);
+INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (1, 'Fairfield', 'IA', '1000 N 4th', '52556');
 INSERT INTO Seller (`ID`, `ADDRESS_ID`, `CREDENTIALS_ID`) VALUES (1, 1, 1);
+
+INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (2, 'Ogabek', 'Yuldashov','ogabek.yuldashov@gmail.com', '123', 1, 2);
+-- INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (2, 'Fairfield', 'IA', '1000 N 4th', '52557');
+INSERT INTO Buyer (`ID`, `CREDENTIALS_ID`, `SHOPPING_CART_ID`) VALUES (1, 2, 1);
+insert into cart (id, buyer_id, total_amount) values (1, 1, 0);
 
 
 INSERT INTO Product (`DATE_PRODUCT_ADDED`,`DESCRIPTION`,`DISCOUNT_RATE`,`IS_NEW_ARRIVAL`, `NAME`, `OLD_PRICE`, `PRICE`,`BRAND_ID`, `CATEGORY_ID`, `SELLER_ID`) VALUES (DATE '2019-08-13','Lorem Ipsum Dolor sit amet. Lorem Ipsum Dolor sit amet',3,FALSE, 'HP Envy 17', 1352, 1299,1, 1, 1);
@@ -49,6 +57,14 @@ insert into product_image (id, img_name) values (9, '50f5bf4e-fd7f-42cc-ab54-154
 insert into product_product_imgs (product_id, product_imgs_id) values (3,7);
 insert into product_product_imgs (product_id, product_imgs_id) values (3,8);
 insert into product_product_imgs (product_id, product_imgs_id) values (3,9);
+
+
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, 'APPROVED', 'This is an awesome product');
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, 'APPROVED', 'This is an awesome product');
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 2, 'PENDING', 'This is an awesome product');
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 2, 'APPROVED', 'This is an awesome product');
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 3, 'PENDING', 'This is an awesome product');
+insert into review (byr_id, date_posted, message, product_id, status, title) values (1, DATE '2019-08-13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 3, 'APPROVED', 'This is an awesome product');
 
 
 /*INSERT INTO PRODUCT_PRODUCT_IMGS (`PRODUCT_ID`, `PRODUCT_IMGS_ID`) VALUES (1, 1);

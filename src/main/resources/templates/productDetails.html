@@ -138,8 +138,8 @@
                                 <h4 th:text="${currProduct.seller.getFullName()}">Seller Name</h4>
 
                                 <p>Email: <span th:text="${currProduct.seller.credentials.email}">email@email.com</span></p>
-                                <a th:href="@{/products(sid=${currProduct.seller.id})}">Explore Products of this seller</a>
-                                <button id="btnFollowSeller" class="primary-btn" th:attr="data-sid=${currProduct.seller.id}">Follow Seller</button>
+                                <h5><a th:href="@{/products(sid=${currProduct.seller.id})}">Explore Products of this seller</a></h5>
+                                <p><button id="btnFollowSeller" class="primary-btn" th:attr="data-sid=${currProduct.seller.id}">Follow Seller</button></p>
 
                             </div>
                             <div id="tab2" class="tab-pane fade in">

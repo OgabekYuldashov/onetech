@@ -22,9 +22,15 @@ public class Notification {
 
     private Boolean isRead = false;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Buyer receiver;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Seller sender;
+
+    public Notification(@NotBlank String message, Buyer receiver, Seller sender) {
+        this.message = message;
+        this.receiver = receiver;
+        this.sender = sender;
+    }
 }
