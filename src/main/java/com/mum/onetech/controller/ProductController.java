@@ -228,6 +228,8 @@ public class ProductController {
     public @ResponseBody Product updateDelete(@RequestBody Product product){
         System.out.println("********************"+product.getId());
         System.out.println("********************"+productService.getOneProductById(product.getId()));
+          product.setSeller(null);
+          productService.save(product);
         productService.delete(product);
         return product;
     }
