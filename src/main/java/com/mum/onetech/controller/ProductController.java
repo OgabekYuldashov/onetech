@@ -192,9 +192,10 @@ public class ProductController {
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
-    public String updateProduct( Product product,Authentication authentication){
-
-
+    public String updateProduct( @Valid Product product,BindingResult bindingResult,Authentication authentication){
+        if(bindingResult.hasErrors()){
+            return "productUpdateForm";
+        }
         System.out.println("**************************************");
         System.out.println(product);
         if(authentication != null){

@@ -70,7 +70,9 @@
                                                      class="form-control-lg form-control">
                                                 <option  th:each="cat:${categories}" th:text="${cat.name}" th:value="${cat.id}"></option>
                                             </select>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('category.id')}" th:errors="*{category.id}" th:errorclass="fieldError">Incorrect category</p>
                                         </div>
+
                                     </div>
                                     <div class="row form-group"  >
                                         <div class="col col-md-3">
@@ -81,7 +83,9 @@
                                                      class="form-control-lg form-control">
                                                 <option  th:each="bra:${brands}" th:text="${bra.name}" th:value="${bra.id}"></option>
                                             </select>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('brand.id')}" th:errors="*{brand.id}" th:errorclass="fieldError">Incorrect brand</p>
                                         </div>
+
                                     </div>
                                     <div class="row form-group" hidden >
                                         <div class="col col-md-3">
@@ -92,6 +96,7 @@
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
                                         </div>
+                                        <p  class="alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" th:errorclass="fieldError">Incorrect id</p>
 
                                     </div>
 
@@ -103,7 +108,9 @@
                                             <input type="text" id="text-input" th:field="*{name}" name="text-input" placeholder="Text"
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError">Incorrect name</p>
                                         </div>
+
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
@@ -112,6 +119,7 @@
                                         <div class="col-12 col-md-9">
                                                 <textarea name="textarea-input" id="textarea-input" rows="2" th:field="*{description}"
                                                           placeholder="Content..." class="form-control"></textarea>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError">Incorrect description</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -122,6 +130,7 @@
                                             <input type="text" id="text-number" th:field="*{price}" name="text-input" placeholder="price"
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError">Incorrect price</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -132,6 +141,7 @@
                                             <input type="text" id="text-number1" th:field="*{discountRate}" name="text-input" placeholder="Discount Rate"
                                                    class="form-control">
                                             <small class="form-text text-muted">This is a help text</small>
+                                            <p  class="alert-danger" th:if="${#fields.hasErrors('discountRate')}" th:errors="*{discountRate}" th:errorclass="fieldError">Incorrect price</p>
                                         </div>
                                     </div>
                                     <div class="row form-group">
