@@ -1,12 +1,14 @@
 package com.mum.onetech.service;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.Seller;
 import com.mum.onetech.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -51,6 +53,17 @@ public class ProductServiceImpl implements ProductService {
     public Product delete(Product product) {
         productRepository.delete(product);
         return product;
+    }
+
+    @Override
+    public void update(Product product) {
+//        productRepository.update(product.getId() , product.getDescription());
+//     return null;
+    }
+
+    @Override
+    public List<Product> findListOfProductBySeller(Seller seller) {
+        return productRepository.findListOfProductBySeller(seller);
     }
 
 

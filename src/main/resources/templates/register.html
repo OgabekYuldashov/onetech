@@ -86,18 +86,21 @@
 
                 <div class="tab-pane fade signup-form" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <h2 class="form-title">Sign up as Seller</h2>
-                    <form  th:action="@{/seller}"  th:object="${seller}" method="POST"  class="register-form" id="register-form1">
+                    <form  th:object="${seller}" th:action="@{/register/seller}"   method="POST"  class="register-form" id="register-form1">
                         <div class="form-group">
                             <label for="firstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" th:field="*{credentials.firstName}" name="firstName" id="firstName" placeholder="First Name"/>
+                            <input type="text" th:field="*{credentials.firstName}" name="firstName" id="firstName1" placeholder="First Name"/>
+                            <p  class="alert-danger" th:if="${#fields.hasErrors('credentials.firstName')}" th:errors="*{credentials.firstName}" th:errorclass="fieldError">Incorrect name</p>
                         </div>
                         <div class="form-group">
                             <label for="lastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" th:field="*{credentials.lastName}"name="name" id="lastName" placeholder="Last Name"/>
+                            <input type="text" th:field="*{credentials.lastName}"name="name" id="lastName1" placeholder="Last Name"/>
+                            <p  class="alert-danger" th:if="${#fields.hasErrors('credentials.lastName')}" th:errors="*{credentials.lastName}" th:errorclass="fieldError">Incorrect name</p>
                         </div>
                         <div class="form-group">
                             <label for="street"><i class="zmdi zmdi-account material-icons-name"></i></label>
                             <input type="text" th:field="*{address.street}" name="firstName" id="street" placeholder="Street "/>
+                            <p  class="alert-danger" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}" th:errorclass="fieldError">Incorrect name</p>
                         </div>
                         <div class="form-group">
                             <label for="city"><i class="zmdi zmdi-account material-icons-name"></i></label>

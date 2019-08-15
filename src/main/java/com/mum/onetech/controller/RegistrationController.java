@@ -21,6 +21,9 @@ public class RegistrationController {
     BuyerService buyerService;
 
     @Autowired
+    private SellerService sellerService;
+
+    @Autowired
     CredentialsService credentialsService;
 
     @GetMapping("/register")
@@ -52,14 +55,20 @@ public class RegistrationController {
     }
 
     @PostMapping("/register/seller")
-    public String registerSeller(@Valid @ModelAttribute("seller") Seller seller, BindingResult bindingResult, Model model){
+    public String registerSeller( @Valid @ModelAttribute("seller") Seller seller, BindingResult bindingResult, Model model){
         model.addAttribute("buyer", new Buyer());
 
         if(bindingResult.hasErrors()){
+            System.out.println(" ******error ======" +seller);
             return "register";
         }
-
-        return "redirect:/";
+        System.out.println("******" +seller);
+        Role role =new Role();
+        role.setRole(RoleType.SELLER);
+        seller.getCredentials().setRole(role);
+        seller.getCredentials().setVerified(1);
+        sellerService.save(seller);
+        return "redirect:/login";
     }
 
     @GetMapping("/login")

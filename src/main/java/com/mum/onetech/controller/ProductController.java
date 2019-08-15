@@ -43,13 +43,14 @@ public class ProductController {
     public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
 
+
     @ModelAttribute("categories")
-    public List<Category> addCategories(Model model){
+    public List<Category> addCategories(){
         return categoryService.findAll();
     }
 
     @ModelAttribute("brands")
-    public List<Brand> getAllBrands(){
+    public List<Brand> addBrands(){
         return brandService.findAll();
     }
 
@@ -128,15 +129,26 @@ public class ProductController {
         return "productAddForm";
     }
     @PostMapping("/addProduct")
-    public String addProduct(Product product){
+    public String addProduct(@Valid Product product, BindingResult bindingResult, Authentication authentication){
+        if(bindingResult.hasErrors()){
+            return "productAddForm";
+        }
 
-        String result = null;
+        if(authentication != null){
+            System.out.println("****************"+authentication.getName());
+            Seller seller=sellerService.findOneByEmail(authentication.getName());
+            System.out.println("****************"+seller );
+            if(seller.getFollowers()!=null){
+                List<Buyer> buyers=seller.getFollowers();
+                Util.addNotificationforFollower(buyers,"New Product");
+            }
+            product.setSeller(seller);
+
+        }
+
+
         List<ProductImage> result2= new ArrayList<>();
-//        try {
-//            result = this.saveUploadedFiles(product.getProductImages());
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
+
         try {
             result2 = this.saveImages(product.getProductImages());
         }catch (IOException e){
@@ -145,10 +157,11 @@ public class ProductController {
 
         product.setProductImgs(result2);
         product.calculateDiscount( product.getDiscountRate());
-//        product.setPictureUrls(result);
+
         product.setDateProductAdded(new Date());
+
         productService.save(product);
-        return "productAddForm";
+        return "redirect:/seller";
     }
 
     private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
@@ -176,26 +189,48 @@ public class ProductController {
     }
 
     @GetMapping("/productUpdate")
-    public String getProductForUpdate(@RequestParam ("id") Long id, Model model, HttpSession session){
+    public String getProductForUpdate(@RequestParam ("id") Long id, Model model){
         model.addAttribute("product",productService.getOneProductById(id));
-        session.setAttribute("productUp",productService.getOneProductById(id));
+
         return "productUpdateForm";
     }
     @PostMapping("/productUpdate")
-    public String updateProduct( Product product,HttpSession session){
-        System.out.println("idddd" +session.getAttribute("productUp"));
-        productService.delete(product);
+    public String updateProduct( @Valid Product product,BindingResult bindingResult,Authentication authentication){
+        if(bindingResult.hasErrors()){
+            return "productUpdateForm";
+        }
+        System.out.println("**************************************");
+        System.out.println(product);
+        if(authentication != null){
+            System.out.println("****************"+authentication.getName());
+            Seller seller=sellerService.findOneByEmail(authentication.getName());
+            System.out.println("****************"+seller );
+            product.setSeller(seller);
 
-        product.setId(null);
+        }
+        product.calculateDiscount( product.getDiscountRate());
+        product.setDateProductAdded(new Date());
+        List<ProductImage> result= new ArrayList<>();
+
+        try {
+            result = this.saveImages(product.getProductImages());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        product.setProductImgs(result);
         productService.save(product);
-        return "welcome";
+        return "redirect:/seller";
     }
 
     @PostMapping("/productDelete")
-    public @ResponseBody Product updateDelete(@RequestBody Product product){
-        System.out.println("product"+product);
+    public @ResponseBody ProductModel updateDelete(@RequestBody Product product){
+        System.out.println("********************"+product);
+        Long id=product.getId();
+        ProductModel product1= new ProductModel();
+        product1.setId(id);
         productService.delete(product);
-        return product;
+        return product1;
     }
 
 }

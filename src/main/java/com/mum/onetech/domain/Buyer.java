@@ -48,11 +48,15 @@ public class Buyer {
     private List<BuyerOrder> buyerOrders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CART_ID",nullable = false)
     private Cart shoppingCart = new Cart(this);
 
     public void addOrder(BuyerOrder buyerOrder){
         buyerOrders.add(buyerOrder);
     }
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "buyer")
+    private List<BuyerOrder> orders = new ArrayList<>();
+
 
     public void addReview(Review review){
         reviews.add(review);

@@ -1,6 +1,7 @@
 package com.mum.onetech.repository;
 
 import com.mum.onetech.domain.Product;
+import com.mum.onetech.domain.Seller;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +20,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "SELECT count(p) FROM Product p")
     Long getCountAll();
 
-    
+    @Query(value = "SELECT p FROM Product p WHERE p.seller = :seller")
+    List<Product> findListOfProductBySeller(@Param("seller") Seller seller);
 }
