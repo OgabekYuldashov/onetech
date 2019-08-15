@@ -58,8 +58,9 @@
                 <!-- Images -->
                 <div class="col-lg-2 buyerOrder-lg-1 buyerOrder-2">
                     <ul class="image_list">
+                        <!--<li th:each="img : ${currProduct.productImgs}" th:data-image="${'/images/pimgs/' + img.imgName}">-->
                         <li th:each="img : ${currProduct.productImgs}" th:data-image="${'/images/pimgs/' + img.imgName}">
-                            <img th:src="@{/images/pimgs/{img}(img=${img.imgName})}" alt="">
+                            <img th:src="@{/images/pimgs/{image}(image=${img.imgName})}" alt="">
                         </li>
                     </ul>
                 </div>
@@ -92,7 +93,7 @@
                                     </div>
 
                                     <!-- Product Color -->
-                                    <ul class="product_color">
+                                    <!--<ul class="product_color">
                                         <li>
                                             <span>Color: </span>
                                             <div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
@@ -104,7 +105,7 @@
                                                 <li><div class="color_mark" style="background: #000000;"></div></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul>-->
 
                                 </div>
 
@@ -138,7 +139,8 @@
                                 <h4 th:text="${currProduct.seller.getFullName()}">Seller Name</h4>
 
                                 <p>Email: <span th:text="${currProduct.seller.credentials.email}">email@email.com</span></p>
-                                <h5><a th:href="@{/products(sid=${currProduct.seller.id})}">Explore Products of this seller</a></h5>
+                                <p>Address: <span th:text="${currProduct.seller.address.toString()}">Address Here</span></p>
+                                <h4><a th:href="@{/products(sid=${currProduct.seller.id})}" class="text-info">Explore Products of this seller</a></h4>
                                 <p><button id="btnFollowSeller" class="primary-btn" th:attr="data-sid=${currProduct.seller.id}">Follow Seller</button></p>
 
                             </div>
@@ -165,45 +167,6 @@
                                                         irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                                 </div>
                                             </div>
-
-                                            <div class="single-review">
-                                                <h4>This is a review title</h4>
-                                                <div class="review-heading">
-                                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                    <!--<div class="review-rating pull-right">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>-->
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="single-review">
-                                                <h4>This is a review title</h4>
-                                                <div class="review-heading">
-                                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                    <!--<div class="review-rating pull-right">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>-->
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                </div>
-                                            </div>
-
                                             <!--<ul class="reviews-pages">
                                                 <li class="active">1</li>
                                                 <li><a href="#">2</a></li>
@@ -334,7 +297,7 @@
 <!--Custom JS FIles-->
 <script th:src="@{/js/main.js}"></script>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>-->
 
 <!--JNOTY-->
 <script type="text/javascript" th:src="@{/jnoty/jnoty.js}"></script>

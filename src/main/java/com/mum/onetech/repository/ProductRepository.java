@@ -17,9 +17,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "SELECT COUNT(*) FROM PRODUCT p WHERE p.CATEGORY_ID = :catId", nativeQuery = true)
     Long getCountByCategoryId(@Param("catId") Long catId);
 
+    @Query(value = "SELECT p FROM Product p WHERE p.seller = :seller")
+    List<Product> findListOfProductBySeller(@Param("seller") Seller seller);
+
     @Query(value = "SELECT count(p) FROM Product p")
     Long getCountAll();
 
-    @Query(value = "SELECT p FROM Product p WHERE p.seller = :seller")
-    List<Product> findListOfProductBySeller(@Param("seller") Seller seller);
 }

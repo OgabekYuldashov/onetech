@@ -6,6 +6,7 @@ import com.mum.onetech.domain.RoleType;
 import com.mum.onetech.domain.Seller;
 import com.mum.onetech.service.BuyerService;
 import com.mum.onetech.service.CredentialsService;
+import com.mum.onetech.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,7 +69,7 @@ public class RegistrationController {
         seller.getCredentials().setRole(role);
         seller.getCredentials().setVerified(1);
         sellerService.save(seller);
-        return "redirect:/login";
+        return "redirect:/seller";
     }
 
     @GetMapping("/login")

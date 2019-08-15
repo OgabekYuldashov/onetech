@@ -1,23 +1,3 @@
-/* JS Document */
-
-/******************************
-
-[Table of Contents]
-
-1. Vars and Inits
-2. Set Header
-3. Init Custom Dropdown
-4. Init Page Menu
-5. Init Recently Viewed Slider
-6. Init Brands Slider
-7. Init Quantity
-8. Init Color
-9. Init Favorites
-10. Init Image
-
-
-******************************/
-
 $(document).ready(function()
 {
 	"use strict";

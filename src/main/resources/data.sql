@@ -37,7 +37,7 @@ INSERT INTO Seller (`ID`, `ADDRESS_ID`, `CREDENTIALS_ID`) VALUES (1, 1, 1);
 
 INSERT INTO Credentials (`ID`,  `FIRST_NAME`, `LAST_NAME`,`EMAIL`, `PASSWORD`,`VERIFIED`, `ROLE_ID`) VALUES (2, 'John', 'Doe','john.doe@gmail.com', '$2a$10$9iC/DKLxg4vlDJSmIxEbbePVekUUTrRNakyduFaocTUKWbB/mMbgq', 1, 2);
 -- INSERT INTO Address (`ID`, `CITY`, `STATE`, `STREET`, `ZIP`) VALUES (2, 'Fairfield', 'IA', '1000 N 4th', '52557');
-INSERT INTO Buyer (`ID`, `CREDENTIALS_ID`, `SHOPPING_CART_ID`) VALUES (1, 2, null);
+INSERT INTO Buyer (`ID`, `CREDENTIALS_ID`, `CART_ID`) VALUES (1, 2, null);
 -- insert into cart (id, buyer_id, total_amount) values (1, 1, 0);
 
 

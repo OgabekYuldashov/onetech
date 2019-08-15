@@ -2,20 +2,20 @@ package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.*;
 import com.mum.onetech.jsonmodel.CartModel;
-import com.mum.onetech.service.BrandService;
-import com.mum.onetech.service.BuyerService;
-import com.mum.onetech.service.CategoryService;
-import com.mum.onetech.service.ProductService;
+import com.mum.onetech.jsonmodel.ProductModel;
+import com.mum.onetech.service.*;
 import com.mum.onetech.util.Util;
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,6 +39,8 @@ public class ProductController {
     private BrandService brandService;
     @Autowired
     BuyerService buyerService;
+    @Autowired
+    SellerService sellerService;
 
     public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
 
@@ -100,6 +102,17 @@ public class ProductController {
             products = productService.findAll();
             product_count = productService.getCountAll();
         }
+
+        //Retrieve products by Seller Id
+        /*if(Util.isPositiveInteger(sid)){
+            products = productService.findAllBySellerId(Long.valueOf(catId));
+            product_count = productService.getCountBySellerId(Long.valueOf(catId));
+
+            String currCategory = "No Match Found";
+            if(categoryService.finById(Long.valueOf(catId)) != null){
+                model.addAttribute("currCategory", categoryService.finById(Long.valueOf(catId)).getName());
+            }
+        }*/
 
         if(sortMethod != null){
             if(products != null && products.size() > 0){
@@ -224,7 +237,7 @@ public class ProductController {
     }
 
     @PostMapping("/productDelete")
-    public @ResponseBody ProductModel updateDelete(@RequestBody Product product){
+    public @ResponseBody  ProductModel updateDelete(@RequestBody Product product){
         System.out.println("********************"+product);
         Long id=product.getId();
         ProductModel product1= new ProductModel();

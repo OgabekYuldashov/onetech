@@ -48,7 +48,7 @@ public class Buyer {
     private List<BuyerOrder> buyerOrders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CART_ID",nullable = false)
+    @JoinColumn(name = "CART_ID")
     private Cart shoppingCart = new Cart(this);
 
     public void addOrder(BuyerOrder buyerOrder){

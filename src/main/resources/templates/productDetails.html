@@ -58,8 +58,9 @@
                 <!-- Images -->
                 <div class="col-lg-2 buyerOrder-lg-1 buyerOrder-2">
                     <ul class="image_list">
+                        <!--<li th:each="img : ${currProduct.productImgs}" th:data-image="${'/images/pimgs/' + img.imgName}">-->
                         <li th:each="img : ${currProduct.productImgs}" th:data-image="${'/images/pimgs/' + img.imgName}">
-                            <img th:src="@{/images/pimgs/{img}(img=${img.imgName})}" alt="">
+                            <img th:src="@{/images/pimgs/{image}(image=${img.imgName})}" alt="">
                         </li>
                     </ul>
                 </div>

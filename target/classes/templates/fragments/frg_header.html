@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <header class="header" th:fragment="header">
+
+
 
     <!-- Top Bar -->
 
@@ -36,11 +38,33 @@
                                 </li>-->
                             </ul>
                         </div>
-                        <div class="top_bar_user">
+                        <!--<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+                            Logged in user: <span sec:authentication="name"></span> |
+                            Roles: <span sec:authentication="principal.authorities"></span>
+                            <div>
+                                <form action="#" th:action="@{/logout}" method="post">
+                                    <input type="submit" value="Logout" />
+                                </form>
+                            </div>
+                        </div>-->
+                        <div sec:authorize="isAuthenticated()" class="top_bar_user logout" th:fragment="logout">
+                            <div class="user_icon"><img th:src="@{/images/user.svg}" alt=""></div>
+                            <div><a th:href="@{/register}" sec:authentication="name"></a><span sec:authentication="principal.authorities"></span></div>
+                            <form style="display: inline;" action="#" th:action="@{/logout}" method="post">
+                                <input class="btn btn-light" type="submit" value="Logout" />
+                            </form>
+                            <!--<div><a th:href="@{/login}">Logout</a></div>-->
+                        </div>
+                        <div sec:authorize="!isAuthenticated()" class="top_bar_user">
                             <div class="user_icon"><img th:src="@{/images/user.svg}" alt=""></div>
                             <div><a th:href="@{/register}">Register</a></div>
                             <div><a th:href="@{/login}">Login</a></div>
                         </div>
+                        <!--<sec:authorize access="!isAuthenticated()" class="top_bar_user">
+                            <div class="user_icon"><img th:src="@{/images/user.svg}" alt=""></div>
+                            <div><a th:href="@{/register}">Register</a></div>
+                            <div><a th:href="@{/login}">Login</a></div>
+                        </sec:authorize>-->
                     </div>
                 </div>
             </div>
@@ -144,7 +168,7 @@
 
                                 <li th:each="cat : ${categories}">
                                     <!--<a th:href="@{/products/{catid}(catid=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>-->
-                                    <a th:href="@{products(cat=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>
+                                    <a th:href="@{/products(cat=${cat.id})}" th:text="${cat.name}">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -154,48 +178,16 @@
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a th:href="@{/}">Home<i class="fas fa-chevron-down"></i></a></li>
-                                <li class="hassubs">
-                                    <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    </ul>
-                                </li>
-                                <li class="hassubs">
-                                    <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    </ul>
-                                </li>
+
                                 <li class="hassubs">
                                     <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                                     <ul>
-                                        <li><a th:href="@{shop}">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a th:href="@{products}">Products<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a th:href="@{cart}">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a th:href="@{contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{/products}">Products<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{/cart}">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a th:href="@{/contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
                                     </ul>
                                 </li>
-                                <li><a th:href="@{contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a th:href="@{/contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
 
