@@ -13,7 +13,6 @@ import java.io.File;
 public class OnetechApplication {
 
     public static void main(String[] args) {
-        new File(ProductController.uploadDirectory).mkdir();
         SpringApplication.run(OnetechApplication.class, args);
     }
 

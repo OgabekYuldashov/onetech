@@ -11,8 +11,10 @@ public interface ProductService {
     Product findById(Long pid);
     List<Product> findAllByCategoryId(Long catId);
     List<Product> findAllBySellerId(Long sid);
+    List<Product> findAllByBrandId(Long sid);
     Long getCountByCategoryId(Long catId);
     Long getCountBySellerId(Long catId);
+    Long getCountByBrandId(Long catId);
     Long getCountAll();
     Product getOneProductById(Long id);
     Product delete(Product product);

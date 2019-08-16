@@ -36,7 +36,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllBySellerId(Long sid) {
-        return null;
+        return productRepository.findAllBySellerId(sid);
+    }
+
+    @Override
+    public List<Product> findAllByBrandId(Long brandId) {
+        return productRepository.findAllByBrandId(brandId);
     }
 
     @Override
@@ -46,7 +51,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Long getCountBySellerId(Long sid) {
-        return 0L;
+        return productRepository.getCountBySellerId(sid);
+    }
+
+    @Override
+    public Long getCountByBrandId(Long brandId) {
+        return productRepository.getCountByBrandId(brandId);
     }
 
     @Override

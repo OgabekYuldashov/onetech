@@ -80,11 +80,6 @@ public class ShopController {
         return "cart";
     }
 
-    @RequestMapping("/dummy")
-    public String dummy(Model model) {
-        model.addAttribute("buyer", new Buyer());
-        return "fragments/frg_header";
-    }
 
 
 }

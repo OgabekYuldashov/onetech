@@ -19,7 +19,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand finById(Long cid) {
-        return null;
+    public Brand findById(Long brandId) {
+        return brandRepository.findById(brandId).orElse(null);
     }
+
 }

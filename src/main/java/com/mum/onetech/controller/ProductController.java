@@ -1,7 +1,6 @@
 package com.mum.onetech.controller;
 
 import com.mum.onetech.domain.*;
-import com.mum.onetech.jsonmodel.CartModel;
 import com.mum.onetech.jsonmodel.ProductModel;
 import com.mum.onetech.service.*;
 import com.mum.onetech.util.Util;
@@ -13,14 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -43,9 +38,6 @@ public class ProductController {
     @Autowired
     SellerService sellerService;
 
-    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/static/images/pimgs/";
-
-
     @ModelAttribute("categories")
     public List<Category> addCategories(){
         return categoryService.findAll();
@@ -66,9 +58,9 @@ public class ProductController {
         Product currProduct = productService.findById(Long.valueOf(pid));
 
         //Redirect user to a /products if invalid id is received
-//        if(currProduct == null){
-//            return "redirect:/products";
-//        }
+        if(currProduct == null){
+            return "redirect:/products";
+        }
 
 
         model.addAttribute("categories",categoryService.findAll());
@@ -79,15 +71,15 @@ public class ProductController {
 
     @GetMapping("/products")
     public String getAllProducts(@RequestParam(name = "cat", required = false) String catId,
-                                 @RequestParam(name = "bid", required = false) String bid,
-                                 @RequestParam(name = "sid", required = false) String sid,
+                                 @RequestParam(name = "brand", required = false) String brandId,
+                                 @RequestParam(name = "sid", required = false) String sellerId,
                                  @RequestParam(name = "sort", required = false) String sortMethod, Model model){
-
-//        Product p = new Product();
-//        productService.save(p);
 
         List<Product> products = new ArrayList<>();
         Long product_count = 0L;
+
+        //a toggle to check if any filter has been applied
+        boolean filterApplied = false;
 
         //Retrieve products by Category Id
         if(Util.isPositiveInteger(catId)){
@@ -95,48 +87,64 @@ public class ProductController {
             product_count = productService.getCountByCategoryId(Long.valueOf(catId));
 
             String currCategory = "No Match Found";
-            if(categoryService.finById(Long.valueOf(catId)) != null){
-                model.addAttribute("currCategory", categoryService.finById(Long.valueOf(catId)).getName());
+            if(categoryService.findById(Long.valueOf(catId)) != null){
+                model.addAttribute("currCategory", categoryService.findById(Long.valueOf(catId)).getName());
             }
-        }else {
+            filterApplied = true;
+        }
+
+        //Apply seller id filter
+        if(Util.isPositiveInteger(sellerId)){
+            if(filterApplied){
+                products = products.stream().filter(product -> product.getSeller().getId().equals(Long.valueOf(sellerId))).collect(Collectors.toList());
+                product_count = (long) products.size();
+            }else {
+                products = productService.findAllBySellerId(Long.valueOf(sellerId));
+                product_count = productService.getCountBySellerId(Long.valueOf(sellerId));
+            }
+            filterApplied = true;
+        }
+
+        //Apply brand filter
+        if(Util.isPositiveInteger(brandId)){
+            if(filterApplied){
+                products = products.stream().filter(product -> product.getBrand().getId().equals(Long.valueOf(brandId))).collect(Collectors.toList());
+                product_count = (long) products.size();
+            }else {
+                products = productService.findAllByBrandId(Long.valueOf(brandId));
+                product_count = productService.getCountByBrandId(Long.valueOf(brandId));
+            }
+            filterApplied = true;
+        }
+
+
+        //Return all results if no filter has been applied
+        if(!filterApplied){
             products = productService.findAll();
             product_count = productService.getCountAll();
         }
 
-        //Retrieve products by Seller Id
-        /*if(Util.isPositiveInteger(sid)){
-            products = productService.findAllBySellerId(Long.valueOf(catId));
-            product_count = productService.getCountBySellerId(Long.valueOf(catId));
-
-            String currCategory = "No Match Found";
-            if(categoryService.finById(Long.valueOf(catId)) != null){
-                model.addAttribute("currCategory", categoryService.finById(Long.valueOf(catId)).getName());
-            }
-        }*/
 
         if(sortMethod != null){
-            if(products != null && products.size() > 0){
-                switch (sortMethod){
-                    case "price":
-                        products = products.stream()
-                                .sorted(Comparator.comparing(Product::getPrice)).collect(Collectors.toList());
-                        break;
-                    case "name":
-                        products = products.stream()
-                                .sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
-                        break;
-                }
+            switch (sortMethod){
+                case "price":
+                    products = products.stream()
+                            .sorted(Comparator.comparing(Product::getPrice)).collect(Collectors.toList());
+                    break;
+                case "name":
+                    products = products.stream()
+                            .sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
+                    break;
             }
             model.addAttribute("sortMethod", sortMethod);
         }
 
-
         model.addAttribute("products", products);
         model.addAttribute("product_count", product_count);
-
-//        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
         return "shop";
     }
+
 
     @GetMapping("/addProduct")
     public String getProductForm(@ModelAttribute("product") Product product , Model model, Authentication authentication){
@@ -193,7 +201,6 @@ public class ProductController {
         for (MultipartFile file : files) {
 
             String fileName = Util.randomUUID()+".jpg";
-//            fileName = "56b7aae6-0f52-4a66-b249-86cc147cf43a.jpg";
 
             if (file.isEmpty()) {
                 continue;
@@ -204,9 +211,8 @@ public class ProductController {
 
             byte[] bytes = file.getBytes();
 
-            String fileLocation1 = new File("static\\images\\pimgs").getAbsolutePath() + "\\" + fileName;
-            String fileLocation2 = new File("src\\main\\resources\\static\\images\\pimgs").getAbsolutePath() + "\\" + fileName;
-            FileOutputStream fos = new FileOutputStream(fileLocation2);
+            String fileLocation = new File("src\\main\\resources\\static\\images\\pimgs").getAbsolutePath() + "\\" + fileName;
+            FileOutputStream fos = new FileOutputStream(fileLocation);
             fos.write(bytes);
             fos.close();
 
@@ -215,39 +221,7 @@ public class ProductController {
         return images;
     }
 
-    /*
-    private List<ProductImage> saveImages(MultipartFile[] files) throws IOException {
-        List<ProductImage> images = new ArrayList<>();
 
-
-        byte[] imageByteArray ....
-        String fileName = "image.png";
-        String fileLocation = new File("static\\images").getAbsolutePath() + "\\" + fileName;
-        FileOutputStream fos = new FileOutputStream(fileLocation);
-        fos.write(imageByteArray);
-        fos.close();
-
-        for (MultipartFile file : files) {
-
-            if (file.isEmpty()) {
-                continue;
-            }
-            String fname=Util.randomUUID()+".jpg";
-            String uploadFilePath =uploadDirectory +fname;
-            ProductImage productImage = new ProductImage();
-            productImage.setImgName(fname);
-            images.add(productImage);
-
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(uploadFilePath);
-            Files.write(path, bytes);
-
-
-        }
-
-        return images;
-    }
-*/
     @GetMapping("/productUpdate")
     public String getProductForUpdate(@RequestParam ("id") Long id, Model model, Authentication authentication){
         model.addAttribute("product",productService.getOneProductById(id));

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BrandService {
     List<Brand> findAll();
-    Brand finById(Long cid);
+    Brand findById(Long cid);
 }

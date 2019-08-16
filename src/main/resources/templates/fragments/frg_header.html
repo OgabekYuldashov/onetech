@@ -122,7 +122,7 @@
                             <div class="wishlist_content">
                                 <div class="wishlist_text"><a href="#">Wishlist</a></div>
                                 <!--<div class="wishlist_count" th:text="${buyer.favoriteProducts.size()} ?: 0">115</div>-->
-                                <div class="wishlist_count">115</div>
+                                <div class="wishlist_count">0</div>
                             </div>
                         </div>
 
@@ -178,15 +178,8 @@
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a th:href="@{/}">Home<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a th:href="@{/products}">Shop<i class="fas fa-chevron-down"></i></a></li>
 
-                                <li class="hassubs">
-                                    <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-                                    <ul>
-                                        <li><a th:href="@{/products}">Products<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a th:href="@{/cart}">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a th:href="@{/contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                    </ul>
-                                </li>
                                 <li><a th:href="@{/contact}">Contact<i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
