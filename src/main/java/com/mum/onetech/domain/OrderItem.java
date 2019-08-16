@@ -20,7 +20,7 @@ public class OrderItem {
     private Double unitPrice;
 
     @Enumerated(EnumType.STRING)
-    private OrderItemStatus orderItemStatus ;
+    private OrderItemStatus orderItemStatus = OrderItemStatus.PENDING;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;

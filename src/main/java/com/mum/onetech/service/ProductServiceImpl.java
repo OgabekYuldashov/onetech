@@ -35,8 +35,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findAllBySellerId(Long sid) {
+        return null;
+    }
+
+    @Override
     public Long getCountByCategoryId(Long catId) {
         return productRepository.getCountByCategoryId(catId);
+    }
+
+    @Override
+    public Long getCountBySellerId(Long sid) {
+        return 0L;
     }
 
     @Override

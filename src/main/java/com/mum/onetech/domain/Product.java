@@ -6,6 +6,8 @@ import com.mum.onetech.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +39,7 @@ public class Product {
 
     @NotBlank
     private String description;
-    @Min(value = 0, message = "{Min.Product.price.validation}")
+
     @Digits(integer = 8, fraction = 2, message = "{Digits.Product.price.validation}")
     @NotNull
     private Double price;
@@ -46,7 +48,7 @@ public class Product {
     private Double oldPrice;
     @Temporal(TemporalType.DATE)
     private Date dateProductAdded;
-    @Min(value = 0, message = "{Min.Product.price.validation}")
+
     @Digits(integer = 8, fraction = 2, message = "{Digits.Product.price.validation}")
    private Double discountRate=0.0 ;
 
@@ -60,6 +62,7 @@ public class Product {
 
     @OneToMany(cascade = CascadeType.ALL)
     @Valid
+    @Fetch(FetchMode.JOIN)
     private List<ProductImage> productImgs;
 
     @Transient
