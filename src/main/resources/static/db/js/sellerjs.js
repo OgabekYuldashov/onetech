@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     });
 
-    $('.item').click(function () {
+    $('.item_mark').click(function () {
         let product = {};
         product.id = $(this).val();
         let newData = JSON.stringify(product);
@@ -67,11 +67,9 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (item) {
                 console.log("successs" + item.id);
-                if(item.test==='ordered'){
-                    $('#msginfo').html(item.message);
-                }else{
+
                     $('#' + item.id).remove();
-                }
+
 
             },
             error: function () {
