@@ -300,7 +300,14 @@ public class ProductController {
         Long id=product.getId();
         ProductModel product1= new ProductModel();
         product1.setId(id);
-        productService.delete(product);
+        product1.setTest("notorderd");
+        try{
+            productService.delete(product);
+        }catch(Exception e){
+            product1.setTest("ordered");
+            product1.setMessage("The product is ordered so it is not possible to delete");
+        }
+
         return product1;
     }
 

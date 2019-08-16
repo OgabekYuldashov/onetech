@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductModel {
     private Long id;
+    private String message;
+    private String test;
 }

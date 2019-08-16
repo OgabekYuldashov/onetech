@@ -124,7 +124,7 @@
                                 </div>
 
                             </div>
-
+                            <div class="alert-danger" id="msginfo"></div>
                             <!-- DATA TABLE-->
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
@@ -139,7 +139,7 @@
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody >
                                     <tr th:each="pro:${products}" th:id="${pro.id}">
                                         <td th:text="${pro.dateProductAdded}"></td>
                                         <td th:text="${pro.category.name}"></td>
