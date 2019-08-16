@@ -67,8 +67,12 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (item) {
                 console.log("successs" + item.id);
+                    if(item.type==='ordered'){
+                       $('#msginfo').html(item.type)
+                    }else{
+                        $('#' + item.id).remove();
+                    }
 
-                    $('#' + item.id).remove();
 
 
             },

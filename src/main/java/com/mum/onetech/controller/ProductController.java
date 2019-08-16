@@ -301,8 +301,12 @@ public class ProductController {
 
         ProductModel product1= new ProductModel();
         product1.setId(id);
-
-        productService.delete(product);
+        product1.setType(null);
+        try {
+            productService.delete(product);
+        }catch (Exception e){
+            product1.setType("ordered");
+        }
 
 
         return product1;
