@@ -59,7 +59,7 @@ public class OrderItemController {
         OrderItemModel orderItemModel=new OrderItemModel();
         OrderItem orderItem1=orderItem;
         if(orderItem.getId()!=null){
-           orderItem1=orderItemService.findById(orderItem.getId()) ;
+            orderItem1=orderItemService.findById(orderItem.getId()) ;
             orderItem1.setOrderItemStatus(OrderItemStatus.SHIPPED);
             orderItem1=orderItemService.save(orderItem1);
             orderItemModel.setId(orderItem1.getId());

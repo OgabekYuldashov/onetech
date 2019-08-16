@@ -124,7 +124,7 @@
                                 </div>
 
                             </div>
-
+                            <div class="alert-danger" id="msginfo"></div>
                             <!-- DATA TABLE-->
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
@@ -154,14 +154,10 @@
                                                    data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <button th:class="item" th:value="${pro.id}" class="item"
+                                                <button th:class="item_mark" th:value="${pro.id}" class="item"
                                                         data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-                                                <a th:href="@{/product/id(id=${pro.id})}" class="item"
-                                                   data-toggle="tooltip" data-placement="top" title="More">
-                                                    <i class="zmdi zmdi-more"></i>
-                                                </a>
                                             </div>
                                         </td>
 
