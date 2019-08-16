@@ -45,8 +45,8 @@
 					<div class="shop_sidebar">
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
-							<ul class="sidebar_categories">
-								<li th:each="cat : ${categories}"><a th:href="@{products(cat=${cat.id})}" th:text="${cat.name}">Computers & Laptops</a></li>
+							<ul class="sidebar_categories" th:with="currUrl=(${@currentUrlWithoutParam.apply('cat')})" >
+								<li th:each="cat : ${categories}"><a th:href="@{${currUrl}(cat=${cat.id})}" th:text="${cat.name}">Computers & Laptops</a></li>
 							</ul>
 						</div>
 
@@ -62,15 +62,19 @@
 
 						<div class="sidebar_section">
 							<div class="sidebar_subtitle brands_subtitle">Brands</div>
-							<ul class="brands_list">
-								<li class="brand"><a href="#">Apple</a></li>
-								<li class="brand"><a href="#">Beoplay</a></li>
+							<ul class="brands_list" th:with="currUrl=(${@currentUrlWithoutParam.apply('brand')})" >
+
+								<li th:each="br : ${brands}" class="brand"><a th:href="@{${currUrl}(brand=${br.id})}" th:text="${br.name}">Apple</a></li>
+
+								<!--<li th:each="br : ${brands}" class="brand"><a th:href="@{/products(brand=${br.id})}" th:text="${br.name}">Apple</a></li>-->
+
+								<!--<li class="brand"><a href="#">Beoplay</a></li>
 								<li class="brand"><a href="#">Google</a></li>
 								<li class="brand"><a href="#">Meizu</a></li>
 								<li class="brand"><a href="#">OnePlus</a></li>
 								<li class="brand"><a href="#">Samsung</a></li>
 								<li class="brand"><a href="#">Sony</a></li>
-								<li class="brand"><a href="#">Xiaomi</a></li>
+								<li class="brand"><a href="#">Xiaomi</a></li>-->
 							</ul>
 						</div>
 					</div>
